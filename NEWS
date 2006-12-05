@@ -1,0 +1,78 @@
+* 0.9.3
+
+- fields error reporting
+
+* 0.9.2
+
+- scatter menu entries consistency
+
+* 0.9.1
+
+- Scatter now has 3 types: normal, time and shifted
+- added connection lines in scatter
+
+* 0.9.0
+
+- Added support for default values in model files.
+- Added various models
+
+
+* 0.11.6
+
+- connect dots in coweb
+- bigDots & connect dots in lyapunov
+- fixed missing parameter form in lyapunov
+- time label on scatter time plot
+
+
+* 0.14.0
+- lua models support inverse functions (g(...))
+- added gsl root find (dlua_cycle_find)
+- new Cycles plot
+- new Manifolds plot
+- scatter & scatter time delay
+- axis visibility
+- fixed recursion bug in coweb plot
+- fixed zoom memory bug
+- trimmed delay ranges
+
+* 0.16.0
+- trajectory and variation is common to discrete and trajectory
+- variation is parallel
+- revised all forms
+
+* 0.16.4
+- about frame added
+
+* 0.16.7 (iDmc)
+- bifurcation 2D exception bug fixed
+
+* 0.17.4
+- fixed cycles problems
+- no more exceptions on lyap exponents
+- ode step function choice
+
+* 1.10.0
+- added possibility to export trajectory and basins of attraction data (csv and binary formats, respectively)
+- added fast basins of attraction algorithm
+- added possibility to chose basins colors and save/retrieve settings
+- added random number generation to LUA interpreter from some distributions in the GSL, added brief documentation
+- minor fix to numerical field input interface
+- added numerical jacobian evaluation capability
+- fixed lyap. exponent computation when some exponents reach -inf
+- added lyap. exponents data saving (for vs.time and vs.parameter plots)
+- fixed bug when plotting lyap.exp. in parameter space for univariate models with >=2 parameters
+- added dependency from LAPACK-3.0 library
+- added complex eigenvalues modulus computation to Cycles algorithm (still unused)
+
+* 1.10.1
+- fixed bug in lyap. exponents plot for continuous time models
+- added possibility to save full LE spectrum in csv file for vs time and vs parameters for continuous time models
+
+* 1.10.2
+- added differenziated cycles colouring, depending on specific cycle type (based on eigenvalues inspection)
+
+* 1.10.3
+- fixed bug in F^n computation in Cycles C routine
+
+

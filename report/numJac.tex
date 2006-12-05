@@ -1,0 +1,58 @@
+\documentclass[a4paper,10pt]{article}
+
+\title{Numerical Jacobian evaluation}
+\author{Antonio, Fabio Di Narzo}
+
+\begin{document}
+\maketitle
+
+Consider the map $F: \Re^p \mapsto \Re^p$:
+\[
+F(\mathbf{x}) = \left( \begin{array}{c}
+f_1(\mathbf{x}) \\
+f_2(\mathbf{x}) \\
+\ldots\\
+f_p(\mathbf{x})
+\end{array} \right)
+\]
+with $\mathbf{x} \in \Re^p$. Define $D_j F$ as the column vector:
+\[
+D_j F = \left( \begin{array}{c}
+D_j f_1 \\
+D_j f_2 \\
+\ldots\\
+D_j f_p 
+\end{array}
+\right)
+\]
+with $D_j f_i$ indicating the derivative of $f_i$ with respect to the $j$-th component of $\mathbf{x}$.
+We want to evaluate the Jacobian:
+\[
+JF = \left[ \begin{array}{cccc} D_1F & D_2F & \ldots & D_pF \end{array} \right] = 
+\left( \begin{array}{cccc}
+D_1 f_1 & D_2 f_1 & \ldots & D_p f_1 \\
+D_1 f_2 & D_2 f_2 & \ldots & D_p f_2 \\
+\ldots \\
+D_1 f_p & D_2 f_p & \ldots & D_p f_p \\
+\end{array}\right)
+\]
+The computation of the matrix $JF$ reduces to the computation of the $p \times p$ partial derivatives $D_j f_i$ in a
+generic point $\mathbf{x}$. A numerical approximation of such derivative can be the following:
+\[
+D_j f_i (\mathbf{x}) \simeq \frac{1}{h} [f_i(\mathbf{x}^{(j)\star}) - f_i(\mathbf{x})]
+\]
+with $ \mathbf{x}^{(j)\star} = (x_1, x_2, \ldots, x_j+h, \ldots, x_p)$ and $h \simeq 0$ \footnote{
+The increment $h$ should be chosen as the smallest positive value for which $x_j+h \neq x_j$ on the computer.
+It can be worth to define $h$ relative to each $x_j$, i.e. $h = x_j \times h^\star$
+ with $h^\star \simeq 0$ fixed once for all $j$.
+}.
+
+Note that the actual computation of these $p \times p$ derivatives requires $p+1$ evaluations of the map $F$.
+This can be seen by using matrix notation:
+\[
+D_jF(\mathbf{x}) \simeq  \frac{1}{h} [F(\mathbf{x}^{(j)\star}) - F(\mathbf{x})]
+\]
+So, one can compute $F(\mathbf{x})$ once (stays fixed over $j$) and then the $p$ vectors $F(\mathbf{x}^{(j)\star}),
+\quad 1\leq j\leq p$.
+
+\end{document}

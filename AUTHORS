@@ -1,0 +1,10 @@
+Daniele Pizzoni <auouo@tin.it>, <pizzoni@mathsun1.univ.trieste.it>
+
+------------------------------------------------------------------
+version 1.9.0: some of the program functionality was enhanced 
+by Alexei Grigoriev <alexei_grigoriev@libero.it>, based
+on iDMC-0.17.4, and bug fixes in iDMC-0.17.6, both by Daniele Pizzoni.
+When the phrase "extended by A. G." appears in a 
+source file, it means that this file might have been, but
+not necessarily was, modified from its iDMC-0.17.4 or iDMC-0.17.6
+version.

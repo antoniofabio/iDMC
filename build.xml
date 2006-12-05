@@ -1,0 +1,535 @@
+<?xml version="1.0"?>
+
+<!-- -->
+<!--  Ant file for dmcDue -->
+<!--  Written by Daniele Pizzoni <auouo@tin.it> - 2003 -->
+<!--  Modified by Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> - 2006 -->
+<!-- -->
+
+<project name="dmcDue" default="jar" basedir=".">
+
+<!--            -->
+<!-- properties -->
+<!--            -->
+
+    <property name="name"    value="iDmc"/>
+    <property name="version" value="2.0.0"/>
+    <property name="libVersion" value="${version}"/>
+
+    <!-- directories -->
+    <property name="src.java"  value="src/java"/>
+    <property name="build"     value="build"/>
+    <property name="dist"      value="dist"/>
+    <property name="dist-win"  value="dist-win"/>
+    <property name="javadoc"   value="javadoc"/>
+    <property name="doc"		value="doc"/>
+    <property name="models"    value="models"/>
+
+    <!-- external sources -->
+    <property name="idmclib.src"    location="../idmclib/jidmc"/>
+    <property name="jcommon.src"    location="../jcommon-0.9.3/src"/>
+    <property name="jfreechart.src" location="../jfreechart-0.9.18/src"/>
+    <property name="forms.src"      location="../forms-1.0.3/src/jforms"/>
+    <property name="log4j.src"      location="../logging-log4j-1.2.14/src/java"/>
+
+		<!-- files -->
+		<property name="idmclib.lib.unix" value="${idmclib.src}/idmc.so"/>
+		<property name="idmclib.lib.win" value="${idmclib.src}/idmc.dll"/>
+		<property name="jar_file"      value="${basedir}/iDmc-${version}.jar"/>
+
+
+<!--              -->
+<!-- work targets -->
+<!--              -->
+
+    <!--      -->
+    <!-- init -->
+    <!--      -->
+    <target name="init" depends="version">
+	    <tstamp/>
+        <mkdir dir="${build}"/>
+    </target>
+
+	
+    <!--     -->
+    <!-- all -->
+    <!--     -->
+    <target name="all"
+    		description="compiles and creates all the archives (source and binary)"
+    		depends="all-linux, all-win"/>
+
+    <!--           -->
+    <!-- all-linux -->
+    <!--           -->
+    <target name="all-linux"
+    		description="compiles and creates all the bonary archives"
+    		depends="tar-dist, zip-dist-linux, tar-src, zip-src"/>
+
+
+    <!--         -->
+    <!-- all-win -->
+    <!--         -->
+    <target name="all-win"
+    		description="compiles and creates all the bonary archives"
+    		depends="zip-dist-win, zip-src"/>
+
+    <!--         -->
+    <!-- run     -->
+    <!--         -->
+    <target name="run-linux" description="run the application" depends="jar">
+        <java jar="${jar_file}" fork="true" dir="${dist}" classpath="${dist}" spawn="true"/>
+    </target>
+    <target name="run-windows" description="run the application" depends="dist-win">
+        <java jar="${jar_file}" fork="true" dir="${dist-win}" spawn="true"/>
+    </target>
+
+    <!--         -->
+    <!-- compile -->
+    <!--         -->
+    <target name="compile"
+    		depends="init"
+    		description="compile the java sources in the 'build' directory">
+
+        <!-- they say fork resolves some problems on Windows -->
+        <javac
+            srcdir="${src.java}"
+            destdir="${build}"
+            deprecation="yes"
+	    failonerror="no"
+            fork="true"
+            target="1.4"
+            source="1.4"
+        	debug="yes"
+        >
+            <exclude name="**/junit/*"/>
+            <exclude name="**/*Test*"/>
+	    
+            <sourcepath>
+								<dirset dir="${idmclib.src}"/>
+                <dirset dir="${jcommon.src}"/>
+                <dirset dir="${jfreechart.src}"/>
+                <dirset dir="${forms.src}"/>
+								<dirset dir="${log4j.src}"/>
+            </sourcepath>
+        </javac>
+
+		<!-- files used by reflection -->
+            <javac
+	        srcdir="${jcommon.src}"
+            destdir="${build}"
+            deprecation="yes"
+	    failonerror="no"
+            fork="true" 
+            target="1.4"
+            source="1.4"
+        >
+			<include name="org/jfree/resources/JCommonResources.java"/>
+			<include name="org/jfree/ui/about/resources/AboutResources.java"/>
+        </javac>
+
+        <javac
+	        srcdir="${jfreechart.src}"
+            destdir="${build}"
+            deprecation="yes"
+	    failonerror="no"
+            fork="true" 
+            target="1.4"
+            source="1.4"
+        >
+  		    <include name="org/jfree/chart/resources/JFreeChartResources.java"/>
+		    <include name="org/jfree/resources/JCommonResources.java"/>
+        </javac>
+
+		<!-- copy the localization bundles -->
+		<copy todir="${build}">
+			<fileset dir="${jcommon.src}">
+				<include name="**/LocalizationBundle.properties"/>
+
+			</fileset>
+			<fileset dir="${jfreechart.src}">
+				<include name="**/LocalizationBundle.properties"/>
+			</fileset>
+		</copy>
+
+    </target>
+
+	<target name="version">
+		<copy file="${basedir}/Version.template"
+ tofile="${basedir}/${src.java}/org/tsho/dmc2/Version.java">
+		  <filterchain>
+				<replacetokens begintoken=" " endtoken=" ">
+			    	<token key="versionAnchor" value="&quot;${version}&quot;" />
+				</replacetokens>	
+		  </filterchain>
+		</copy>		
+	</target>
+
+
+    <!--     -->
+    <!-- jar -->
+    <!--     -->
+    <target name="jar"
+            depends="compile"
+            description="create the jarfile in the base directory">
+        <jar jarfile="${jar_file}"
+             basedir="${build}"
+             index="yes"
+             manifest="${src.java}/org/tsho/dmc2/dmc2.manifest">
+        </jar>
+    </target>
+
+
+    <!--            -->
+    <!-- dist-linux -->
+    <!--            -->
+    <target name="dist-linux"
+            depends="jar"
+            description="populate the linux distribuition directory">
+			
+			<copy failonerror="true"
+						file="${idmclib.lib.unix}/"
+						todir="${dist}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${jar_file}/"
+		      todir="${dist}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${basedir}/README"
+		      todir="${dist}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${basedir}/COPYING"
+		      todir="${dist}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${basedir}/logo_new.jpg"
+		      todir="${dist}"
+		      overwrite="yes"/>
+    	
+		<mkdir dir="${dist}/doc"/>
+		<fixcrlf srcdir="${doc}"
+			destdir="${dist}/doc"
+			eol="lf"
+			eof="remove"
+		/>
+    	
+    	    	
+		<mkdir dir="${dist}/models"/>
+
+		<fixcrlf srcdir="${models}"
+			 destdir="${dist}/models"
+			 eol="lf"
+                         eof="remove"
+		/>
+
+                <fixcrlf srcdir="${dist}"
+                         eol="lf"
+                         eof="remove"
+			 includes="README"
+		/>
+
+                <fixcrlf srcdir="${dist}"
+                         eol="lf"
+                         eof="remove"
+                         includes="COPYING"
+		/>
+
+    </target>
+
+    <target name="dist-win"
+            depends="jar"
+            description="populate the windows distribuition directory">
+			
+			<copy failonerror="true"
+						file="${idmclib.lib.win}"
+						todir="${dist-win}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${jar_file}/"
+		      todir="${dist-win}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${basedir}/README"
+		      todir="${dist-win}"
+		      overwrite="yes"/>
+
+		<copy failonerror="true"
+		      file="${basedir}/COPYING"
+		      todir="${dist-win}"
+		      overwrite="yes"/>
+    	
+		<copy failonerror="true"
+		      file="${basedir}/logo_new.jpg"
+		      todir="${dist-win}"
+		      overwrite="yes"/>    	
+    	
+		<mkdir dir="${dist-win}/doc"/>
+		<fixcrlf srcdir="${doc}"
+			 destdir="${dist-win}/doc"
+			 eol="crlf"
+                         eof="remove"
+		/>
+
+		<mkdir dir="${dist-win}/models"/>
+
+		<fixcrlf srcdir="${models}"
+			 destdir="${dist-win}/models"
+			 eol="crlf"
+                         eof="remove"
+		/>
+
+                <fixcrlf srcdir="${dist-win}"
+                         eol="crlf"
+			 includes="README"
+		/>
+                <fixcrlf srcdir="${dist-win}"
+                         eol="crlf"
+                         includes="COPYING"
+		/>
+
+    </target>
+
+
+    <!--         -->
+    <!-- javadoc -->
+    <!--         -->
+<!-- 
+    <target name="javadoc">
+        <delete dir="${javadoc}" />
+        <mkdir dir="${javadoc}" />
+
+        <javadoc sourcepath="."
+                 classpath="."
+			destdir="${javadoc}"
+			doctitle="Dynamical Model Cruncher 2 (version ${version})">
+
+            <packageset dir="${src.java}" defaultexcludes="no"/>
+            
+        </javadoc>
+
+    </target>
+-->
+
+
+<!--               -->
+<!-- clean targets -->
+<!--               -->
+
+
+    <!--           -->
+    <!-- clean-all -->
+    <!--           -->
+    <target name="clean-all"
+    		depends="clean-build, clean-dist, clean-archives"
+    		description="clean-build, clean-dist, clean-javadoc, clean-archives"/>
+
+
+    <!--             -->
+    <!-- clean-build -->
+    <!--             -->
+    <target name="clean-build"
+    		description="remove the build directory">
+        <delete dir="${build}"/>
+    </target>
+
+
+    <!--            -->
+    <!-- clean-dist -->
+    <!--            -->
+    <target name="clean-dist"
+    		description="remove the distribution directory">
+        <delete dir="${dist}"/>
+		<delete dir="${dist-win}"/>
+    </target>
+
+
+    <!--               -->
+    <!-- clean-javadoc -->
+    <!--               -->
+<!--
+    <target name="clean-javadoc" 
+    		description="remove the javadoc directory" >
+        <delete dir="${javadoc}"/>
+    </target>
+-->
+
+    <!--                -->
+    <!-- clean-archives -->
+    <!--                -->
+    <target name="clean-archives"
+    		description="remove the archives (*.bz2, *.zip)" >
+        <delete>
+        	<fileset dir="${basedir}" includes="*.bz2"/>
+        	<fileset dir="${basedir}" includes="*.zip"/>
+        	<fileset dir="${basedir}" includes="*.jar"/>
+        	<fileset dir="${basedir}" includes="*.exe"/>
+       	</delete>
+    </target>
+
+
+    <!--             -->
+    <!-- clean-stale -->
+    <!--             -->
+    <target name="clean-stale"
+	    	description="clean up stale .class files in src" >
+	    <delete>
+	    	<fileset dir="${src.java}" includes="**/*.class"/>
+	    </delete>
+    </target>  
+
+
+<!--                 -->
+<!-- archive targets -->
+<!--                 -->
+
+    <!-- sources patternset -->
+    <patternset id="sources">
+        <exclude name="**/*.aux"/>
+	<exclude name="**/*.dvi"/>
+	<exclude name="**/*.log"/>
+	<exclude name="doc/snapshots/"/>
+	<exclude name="build-eclipse/"/>
+	<exclude name="${javadoc}/"/>
+	<exclude name="${build}/"/>
+	<exclude name="${dist}/"/>
+	<exclude name="${dist-win}/"/>
+	<exclude name="**/.*"/>
+	<exclude name="**/*.class"/>
+	<exclude name="**/*.o"/>
+	<exclude name="**/*.d"/>
+	<exclude name="**/*.so"/>
+	<exclude name="**/*.dll"/>
+	<exclude name="**/*.jar"/>
+	<exclude name="**/*.tar*"/>
+	<exclude name="**/*.zip"/>
+	<exclude name="**/*.exe"/>
+    </patternset>
+
+
+    <!--         -->
+    <!-- tar-src -->
+    <!--         -->
+    <target name="tar-src" 
+    		description="create the source tar archive">
+
+        <property name="prefix" value="${name}-${version}"/>
+
+        <tar destfile="${name}-${version}-src.tar.bz2"
+             compression="bzip2">
+
+        <tarfileset dir="${basedir}" prefix="${prefix}">
+	    <patternset refid="sources"/>
+	</tarfileset>
+
+      	</tar>
+
+    </target>  
+
+
+    <!--          -->
+    <!-- tar-dist -->
+    <!--          -->
+    <target name="tar-dist" 
+            depends="dist-linux"
+            description="create the distribution tar archive">
+
+        <property name="prefix" value="${name}-${version}"/>
+
+        <tar destfile="${name}-${version}-bin.tar.bz2"
+             compression="bzip2">
+
+        <tarfileset dir="${dist}" prefix="${prefix}"/>
+
+      	</tar>
+
+    </target>  
+
+
+    <!--         -->
+    <!-- zip-src -->
+    <!--         -->
+    <target name="zip-src" 
+            description="create the source zip archive">
+
+        <zip destfile="${name}-${version}-src.zip">
+
+            <zipfileset dir="${basedir}"
+                        prefix="${name}-${version}">
+                <patternset refid="sources"/>
+            </zipfileset>
+
+        </zip>
+
+    </target> 
+
+
+    <!--                -->
+    <!-- zip-dist-linux -->
+    <!--                -->
+    <target name="zip-dist-linux"
+            description="create the linux distribution zip archive"
+            depends="dist-linux">
+
+        <zip destfile="${name}-${version}-linux.zip">
+            <zipfileset dir="${dist}"
+                        prefix="${name}-${version}"
+            />
+      	</zip>
+
+    </target>  
+
+
+    <!--              -->
+    <!-- zip-dist-win -->
+    <!--              -->
+    <target name="zip-dist-win"
+            description="create the windows distribution zip archive"
+            depends="dist-win">
+
+        <zip destfile="${name}-${version}-win.zip">
+            <zipfileset dir="${dist-win}"
+                        prefix="${name}-${version}"
+            />
+      	</zip>
+
+    </target>  
+
+
+    <!--                     -->
+    <!-- cross-win-installer -->
+    <!--                     -->
+    <target name="cross-win-installer"
+            description="create the windows installer package from linux with wine"
+            depends="dist-win">
+
+	<copy failonerror="true"
+	      file="${basedir}/misc/dmcDue.nsi"
+	      todir="${dist-win}"
+	      overwrite="yes"/>
+
+        <exec os="Linux"
+              dir="dist-win"
+              executable="wine">
+
+              <arg value="/opt/NSIS-2.0/makensis.exe"/>
+              <arg value="dmcDue.nsi"/>
+        </exec>
+
+	<move failonerror="true"
+	      todir="${basedir}"
+	      overwrite="yes">
+
+            <fileset dir="${dist-win}">
+                <include name="**/*.exe"/>
+            </fileset>
+        </move>
+     </target>  
+
+</project>

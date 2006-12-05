@@ -1,0 +1,4 @@
+Starting from version 1.10.2, cycles gets coloured of 3 different colors, depending on their type:
+- green: stable cycle
+- red: unstable cycle
+- blue: neither of the previous two (saddle or nonhyperbolic cycle)

@@ -1,0 +1,65 @@
+HOW TO COMPILE dmcDue/iDmc
+--------------------------
+
+Starting from the 2.x.x series, iDmc is a pure Java program.
+
+iDmc was developed under Debian GNU/Linux mainly using the IBM Eclipse
+IDE (www.eclipse.org).
+
+The Java part is Java2 1.5 compliant.
+
+Full and successful compile and runtime testing was done with Sun's Java2 
+SDK/JRE 1.5.0_06 under Ubuntu GNU/Linux (x86_64) and under Micro$oft Windows XP.
+
+The compilation defaults to produce a "static" jar file.
+This is to avoid dependencies hells only and is not stricly
+required.
+
+Sofware you need to compile:
+
+- Java2 SDK 1.4 o superiore
+  java.sun.com/j2se/
+
+- Apace ant 1.5 or above
+  http://ant.apache.org/
+
+Third part libraries:
+
+- idmclib: The iDMC C support library
+
+- JGoodies Forms, Java panels layout library
+  http://www.jgoodies.com/
+
+- JFree JFreeChart 0.9.18: a free Java class library for generating charts
+  www.jfree.org
+
+- JCommon 0.9.3: used by JFreeChart
+  www.jfree.org
+
+- jakarta-log4j-1.2.14: logging library used by JFreeChart
+  http://logging.apache.org/log4j/docs
+
+The JGoodies Forms library API is stable so, generally
+speaking, you should be able to use more recent versions of this
+library. About JFreeChart, the core library of the program, stick to
+the specified version or you'll certainly have to adapt part of the
+code.
+
+To compile under Linux using the included build.xml
+unpack all the packages in a same directory, then use ant to compile all:
+
+$ cd iDmc
+$ ant dist-linux
+
+look for other ant targets in the build.xml file.
+
+If something goes wrong or you want to compile under that nasty mass
+commercial operative system then you should really have a look to the
+build.xml.
+
+In the misc directory you will also find a NSIS (Nullsoft Scriptable
+Install System, http://nsis.sourceforge.net/home/) script to create
+Windows autoinstaller packages.
+
+Daniele Pizzoni <auouo@tin.it>
+Adapted to the 2.x.x series by Antonio Di Narzo on 2/12/2006
