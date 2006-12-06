@@ -14,7 +14,7 @@
 
     <property name="name"    value="iDmc"/>
     <property name="version" value="2.0.0"/>
-    <property name="libVersion" value="${version}"/>
+    <property name="libVersion" value="0.1.0"/>
 
     <!-- directories -->
     <property name="src.java"  value="src/java"/>
@@ -22,7 +22,7 @@
     <property name="dist"      value="dist"/>
     <property name="dist-win"  value="dist-win"/>
     <property name="javadoc"   value="javadoc"/>
-    <property name="doc"		value="doc"/>
+    <property name="doc"    value="doc"/>
     <property name="models"    value="models"/>
 
     <!-- external sources -->
@@ -32,11 +32,10 @@
     <property name="forms.src"      location="../forms-1.0.3/src/jforms"/>
     <property name="log4j.src"      location="../logging-log4j-1.2.14/src/java"/>
 
-		<!-- files -->
-		<property name="idmclib.lib.unix" value="${idmclib.src}/idmc.so"/>
-		<property name="idmclib.lib.win" value="${idmclib.src}/idmc.dll"/>
-		<property name="jar_file"      value="${basedir}/iDmc-${version}.jar"/>
-
+    <!-- files -->
+    <property name="idmclib.lib.unix" value="${idmclib.src}/idmc.so"/>
+    <property name="idmclib.lib.win" value="${idmclib.src}/idmc.dll"/>
+    <property name="jar_file"      value="${basedir}/iDmc-${version}.jar"/>
 
 <!--              -->
 <!-- work targets -->
@@ -105,14 +104,13 @@
             <exclude name="**/*Test*"/>
 	    
             <sourcepath>
-								<dirset dir="${idmclib.src}"/>
+                <dirset dir="${idmclib.src}"/>
                 <dirset dir="${jcommon.src}"/>
                 <dirset dir="${jfreechart.src}"/>
                 <dirset dir="${forms.src}"/>
-								<dirset dir="${log4j.src}"/>
+		<dirset dir="${log4j.src}"/>
             </sourcepath>
         </javac>
-
 		<!-- files used by reflection -->
             <javac
 	        srcdir="${jcommon.src}"
@@ -122,9 +120,9 @@
             fork="true" 
             target="1.4"
             source="1.4"
-        >
-			<include name="org/jfree/resources/JCommonResources.java"/>
-			<include name="org/jfree/ui/about/resources/AboutResources.java"/>
+            >
+                <include name="org/jfree/resources/JCommonResources.java"/>
+                <include name="org/jfree/ui/about/resources/AboutResources.java"/>
         </javac>
 
         <javac
@@ -136,33 +134,32 @@
             target="1.4"
             source="1.4"
         >
-  		    <include name="org/jfree/chart/resources/JFreeChartResources.java"/>
-		    <include name="org/jfree/resources/JCommonResources.java"/>
+                <include name="org/jfree/chart/resources/JFreeChartResources.java"/>
+                <include name="org/jfree/resources/JCommonResources.java"/>
         </javac>
 
-		<!-- copy the localization bundles -->
-		<copy todir="${build}">
-			<fileset dir="${jcommon.src}">
-				<include name="**/LocalizationBundle.properties"/>
-
-			</fileset>
-			<fileset dir="${jfreechart.src}">
-				<include name="**/LocalizationBundle.properties"/>
-			</fileset>
-		</copy>
+        <!-- copy the localization bundles -->
+        <copy todir="${build}">
+                <fileset dir="${jcommon.src}">
+                        <include name="**/LocalizationBundle.properties"/>
+                </fileset>
+                <fileset dir="${jfreechart.src}">
+                        <include name="**/LocalizationBundle.properties"/>
+                </fileset>
+        </copy>
 
     </target>
-
-	<target name="version">
-		<copy file="${basedir}/Version.template"
- tofile="${basedir}/${src.java}/org/tsho/dmc2/Version.java">
-		  <filterchain>
-				<replacetokens begintoken=" " endtoken=" ">
-			    	<token key="versionAnchor" value="&quot;${version}&quot;" />
-				</replacetokens>	
-		  </filterchain>
-		</copy>		
-	</target>
+    
+    <target name="version">
+        <copy file="${basedir}/Version.template"
+            tofile="${basedir}/${src.java}/org/tsho/dmc2/Version.java">
+          <filterchain>
+              <replacetokens begintoken=" " endtoken=" ">
+                  <token key="versionAnchor" value="&quot;${version}&quot;" />
+              </replacetokens>
+          </filterchain>
+        </copy>
+    </target>
 
 
     <!--     -->
@@ -186,136 +183,130 @@
             depends="jar"
             description="populate the linux distribuition directory">
 			
-			<copy failonerror="true"
-						file="${idmclib.lib.unix}/"
-						todir="${dist}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+            file="${idmclib.lib.unix}/"
+            todir="${dist}"
+          overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${jar_file}/"
-		      todir="${dist}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+              file="${jar_file}/"
+              todir="${dist}"
+              overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${basedir}/README"
-		      todir="${dist}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+              file="${basedir}/README"
+              todir="${dist}"
+              overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${basedir}/COPYING"
-		      todir="${dist}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+              file="${basedir}/COPYING"
+              todir="${dist}"
+              overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${basedir}/logo_new.jpg"
-		      todir="${dist}"
-		      overwrite="yes"/>
-    	
-		<mkdir dir="${dist}/doc"/>
-		<fixcrlf srcdir="${doc}"
-			destdir="${dist}/doc"
-			eol="lf"
-			eof="remove"
-		/>
-    	
-    	    	
-		<mkdir dir="${dist}/models"/>
+        <copy failonerror="true"
+              file="${basedir}/logo_new.jpg"
+              todir="${dist}"
+              overwrite="yes"/>
 
-		<fixcrlf srcdir="${models}"
-			 destdir="${dist}/models"
-			 eol="lf"
-                         eof="remove"
-		/>
+        <mkdir dir="${dist}/doc"/>
+        <fixcrlf srcdir="${doc}"
+                destdir="${dist}/doc"
+                eol="lf"
+                eof="remove"
+        />
 
-                <fixcrlf srcdir="${dist}"
-                         eol="lf"
-                         eof="remove"
-			 includes="README"
-		/>
 
-                <fixcrlf srcdir="${dist}"
-                         eol="lf"
-                         eof="remove"
-                         includes="COPYING"
-		/>
+        <mkdir dir="${dist}/models"/>
 
+        <fixcrlf srcdir="${models}"
+                 destdir="${dist}/models"
+                 eol="lf"
+                 eof="remove"
+        />
+
+        <fixcrlf srcdir="${dist}"
+                 eol="lf"
+                 eof="remove"
+                 includes="README"
+        />
+
+        <fixcrlf srcdir="${dist}"
+                 eol="lf"
+                 eof="remove"
+                 includes="COPYING"
+        />
     </target>
 
     <target name="dist-win"
             depends="jar"
             description="populate the windows distribuition directory">
 			
-			<copy failonerror="true"
-						file="${idmclib.lib.win}"
-						todir="${dist-win}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+            file="${idmclib.lib.win}"
+            todir="${dist-win}"
+        overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${jar_file}/"
-		      todir="${dist-win}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+              file="${jar_file}/"
+              todir="${dist-win}"
+              overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${basedir}/README"
-		      todir="${dist-win}"
-		      overwrite="yes"/>
+        <copy failonerror="true"
+              file="${basedir}/README"
+              todir="${dist-win}"
+              overwrite="yes"/>
 
-		<copy failonerror="true"
-		      file="${basedir}/COPYING"
-		      todir="${dist-win}"
-		      overwrite="yes"/>
-    	
-		<copy failonerror="true"
-		      file="${basedir}/logo_new.jpg"
-		      todir="${dist-win}"
-		      overwrite="yes"/>    	
-    	
-		<mkdir dir="${dist-win}/doc"/>
-		<fixcrlf srcdir="${doc}"
-			 destdir="${dist-win}/doc"
-			 eol="crlf"
-                         eof="remove"
-		/>
+        <copy failonerror="true"
+              file="${basedir}/COPYING"
+              todir="${dist-win}"
+              overwrite="yes"/>
 
-		<mkdir dir="${dist-win}/models"/>
+        <copy failonerror="true"
+              file="${basedir}/logo_new.jpg"
+              todir="${dist-win}"
+              overwrite="yes"/>    	
 
-		<fixcrlf srcdir="${models}"
-			 destdir="${dist-win}/models"
-			 eol="crlf"
-                         eof="remove"
-		/>
+        <mkdir dir="${dist-win}/doc"/>
+        <fixcrlf srcdir="${doc}"
+                 destdir="${dist-win}/doc"
+                 eol="crlf"
+                 eof="remove"
+        />
 
-                <fixcrlf srcdir="${dist-win}"
-                         eol="crlf"
-			 includes="README"
-		/>
-                <fixcrlf srcdir="${dist-win}"
-                         eol="crlf"
-                         includes="COPYING"
-		/>
+        <mkdir dir="${dist-win}/models"/>
 
+        <fixcrlf srcdir="${models}"
+                 destdir="${dist-win}/models"
+                 eol="crlf"
+                 eof="remove"
+        />
+
+        <fixcrlf srcdir="${dist-win}"
+                 eol="crlf"
+                 includes="README"
+        />
+        <fixcrlf srcdir="${dist-win}"
+                 eol="crlf"
+                 includes="COPYING"
+        />
     </target>
 
 
     <!--         -->
     <!-- javadoc -->
     <!--         -->
-<!-- 
     <target name="javadoc">
         <delete dir="${javadoc}" />
         <mkdir dir="${javadoc}" />
 
         <javadoc sourcepath="."
                  classpath="."
-			destdir="${javadoc}"
-			doctitle="Dynamical Model Cruncher 2 (version ${version})">
-
+                destdir="${javadoc}"
+                doctitle="Dynamical Model Cruncher 2 (version ${version})">
             <packageset dir="${src.java}" defaultexcludes="no"/>
-            
         </javadoc>
 
     </target>
--->
 
 
 <!--               -->
@@ -327,7 +318,7 @@
     <!-- clean-all -->
     <!--           -->
     <target name="clean-all"
-    		depends="clean-build, clean-dist, clean-archives"
+    		depends="clean-build, clean-dist, clean-javadoc, clean-archives"
     		description="clean-build, clean-dist, clean-javadoc, clean-archives"/>
 
 
@@ -346,19 +337,17 @@
     <target name="clean-dist"
     		description="remove the distribution directory">
         <delete dir="${dist}"/>
-		<delete dir="${dist-win}"/>
+        <delete dir="${dist-win}"/>
     </target>
 
 
     <!--               -->
     <!-- clean-javadoc -->
     <!--               -->
-<!--
     <target name="clean-javadoc" 
     		description="remove the javadoc directory" >
         <delete dir="${javadoc}"/>
     </target>
--->
 
     <!--                -->
     <!-- clean-archives -->
