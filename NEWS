@@ -75,4 +75,5 @@
 * 1.10.3
 - fixed bug in F^n computation in Cycles C routine
 
-
+* 2.0.0
+- removed all native code. Now using the external 'idmclib' library
