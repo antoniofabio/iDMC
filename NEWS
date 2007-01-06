@@ -77,3 +77,8 @@
 
 * 2.0.0
 - removed all native code. Now using the external 'idmclib' library
+
+* 2.0.1
+- added idmclib return codes to the jidmclib interface
+- fixed cycles input mask (ranges explicitely given for each model variable)
+

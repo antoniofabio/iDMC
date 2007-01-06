@@ -24,7 +24,7 @@ public class FastBasinsAlgorithm implements BasinsAlgorithm {
 		attractorLimit = br.getAttractorLimit();
 		attractorIterations = br.getAttractorIterations();
         attractorsSamplePoints = br.getAttractorsSamplePoints();
-        index=0;    	
+        index=0;
     }
     
 	public void run() {

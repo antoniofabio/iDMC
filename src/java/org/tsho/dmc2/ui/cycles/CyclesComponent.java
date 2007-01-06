@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004,2005,2006 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  *

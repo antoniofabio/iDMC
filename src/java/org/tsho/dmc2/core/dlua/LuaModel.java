@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004,2005,2006 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  *
@@ -27,12 +27,13 @@ package org.tsho.dmc2.core.dlua;
 import org.tsho.dmc2.core.VariableDoubles;
 import org.tsho.dmc2.core.model.Model;
 import org.tsho.dmc2.core.model.ModelException;
+import org.tsho.jidmclib.idmc;
 
 public class LuaModel extends org.tsho.jidmclib.Model implements Model {
 	public org.tsho.jidmclib.Model model=null;
     static final int TYPE_CONT = 1;
     static final int TYPE_DISC = 2;
-    
+
     protected final String name;
     
     LuaModel(final String name, final String buffer)

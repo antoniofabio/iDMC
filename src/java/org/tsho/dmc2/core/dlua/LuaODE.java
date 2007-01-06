@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004,2005,2006 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  *
@@ -37,6 +37,7 @@ public class LuaODE extends LuaModel implements ODE {
             final double[] par, final double[] var, final double[] result) {
         try {
             int ans=model.f(par, var, result);
+            //FIXME: throw proper exception depending on idmclib return code
             if(ans<0)
             	throw new LuaErrorException("Error in evaluating model function");
         }

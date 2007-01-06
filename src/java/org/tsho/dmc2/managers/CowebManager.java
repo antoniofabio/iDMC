@@ -159,7 +159,7 @@ public class CowebManager extends AbstractManager
 
         Stepper stepper = null;
         if (model instanceof SimpleMap) {
-            stepper = Lua.newIterator2(model,
+            stepper = Lua.newIterator(model,
             		VariableDoubles.toArray(parameters),
             		new double[model.getNVar()]);
         }

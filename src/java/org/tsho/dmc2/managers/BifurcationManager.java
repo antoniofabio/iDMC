@@ -159,7 +159,7 @@ AbstractManager.AxesVisibility {
         
         Stepper stepper = null;
         if (model instanceof SimpleMap) {
-            stepper = Lua.newIterator2(model,
+            stepper = Lua.newIterator(model,
             		VariableDoubles.toArray(parameters),
             		VariableDoubles.toArray(initial));
         }
@@ -248,7 +248,7 @@ AbstractManager.AxesVisibility {
         
         Stepper stepper = null;
         if (model instanceof SimpleMap) {
-            stepper = Lua.newIterator2(model,
+            stepper = Lua.newIterator(model,
             		VariableDoubles.toArray(parameters),
                     VariableDoubles.toArray(initial));
         }

@@ -60,20 +60,30 @@ public final class CyclesControlForm2 extends AbstractControlForm {
     private GetFloat upperHRangeField;
     private GetFloat lowerVRangeField;
     private GetFloat upperVRangeField;
+    private GetFloat rangeFieldsMin[];
+    private GetFloat rangeFieldsMax[];
     private JComboBox domainBox;
     private JComboBox rangeBox;
+    String varNames[];
 
     
     public CyclesControlForm2(final Model model, AbstractPlotComponent frame) {
         super(frame);
         setOpaque(true);
 
-        if (model.getNVar() < 1) {
-            throw new Error("models must be with dimension >= 2");
-        }
-
+        if (model.getNVar() < 1)
+            throw new Error("models must be with dimension >= 1");
+        
         parFields = FormHelper.createFields(model.getParNames(), "parameter");
-
+        
+        varNames = model.getVarNames();
+        rangeFieldsMin = new GetFloat[varNames.length];
+        rangeFieldsMax = new GetFloat[varNames.length];
+        for(int i=0; i<varNames.length; i++) {
+            rangeFieldsMin[i] = new GetFloat(varNames[i] + " min", FormHelper.FIELD_LENGTH);
+            rangeFieldsMax[i] = new GetFloat(varNames[i] + " max", FormHelper.FIELD_LENGTH);
+        }
+        
         epsilonField = new GetFloat(
                 "epsilon", FormHelper.FIELD_LENGTH,
                 new Range(0, Double.MAX_VALUE));
@@ -121,13 +131,25 @@ public final class CyclesControlForm2 extends AbstractControlForm {
         while (i.hasNext()) {
             builder.addRow(i.nextLabel(), (Component) i.value());
         }
+        
+        builder.addTitle("Variables ranges");
+        int j;
+        for(j=0; j<varNames.length-1; j++) {
+            builder.addSubtitle(varNames[j]);
+            builder.addRow("min", rangeFieldsMin[j]);
+            builder.addRow("max", rangeFieldsMax[j]);
+            builder.addGap();
+        }
+        builder.addSubtitle(varNames[j]);
+        builder.addRow("min", rangeFieldsMin[j]);
+        builder.addRow("max", rangeFieldsMax[j]);
 
         builder.addTitle("Algorithm");
         builder.addRow("epsilon", epsilonField);
         builder.addRow("period", periodField);
         builder.addRow("max. tries", triesField);
         
-        builder.addTitle("Ranges");
+        builder.addTitle("Plotting ranges");
         builder.addSubtitle("horizontal");
         builder.addRow("min", lowerHRangeField);
         builder.addRow("max", upperHRangeField);
@@ -169,7 +191,7 @@ public final class CyclesControlForm2 extends AbstractControlForm {
     public VariableDoubles getParameterValues() throws InvalidData {
         return FormHelper.collectFieldValues(parFields);
     }
-
+    
     public void setParameterValues(final VariableDoubles init) {
         FormHelper.setFieldValues(parFields, init);
     }
@@ -205,6 +227,20 @@ public final class CyclesControlForm2 extends AbstractControlForm {
     }
 
     // Ranges
+    
+    public VariableDoubles getRangeMin() throws InvalidData {
+        VariableDoubles ans = new VariableDoubles(varNames);
+        for(int i=0; i<varNames.length; i++)
+            ans.put(varNames[i], rangeFieldsMin[i].getValue());
+        return ans;
+    }
+    
+    public VariableDoubles getRangeMax() throws InvalidData {
+        VariableDoubles ans = new VariableDoubles(varNames);
+        for(int i=0; i<varNames.length; i++)
+            ans.put(varNames[i], rangeFieldsMax[i].getValue());
+        return ans;
+    }
 
     public Range getXRange() throws InvalidData {
         if (lowerHRangeField.getValue() >= upperHRangeField.getValue()) {

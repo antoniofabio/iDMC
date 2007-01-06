@@ -39,9 +39,21 @@ import org.tsho.dmc2.core.model.ModelException;
 
 /**
  *
- * @author Daniele Pizzoni <auouo@tin.it>. Modified by Antonio Di Narzo <antonio.dinarzo@studio.unibo.it>
+ * @author Daniele Pizzoni <auouo@tin.it>. 
+ * Modified by Antonio Di Narzo <antonio.dinarzo@studio.unibo.it>
  */
 public final class Lua {
+        /**
+     *idmclib common return codes
+     */
+    static final int OK = idmc.IDMC_OK;
+    static final int EMEM = idmc.IDMC_EMEM;
+    static final int ELUASYNTAX = idmc.IDMC_ELUASYNTAX;
+    static final int ERUN = idmc.IDMC_ERUN;
+    static final int EMODEL = idmc.IDMC_EMODEL;
+    static final int EERROR = idmc.IDMC_EERROR;
+    static final int EMATH = idmc.IDMC_EMATH;
+    static final int EINT = idmc.IDMC_EINT;
 
     private Lua() {
     }
@@ -66,6 +78,10 @@ public final class Lua {
         return null;
     }
 
+    /**
+     *This is the model object factory. Depending on model features, specific 
+     * LuaModel subclasses are instantiated
+     */
     public static Model newModel(final File f)
             throws IOException, ModelException { // FileNotFoundException
         FileReader fr = new FileReader(f);
@@ -106,7 +122,7 @@ public final class Lua {
         }
     }
 
-    public static MapStepper newIterator2(Model model, 
+    public static MapStepper newIterator(Model model, 
     		double pars[], double vars[]) {
         return new LuaIterator((LuaSimpleMap) model, 
         		pars, vars);
@@ -137,7 +153,7 @@ public final class Lua {
                 VariableDoubles.toArray(parameters), 
                 VariableDoubles.toArray(initialPoint), 
                 result, iterations);
-        if(ans<0)
+        if(ans!=OK)
             throw new ModelException("error computing lyapunov exponents");
         return result;
     }
@@ -151,7 +167,7 @@ public final class Lua {
                 VariableDoubles.toArray(parameters),
                 VariableDoubles.toArray(initialPoint),
                 result, time, step);
-        if(ans<0)
+        if(ans!=OK)
             throw new ModelException("error in computing lyapunov exponents");
         return result;
     }

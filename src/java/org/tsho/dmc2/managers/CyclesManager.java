@@ -105,6 +105,7 @@ public class CyclesManager extends AbstractManager
 
         VariableDoubles initial;
         VariableDoubles parameters;
+        VariableDoubles rangeMin, rangeMax;
         Range xRange;
         Range yRange;
         String xLabel;
@@ -116,6 +117,8 @@ public class CyclesManager extends AbstractManager
         try {
             initial = model.getVariables();
             parameters = form.getParameterValues();
+            rangeMin = form.getRangeMin();
+            rangeMax = form.getRangeMax();
 
             xRange = form.getXRange();
             yRange = form.getYRange();
@@ -134,7 +137,9 @@ public class CyclesManager extends AbstractManager
         plot.zoom(0.0);
 
         plotRenderer.initialize(
-                parameters, initial, xLabel, yLabel,
+                parameters, initial, 
+                rangeMin, rangeMax,
+                xLabel, yLabel,
                 epsilon, period, maxTries);
 
         plotRenderer.setBigDots(bigDots);

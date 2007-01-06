@@ -184,7 +184,7 @@ public class TrajectoryManager extends AbstractManager
         if (!form.isVariation()) {
             Stepper stepper = null;
             if (model instanceof SimpleMap) {
-                stepper = Lua.newIterator2(model, 
+                stepper = Lua.newIterator(model, 
                 		VariableDoubles.toArray(parameters), 
                 		VariableDoubles.toArray(initialVal));
             }
@@ -302,7 +302,7 @@ public class TrajectoryManager extends AbstractManager
         for (int i = 0; i < count; i++) {
             Stepper stepper;
             if (model instanceof SimpleMap) {
-                stepper = Lua.newIterator2(model,
+                stepper = Lua.newIterator(model,
                 		VariableDoubles.toArray(
                                 updateValues(i, parameters, deltaPar)),
                         VariableDoubles.toArray(

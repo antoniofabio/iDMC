@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004,2005,2006 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -45,6 +45,8 @@ public class CyclesRenderer implements DmcPlotRenderer {
 
     private DmcRenderablePlot plot;
     private SimpleMap map;
+    
+    VariableDoubles rangeMin, rangeMax;
 
     // parameters
 
@@ -98,8 +100,12 @@ public class CyclesRenderer implements DmcPlotRenderer {
         int yLabelIndex = VariableDoubles.indexOf(initialValues, yLabel);
 
         int x, y;
+        String varNames[] = map.getVarNames();
         int dim = map.getNVar();
         double tmp[] = new double[dim];
+        double tmp1[] = new double[dim];
+        double vRangeMax[] = VariableDoubles.toArray(rangeMax);
+        double vRangeMin[] = VariableDoubles.toArray(rangeMin);
         double[] cycle;
     	double[] cycleModulus = new double[dim];
         
@@ -114,18 +120,10 @@ public class CyclesRenderer implements DmcPlotRenderer {
                 return;
             }
 
-            /*
-             *FIXME: ranges should be explicit algorithm inputs (even for systems with >2 variables!)
-             */
-            double xInit = domainAxis.getLowerBound()
-                           - (domainAxis.getLowerBound() - domainAxis.getUpperBound())
-                           * Math.random();
-            double yInit = rangeAxis.getLowerBound()
-                           - (rangeAxis.getLowerBound() - rangeAxis.getUpperBound())
-                           * Math.random();
-            initialValues.put(xLabel, xInit);
-            initialValues.put(yLabel, yInit);
-
+            for(int iii = 0; iii<dim; iii++) {
+                double val =  (vRangeMax[iii] - vRangeMin[iii]) * Math.random();
+                initialValues.put(varNames[iii], vRangeMin[iii] + val);
+            }
             counter++;
 
             try {
@@ -267,11 +265,14 @@ public class CyclesRenderer implements DmcPlotRenderer {
 
     public void initialize(
             VariableDoubles parameters, VariableDoubles initialPoint,
+            VariableDoubles rangeMin, VariableDoubles rangeMax,
             String xLabel, String yLabel, double epsilon,
             int period, int maxPoints) {
 
         this.parameters = parameters;
         this.initialPoint = initialPoint;
+        this.rangeMin = rangeMin;
+        this.rangeMax = rangeMax;
         this.xLabel = xLabel;
         this.yLabel = yLabel;
         this.epsilon = epsilon;
