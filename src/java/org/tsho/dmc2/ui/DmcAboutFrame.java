@@ -61,7 +61,7 @@ public class DmcAboutFrame extends JFrame {
             setName(DmcDue.Defaults.name);
             setVersion(DmcDue.Defaults.version);
             setInfo(myInfo);
-            setCopyright("Copyright 2004-2006 Marji Lines and Alfredo Medio");
+            setCopyright("Copyright 2004-2007 Marji Lines and Alfredo Medio");
             setLogo(null);
             setLicenceName("GPL");
             setLicenceText(Licences.getInstance().getGPL());

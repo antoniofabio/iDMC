@@ -82,3 +82,5 @@
 - added idmclib return codes to the jidmclib interface
 - fixed cycles input mask (ranges explicitely given for each model variable)
 
+* 2.0.2
+- added 'black' color to cycles routine for eigenvalues near to 1

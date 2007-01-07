@@ -1,4 +1,6 @@
-Starting from version 1.10.2, cycles gets coloured of 3 different colors, depending on their type:
-- green: stable cycle
-- red: unstable cycle
-- blue: neither of the previous two (saddle or nonhyperbolic cycle)
+Starting from version 2.0.2 of iDMC, cycles gets coloured of 4 different colors, 
+depending on their associated eigenvalues modulus:
+- black: at least one ~= 1  ('epsilon' input is taken as approximation criterion)
+- green: all < 1
+- red: all > 1
+- blue: none of the previous 3

@@ -17,7 +17,7 @@ required.
 
 Sofware you need to compile:
 
-- Java2 SDK 1.4 o superiore
+- Java2 SDK 1.4 or above
   java.sun.com/j2se/
 
 - Apace ant 1.5 or above
@@ -25,7 +25,8 @@ Sofware you need to compile:
 
 Third part libraries:
 
-- idmclib: The iDMC C support library
+- idmclib: The iDMC C support library, version 0.1.1 or compatible
+  http://code.google.com/p/idmclib
 
 - JGoodies Forms, Java panels layout library
   http://www.jgoodies.com/

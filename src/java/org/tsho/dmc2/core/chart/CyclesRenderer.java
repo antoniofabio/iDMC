@@ -208,6 +208,7 @@ public class CyclesRenderer implements DmcPlotRenderer {
         /*check eigval modulus. Depending on it, set color.*/
         boolean stable=false;
         boolean unstable=false;
+        boolean one=false;
         int dim=cycleModulus.length;
         for(int i=0; i<dim; i++) {
                 if(stable)
@@ -220,13 +221,18 @@ public class CyclesRenderer implements DmcPlotRenderer {
                                 unstable=false;
                                 break;
                         } else continue;
-                if(cycleModulus[i]<1)
+                if(Math.abs(cycleModulus[i]-1)<=epsilon) {
+                    one=true;
+                    break;
+                } else if(cycleModulus[i]<1)
                         stable=true;
                 else if(cycleModulus[i]>1)
                         unstable=true;
                 else break;
         }
-        if(stable)
+        if(one)
+                g2.setColor(Color.BLACK);
+        else if(stable)
                 g2.setColor(Color.GREEN);
         else if(unstable)
                 g2.setColor(Color.RED);
