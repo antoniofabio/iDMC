@@ -14,7 +14,7 @@
 
     <property name="name"    value="iDmc"/>
     <property name="version" value="2.0.2"/>
-    <property name="libVersion" value="0.1.1"/>
+    <property name="libVersion" value="0.2.0"/>
 
     <!-- directories -->
     <property name="src.java"  value="src/java"/>
