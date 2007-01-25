@@ -27,7 +27,6 @@
 package org.tsho.dmc2.core.algorithms;
 
 import java.util.Vector;
-
 import org.tsho.dmc2.core.chart.BasinRenderer;
 import org.tsho.dmc2.core.model.SimpleMap;
 import org.tsho.jidmclib.*;
@@ -48,7 +47,7 @@ public class NativeBasinsAlgorithm implements BasinsAlgorithm {
         Grid grid = br.getGrid();
         double ranges[] = grid.getRanges();
         SimpleMap map = br.getMap();
-        SWIGTYPE_p_double parameters = idmc.new_doubleArray(map.getNPar());
+        double parameters[] = br.getParameters();
         basin = new Basin((Model) map, parameters, 
             ranges[0], ranges[1], grid.nc, 
             ranges[2], ranges[3], grid.nr, 
@@ -63,7 +62,7 @@ public class NativeBasinsAlgorithm implements BasinsAlgorithm {
         int br_data[] = br.getGrid().getData();
         int len = br_data.length;
         index=0;
-        while (!(basin.finished()!=0)) {
+        while (basin.finished()==0) {
             basin.step_n(rate);
             index+=rate;
             /*Fill raster data as wanted by BasinRenderer*/
@@ -73,6 +72,9 @@ public class NativeBasinsAlgorithm implements BasinsAlgorithm {
             if (br.isStopped())
                 return;
 	}
+        /*Fill raster data as wanted by BasinRenderer*/
+        for(int i=0; i<br_data.length; i++)
+            br_data[i] = idmc.intArray_getitem(b_data, i);        
         br.drawImage();
     }
 

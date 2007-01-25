@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004,2007 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -144,7 +144,7 @@ public class BasinComponent extends AbstractPlotComponent
                 controlForm.updateSamplesMenu();
             }
         });
-        menuItem.setSelected(true);
+        menuItem.setSelected(false);
         
         
         menu.addSeparator();

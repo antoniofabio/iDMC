@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004-2006 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004-2006,2007 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -302,5 +302,13 @@ public class BasinRenderer implements DmcPlotRenderer {
 
     public SimpleMap getMap() {
         return map;
+    }
+
+    public double[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(double[] parameters) {
+        this.parameters = parameters;
     }
 }
