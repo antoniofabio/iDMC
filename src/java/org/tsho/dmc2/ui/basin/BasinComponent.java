@@ -131,6 +131,22 @@ public class BasinComponent extends AbstractPlotComponent
             }
         });
         
+        menuItem = new JRadioButtonMenuItem("Native algorithm");
+        menuItem.setMnemonic(KeyEvent.VK_N);
+        group.add(menuItem);
+        menu.add(menuItem);
+        menuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                //change flag in basin control form and in basin renderer
+                BasinRenderer plotRenderer=manager.getPlotRenderer();
+                plotRenderer.setType(BasinRenderer.NATIVE_ALGORITHM);
+                privateControlForm.setType(BasinRenderer.NATIVE_ALGORITHM);
+                controlForm.updateSamplesMenu();
+            }
+        });
+        menuItem.setSelected(true);
+        
+        
         menu.addSeparator();
         
         menu.add(colorSettingsAction);
