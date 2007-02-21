@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004-2006,2007 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -52,7 +52,6 @@ public class BasinRenderer implements DmcPlotRenderer {
     
     public static final int FAST_ALGORITHM = 0;
     public static final int SLOW_ALGORITHM = 1;
-    public static final int NATIVE_ALGORITHM = 2;
     private int type;
 
     /** parameters */
@@ -142,8 +141,6 @@ public class BasinRenderer implements DmcPlotRenderer {
         	bA = new FastBasinsAlgorithm(this);
         else if(type==SLOW_ALGORITHM)
         	bA = new SlowBasinsAlgorithm(this);
-        else if(type==NATIVE_ALGORITHM)
-        	bA = new NativeBasinsAlgorithm(this);
       	bA.run();
         
         /** Now that grid is computed, pass it to the BasinComponent for possible storing */
@@ -230,85 +227,73 @@ public class BasinRenderer implements DmcPlotRenderer {
         bigDotsEnabled=flag;
     }
 
-    /**
-     * @return the grid
-     */
-    public Grid getGrid() {
-            return grid;
-    }
+	/**
+	 * @return the grid
+	 */
+	public Grid getGrid() {
+		return grid;
+	}
 
-    /**
-     * @return the infinity
-     */
-    public double getInfinity() {
-            return infinity;
-    }
+	/**
+	 * @return the infinity
+	 */
+	public double getInfinity() {
+		return infinity;
+	}
 
-    /**
-     * @return the attractorLimit
-     */
-    public int getAttractorLimit() {
-            return attractorLimit;
-    }
+	/**
+	 * @return the attractorLimit
+	 */
+	public int getAttractorLimit() {
+		return attractorLimit;
+	}
 
-    /**
-     * @return the attractorIterations
-     */
-    public int getAttractorIterations() {
-            return attractorIterations;
-    }
+	/**
+	 * @return the attractorIterations
+	 */
+	public int getAttractorIterations() {
+		return attractorIterations;
+	}
 
-    /**
-     * @return the stopped
-     */
-    public boolean isStopped() {
-            return stopped;
-    }
+	/**
+	 * @return the stopped
+	 */
+	public boolean isStopped() {
+		return stopped;
+	}
 
-    /**
-     * @return the numberOfRandomPoints
-     */
-    public int getNumberOfRandomPoints() {
-            return numberOfRandomPoints;
-    }
+	/**
+	 * @return the numberOfRandomPoints
+	 */
+	public int getNumberOfRandomPoints() {
+		return numberOfRandomPoints;
+	}
 
-    /**
-     * @return the rate
-     */
-    public int getRate() {
-            return rate;
-    }
+	/**
+	 * @return the rate
+	 */
+	public int getRate() {
+		return rate;
+	}
 
-    /**
-     * @return the attractorsSamplePoints
-     */
-    public Vector getAttractorsSamplePoints() {
-            return attractorsSamplePoints;
-    }
+	/**
+	 * @return the attractorsSamplePoints
+	 */
+	public Vector getAttractorsSamplePoints() {
+		return attractorsSamplePoints;
+	}
 
-    /**
-     * @return the colorSettings
-     */
-    public ColorSettings getColorSettings() {
-            return colorSettings;
-    }
+	/**
+	 * @return the colorSettings
+	 */
+	public ColorSettings getColorSettings() {
+		return colorSettings;
+	}
 
-    /**
-     * @param colorSettings the colorSettings to set
-     */
-    public void setColorSettings(ColorSettings colorSettings) {
-            BasinRenderer.colorSettings = colorSettings;
-    }
-
-    public SimpleMap getMap() {
-        return map;
-    }
-
-    public double[] getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(double[] parameters) {
-        this.parameters = parameters;
-    }
+	/**
+	 * @param colorSettings the colorSettings to set
+	 */
+	public void setColorSettings(ColorSettings colorSettings) {
+		BasinRenderer.colorSettings = colorSettings;
+	}    
 }

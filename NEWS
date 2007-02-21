@@ -85,5 +85,5 @@
 * 2.0.2
 - added 'black' color to cycles routine for eigenvalues near to 1
 
-* 2.1.0
-- added new 'native' basins of attraction algorithm
+* 2.0.3
+- fixed issues 2,3

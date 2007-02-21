@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004,2007 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -130,22 +130,6 @@ public class BasinComponent extends AbstractPlotComponent
                 privateControlForm.updateSamplesMenu();
             }
         });
-        
-        menuItem = new JRadioButtonMenuItem("Native algorithm");
-        menuItem.setMnemonic(KeyEvent.VK_N);
-        group.add(menuItem);
-        menu.add(menuItem);
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                //change flag in basin control form and in basin renderer
-                BasinRenderer plotRenderer=manager.getPlotRenderer();
-                plotRenderer.setType(BasinRenderer.NATIVE_ALGORITHM);
-                privateControlForm.setType(BasinRenderer.NATIVE_ALGORITHM);
-                controlForm.updateSamplesMenu();
-            }
-        });
-        menuItem.setSelected(false);
-        
         
         menu.addSeparator();
         

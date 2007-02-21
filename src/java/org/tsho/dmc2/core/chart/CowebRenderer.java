@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004, 2007 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -26,6 +26,7 @@
  */
 package org.tsho.dmc2.core.chart;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -102,15 +103,11 @@ public class CowebRenderer implements DmcPlotRenderer {
 
         if (plot.isAlpha()) {
             g2.setComposite(AlphaComposite.SrcOver);
-
         }
 
         Stepper.Point2D result = stepper.getCurrentPoint2D();
 
         int transX, transY;
-
-//        double start = Math.floor(dataArea.getMinX() + 0.5);
-//        double end = Math.floor(dataArea.getMaxX() + 0.5);
 
         double start = (int) dataArea.getMinX();
         double end = (int) dataArea.getMaxX();
@@ -118,10 +115,12 @@ public class CowebRenderer implements DmcPlotRenderer {
         double[] value = new double[1];
 
         int prevY = 0;
+        boolean flagOld=false;
+        boolean flagNew=false;
 
         label:
         for (double i = start; i <= end; i += 1) {
-            value[0] = this.domainAxis.valueToJava2D(
+            value[0] = this.domainAxis.java2DToValue(
                     i, dataArea, RectangleEdge.BOTTOM);
 
             stepper.setInitialValue(value);
@@ -136,15 +135,7 @@ public class CowebRenderer implements DmcPlotRenderer {
             transX = (int) i;
             transY = (int) rangeAxis.valueToJava2D(
                                 result.getX(), dataArea, RectangleEdge.LEFT);
-
-//            transX = (int) Math.round(i);
-//            transY = (int) Math.round(rangeAxis.translateValueToJava2D(
-//                                result.getX(), dataArea, RectangleEdge.LEFT));
-
-
-//            System.out.println(
-//                "i = " + i + "; transX = " + transX + "; value = " + value[0]
-//                + "; j = " + transY + "; y = " + result.getX());
+            flagNew = Double.isNaN(result.getX());
 
             if (bigDots) {
                 g2.fillRect(transX - 1, transY - 1, 3, 3);
@@ -155,10 +146,12 @@ public class CowebRenderer implements DmcPlotRenderer {
 
             if (connectWithLines) {
                 if (i > start) {
+                    if(!flagOld && !flagNew)
                     g2.drawLine(transX, transY, transX - 1, prevY);
                 }
 
                 prevY = transY;
+                flagOld = flagNew;
             }
 
             if (stopped) {

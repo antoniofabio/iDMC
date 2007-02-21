@@ -74,7 +74,20 @@ class LuaIterator implements MapStepper {
                 initialValue, 0, this.currentValues, 0, dim);
     }
     
-    public void initialize(){}
+    public void initialize(){
+        System.arraycopy(
+            initialValues, 0, lastValues, 0, initialValues.length);
+
+        count = 0;
+
+        currentValues = new double[dim];        
+
+        copyArrays(lastValues, currentValues);
+        currentPoint2D.x = currentValues[xIdx];
+        currentPoint2D.y = currentValues[yIdx];
+        lastPoint2D.x = lastValues[xIdx];
+        lastPoint2D.y = lastValues[yIdx];    
+    }
 
     public void setAxes(int x, int y) {
         this.xIdx = x;
