@@ -502,6 +502,8 @@ public class MainFrame extends JFrame {
             return true;
         }
         catch(Exception e){ //quick & dirty way to correct a minor bug
+            JOptionPane.showMessageDialog(this, 
+                    e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
