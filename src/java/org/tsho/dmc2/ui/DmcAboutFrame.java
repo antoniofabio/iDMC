@@ -79,7 +79,7 @@ public class DmcAboutFrame extends JFrame {
                     new Library(JFreeChart.INFO),
                     new Library(JCommon.INFO),
                     new Library("JGoodies Forms", "1.0.3", "BSD", "http://www.jgoodies.com/"),
-                    new Library("idmclib", "0.2.0", "GPL", ""),
+                    new Library("idmclib", "0.3.0", "GPL", ""),
             }
             ));
         }
