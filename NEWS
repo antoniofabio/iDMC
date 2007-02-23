@@ -87,4 +87,4 @@
 
 * 2.0.3
 - fixed issues 2,3
-- added idmclib lua error messages reporting to the user
+- added idmclib lua error messages reporting to the user (issue 4)
