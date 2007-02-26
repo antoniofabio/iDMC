@@ -96,12 +96,10 @@ class LuaIterator implements MapStepper {
 
 
     public void step() throws ModelException {
-
         System.arraycopy(currentValues, 0, lastValues, 0, dim);
-        model.evaluate(parameters, lastValues, currentValues);
+        model.evaluate(parameters, lastValues, currentValues); //can throw a runtime exception
 
         count++;
-
         currentPoint2D.x = currentValues[xIdx];
         currentPoint2D.y = currentValues[yIdx];
         lastPoint2D.x = lastValues[xIdx];
@@ -110,7 +108,7 @@ class LuaIterator implements MapStepper {
 
     public void getCurrentValue(double[] value) {
         System.arraycopy(
-            currentValues, 0, value, 0, this.currentValues.length);
+            currentValues, 0, value, 0, currentValues.length);
     }
 
     public VariableDoubles getLastValue() {

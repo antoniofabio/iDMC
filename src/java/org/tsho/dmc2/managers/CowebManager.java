@@ -96,7 +96,6 @@ public class CowebManager extends AbstractManager
         plot.addCoreStatusListener( new CoreStatusListener() {
             public void sendCoreStatus(final CoreStatusEvent event) {
                 if (event.getType() == CoreStatusEvent.REDRAW) {
-//                    ((CowebRenderer) plot.getPlotRenderer()).setContinua(false);
                     launchThread(false);
                 }
                 else if (event.getType() == CoreStatusEvent.REPAINT) {
@@ -105,13 +104,6 @@ public class CowebManager extends AbstractManager
             }
         });
 
-//        chart = new JFreeChart(model.getName(), plot);
-//
-//        chartPanel = new DmcChartPanel(chart);
-//        chartPanel.setMouseZoomable(true, false);
-//        chartPanel.setPopupMenu(null);
-
-        // stop everything on resizing
         // TODO fix
         chartPanel.addComponentListener(new ComponentAdapter() {
             public final void componentResized(final ComponentEvent e) {
