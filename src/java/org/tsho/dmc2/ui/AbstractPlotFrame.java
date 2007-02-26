@@ -253,6 +253,9 @@ public abstract class AbstractPlotFrame extends JFrame
     public void showInvalidDataDialog(String message) {
         JOptionPane.showMessageDialog(this, message, "Invalid data.", JOptionPane.ERROR_MESSAGE);
     }
+    public void showRuntimeErrorDialog(String message) {
+        JOptionPane.showMessageDialog(this, message, "Runtime error", JOptionPane.ERROR_MESSAGE);
+    }
 
     protected void showInvalidDataDialog() {
         JOptionPane.showMessageDialog(this, "Invalid data insterted.", "Invalid data.", JOptionPane.ERROR_MESSAGE);

@@ -38,6 +38,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
+import org.tsho.dmc2.ui.trajectory.TrajectoryComponent;
 import org.tsho.dmc2.DmcDue;
 import org.tsho.dmc2.core.Stepper;
 import org.tsho.dmc2.core.model.ModelException;
@@ -47,7 +48,7 @@ import org.tsho.dmc2.core.util.*;
 public class TrajectoryRenderer implements DmcPlotRenderer {
 
     private DmcRenderablePlot plot;
-    
+    private TrajectoryComponent plotComponent;
     private Stepper stepper;
 
     // parameters
@@ -79,14 +80,14 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
     
     private Dataset dataset;
 
-    public TrajectoryRenderer(
-            final DmcRenderablePlot plot,
-            final Stepper stepper, Dataset dataset) {
+    public TrajectoryRenderer(final DmcRenderablePlot plot,
+            final Stepper stepper, TrajectoryComponent component) {
 
         this.plot = plot;
         this.stepper = stepper;
         computeRanges = true;
-        this.dataset=dataset;
+        this.dataset = (Dataset) component.getDataobject();
+        this.plotComponent = component;
     }
 
     public void initialize() {
@@ -117,15 +118,18 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
             stepper.initialize();
 
             state = STATE_TRANSIENTS;
-
-            for (index = 0; index < transients; index++) {
-
-                stepper.step();
-
-                if (stopped) {
-                    state = STATE_STOPPED;
-                    return;
+            
+            try{
+                for (index = 0; index < transients; index++) {
+                    stepper.step();
+                    if (stopped) {
+                        state = STATE_STOPPED;
+                        return;
+                    }
                 }
+            } catch(RuntimeException re) {
+                plotComponent.showRuntimeErrorDialog(re.getMessage());
+                throw new RuntimeException(re);
             }
 
             index = 0;
@@ -203,7 +207,13 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
                 drawItem(g2, index, x, y);
             }
 
-            stepper.step();
+            try{
+                stepper.step();
+            } catch(RuntimeException re) {
+                plotComponent.showRuntimeErrorDialog(re.getMessage());
+                throw new RuntimeException(re);
+            }
+
 
             if (stopped) {
                 state = STATE_STOPPED;
