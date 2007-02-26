@@ -836,8 +836,12 @@ ManagerListener2, PlotComponent {
     public void showInvalidDataDialog(String message) {
         // TODO parent should not be null
         // and I should delegate this to someone else
-        JOptionPane.showMessageDialog(null, message, "Error.", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
+    public void showRuntimeErrorDialog(String message) {
+        JOptionPane.showMessageDialog(this, message, "Runtime error", JOptionPane.ERROR_MESSAGE);
+    }
+
     
     public AbstractManager getManager() {
         return manager;
