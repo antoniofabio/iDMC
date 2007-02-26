@@ -88,7 +88,7 @@ public abstract class AbstractManager {
     protected JFreeChart chart;
     protected DmcRenderablePlot plot;
     protected DmcChartPanel chartPanel;
-    protected ManagerListener2 frame;
+    private ManagerListener2 frame;
 
     protected String errorMessage;
     protected NumberAxis xAxis;
@@ -206,7 +206,7 @@ public abstract class AbstractManager {
            
             
              try {
-                frame.jobNotify(true);
+                getFrame().jobNotify(true);
 
                 if (plotOnly) {
                     chartPanel.drawPlot();
@@ -217,26 +217,30 @@ public abstract class AbstractManager {
             }
             catch (ModelException e) {
                 if (e.getMessage() != null) {
-                    frame.errorNotify(e.getMessage());
+                    getFrame().errorNotify(e.getMessage());
                 }
                 else {
-                    frame.errorNotify("Model error.");
+                    getFrame().errorNotify("Model error.");
                 }
             }
             catch (OutOfMemoryError e) {
                 e.printStackTrace();
-                frame.errorNotify("Out of Memory Error");
+                getFrame().errorNotify("Out of Memory Error");
             }
             catch (Throwable e) {
                 e.printStackTrace();
-                frame.errorNotify("Undefined error.");
+                getFrame().errorNotify("Undefined error.");
             }
             finally {
                 plot.getPlotRenderer().setState(DmcPlotRenderer.STATE_FINISHED);
-                frame.jobNotify(false);
+                getFrame().jobNotify(false);
             }
              
         }
     };
+
+    public ManagerListener2 getFrame() {
+        return frame;
+    }
 
 }

@@ -196,7 +196,7 @@ public class TrajectoryManager extends AbstractManager
                 		odeStepFunction);
             }
 
-            renderer = new TrajectoryRenderer(plot, stepper, (Dataset) component.getDataobject());
+            renderer = new TrajectoryRenderer(plot, stepper, component);
             plot.setPlotRenderer(renderer);
 
             stepper.setAxes(
@@ -261,7 +261,7 @@ public class TrajectoryManager extends AbstractManager
 
         renderer.setTransients(transients);
         renderer.setIterations(iterations);
-        renderer.setDelay(frame.getDelayValue());
+        renderer.setDelay(getFrame().getDelayValue());
         renderer.setBigDots(bigDots);
         renderer.setConnectWithLines(connectDots);
         renderer.setContinua(false);
@@ -374,26 +374,26 @@ public class TrajectoryManager extends AbstractManager
 
                         case DmcPlotRenderer.STATE_RANGES:
                             ratio = renderer.getRangeIterations();
-                            frame.progressString("calculating ranges...");
+                            getFrame().progressString("calculating ranges...");
                             break;
 
                         case DmcPlotRenderer.STATE_TRANSIENTS:
                             ratio = renderer.getTransients();
-                            frame.progressString("calculating transients...");
+                            getFrame().progressString("calculating transients...");
                             break;
 
                         case DmcPlotRenderer.STATE_POINTS:
                             ratio = renderer.getIterations();
-                            frame.progressString("plotting...");
+                            getFrame().progressString("plotting...");
                             break;
 
                         case DmcPlotRenderer.STATE_FINISHED:
-                            frame.progressString("ok. ");
+                            getFrame().progressString("ok. ");
                             report();
                             return;
 
                         case DmcPlotRenderer.STATE_STOPPED:
-                            frame.progressString("stopped, ok.");
+                            getFrame().progressString("stopped, ok.");
                             report();
 
                             return;
@@ -421,9 +421,9 @@ public class TrajectoryManager extends AbstractManager
 
         private void report() {
             TrajectoryRenderer renderer = (TrajectoryRenderer) plot.getPlotRenderer();
-            frame.progressCount(renderer.getIndex());
+            getFrame().progressCount(renderer.getIndex());
             if (ratio != 0) {
-                frame.progressPercent((renderer.getIndex() * 100 / ratio));
+                getFrame().progressPercent((renderer.getIndex() * 100 / ratio));
             }
         }
     };

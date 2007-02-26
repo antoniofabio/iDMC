@@ -219,7 +219,7 @@ public class CowebManager extends AbstractManager
         yAxis.setLabel(yLabel);
         
         renderer.setPower(power);
-        renderer.setDelay(frame.getDelayValue());
+        renderer.setDelay(getFrame().getDelayValue());
         renderer.setBigDots(bigDots);
         renderer.setConnectWithLines(connectDots);
 
@@ -273,26 +273,26 @@ public class CowebManager extends AbstractManager
 
                         case DmcPlotRenderer.STATE_ERROR:
                             ratio = 0;
-                            frame.progressString("error...");
+                            getFrame().progressString("error...");
                             return;
         
                         case DmcPlotRenderer.STATE_TRANSIENTS:
                             ratio = renderer.getTransients();
-                            frame.progressString("calculating transients...");
+                            getFrame().progressString("calculating transients...");
                             break;
 
                         case DmcPlotRenderer.STATE_POINTS:
 //                            ratio = renderer.getIterations();
-                            frame.progressString("plotting...");
+                            getFrame().progressString("plotting...");
                             break;
                     
                         case DmcPlotRenderer.STATE_FINISHED:
-                            frame.progressString("ok. ");
+                            getFrame().progressString("ok. ");
                             report();
                             return;
 
                         case DmcPlotRenderer.STATE_STOPPED:
-                            frame.progressString("stopped, ok.");
+                            getFrame().progressString("stopped, ok.");
                             report();
 
                             return;

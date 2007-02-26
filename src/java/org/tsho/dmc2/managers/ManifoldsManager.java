@@ -175,7 +175,7 @@ public class ManifoldsManager extends AbstractManager
             lastIteration = form.getIterationsLast();
         }
         catch (InvalidData e) {
-            frame.showInvalidDataDialog(e.getMessage());
+            getFrame().showInvalidDataDialog(e.getMessage());
             return false;
         }
 

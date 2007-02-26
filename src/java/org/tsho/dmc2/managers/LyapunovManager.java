@@ -143,7 +143,7 @@ AbstractManager.AxesVisibility {
                 stepSize =form.getStepSize();
         }
         catch (InvalidData e) {
-            frame.showInvalidDataDialog(e.getMessage());
+            getFrame().showInvalidDataDialog(e.getMessage());
             return false;
         }
         
@@ -187,7 +187,7 @@ AbstractManager.AxesVisibility {
             }
         }
         catch (InvalidData e) {
-            frame.showInvalidDataDialog(e.getMessage());
+            getFrame().showInvalidDataDialog(e.getMessage());
             return false;
         }
         
@@ -234,7 +234,7 @@ AbstractManager.AxesVisibility {
                 iterations = form.getIterations();
             }
         } catch (InvalidData e2) {
-            frame.showInvalidDataDialog(e2.getMessage());
+            getFrame().showInvalidDataDialog(e2.getMessage());
             return false;
         }
         

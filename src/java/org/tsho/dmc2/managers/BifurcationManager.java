@@ -150,7 +150,7 @@ AbstractManager.AxesVisibility {
             transients = form.getTransients();
         }
         catch (InvalidData e) {
-            frame.showInvalidDataDialog(e.getMessage());
+            getFrame().showInvalidDataDialog(e.getMessage());
             return false;
         }
         
@@ -242,7 +242,7 @@ AbstractManager.AxesVisibility {
             infinity = form.getInfinity();
         }
         catch (InvalidData e) {
-            frame.showInvalidDataDialog(e.getMessage());
+            getFrame().showInvalidDataDialog(e.getMessage());
             return false;
         }
         
@@ -338,7 +338,7 @@ AbstractManager.AxesVisibility {
                             return;
                             
                         case DmcPlotRenderer.STATE_RUNNING:
-                            frame.progressString("plotting...");
+                            getFrame().progressString("plotting...");
                             break;
                             
                         default:
