@@ -36,10 +36,6 @@ public class LuaSimpleMap extends LuaModel implements SimpleMap {
     public void evaluate(
             final double[] par, final double[] var, final double[] result)
             throws ModelException {
-        try {
-            model.f(par,var,result);
-        } catch (RuntimeException re) {
-            throw new ModelException("Lua runtime error");
-        }
+            model.f(par,var,result); //can throw a generic runtime exception
     }
 }
