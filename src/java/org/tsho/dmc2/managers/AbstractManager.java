@@ -227,7 +227,9 @@ public abstract class AbstractManager {
                 e.printStackTrace();
                 getFrame().errorNotify("Out of Memory Error");
             }
-            catch (Throwable e) {
+            catch (RuntimeException re) {
+                getFrame().errorNotify(re.getMessage());
+            } catch (Throwable e) {
                 e.printStackTrace();
                 getFrame().errorNotify("Undefined error.");
             }
