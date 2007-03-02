@@ -128,7 +128,7 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
                     }
                 }
             } catch(RuntimeException re) {
-                plotComponent.showRuntimeErrorDialog(re.getMessage());
+                //plotComponent.showRuntimeErrorDialog(re.getMessage());
                 throw new RuntimeException(re);
             }
 
@@ -210,7 +210,7 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
             try{
                 stepper.step();
             } catch(RuntimeException re) {
-                plotComponent.showRuntimeErrorDialog(re.getMessage());
+                //plotComponent.showRuntimeErrorDialog(re.getMessage());
                 throw new RuntimeException(re);
             }
 

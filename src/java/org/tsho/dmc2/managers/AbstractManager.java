@@ -229,7 +229,8 @@ public abstract class AbstractManager {
             }
             catch (RuntimeException re) {
                 getFrame().errorNotify(re.getMessage());
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 e.printStackTrace();
                 getFrame().errorNotify("Undefined error.");
             }
