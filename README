@@ -6,7 +6,7 @@ This is iDMC the interactive Dynamical Model Calculator simulates and
 performs graphical and numerical analysis of systems of differential
 and difference equations.
 
-iDmc is Copyright (C) 2004-2006 Marji Lines and Alfredo Medio.
+iDmc is Copyright (C) 2004-2007 Marji Lines and Alfredo Medio.
 
 iDmc was designed and written by Daniele Pizzoni <auouo@tin.it>, and 
 subsequently modified by A. Grigoriev and A. Di Narzo.
@@ -40,7 +40,7 @@ idmclib
 
 The iDMC C support library
 
-Copyright (C) 2006 Marji Lines and Alfredo Medio.
+Copyright (C) 2006-2007 Marji Lines and Alfredo Medio.
 
 http://code.google.com/p/idmclib
 

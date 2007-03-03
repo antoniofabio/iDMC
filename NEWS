@@ -88,3 +88,8 @@
 * 2.0.3
 - fixed issues 2,3
 - added idmclib lua error messages reporting to the user (issue 4)
+
+* 2.0.4
+- fixed issue 5 (idmclib errors not reported to the user in trajectory plot)
+- upgraded dependency on idmclib 0.4.0
+- added new detailed idmclib runtime error messages reporting

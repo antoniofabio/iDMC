@@ -3,7 +3,7 @@
 <!-- -->
 <!--  Ant file for dmcDue -->
 <!--  Written by Daniele Pizzoni <auouo@tin.it> - 2003 -->
-<!--  Modified by Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> - 2006 -->
+<!--  Modified by Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> - 2006,2007 -->
 <!-- -->
 
 <project name="dmcDue" default="jar" basedir=".">
@@ -13,7 +13,7 @@
 <!--            -->
 
     <property name="name"    value="iDmc"/>
-    <property name="version" value="2.0.3"/>
+    <property name="version" value="2.0.4"/>
     <property name="libVersion" value="0.4.0"/>
 
     <!-- directories -->
