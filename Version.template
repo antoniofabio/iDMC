@@ -10,8 +10,12 @@ package org.tsho.dmc2;
  */
 public class Version {
 	private static String versionString= versionAnchor ;
+	private static String nativeLibVersionString= nativeLibVersionAnchor ;
 	
 	public static String getVersionString() {
 		return versionString;
+	}
+	public static String getNativeLibVersionString() {
+		return nativeLibVersionString;
 	}
 }

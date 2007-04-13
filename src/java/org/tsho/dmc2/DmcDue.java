@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004-2007 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -47,8 +47,8 @@ public class DmcDue {
     public static class Defaults {
         public static final String name = "iDmc";
         public static String version;
-        public static String nativeLibName;
         public static String nativeLibVersion;
+        public static String nativeLibName;
         public static final String modelsDir=System.getProperty("user.dir") + "/models";
         public static boolean debug=false;
 
@@ -60,23 +60,27 @@ public class DmcDue {
             System.out.println("debug: " + debug);
         }
     }
+ 
     
     public static String getNativeLibName() {
-        /* load the native library */
-    	Defaults.version = Version.getVersionString();
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            Defaults.nativeLibName = System.getProperty("user.dir") + "\\idmc.dll";
-        }
-        else if (System.getProperty("os.name").startsWith("Linux")) {
-            Defaults.nativeLibName = System.getProperty("user.dir") + "/idmc.so";
-        }
-        else {
-            Defaults.nativeLibName = null;
-        }    	
     	return Defaults.nativeLibName;
     }
 
     public static void main(String[] args) {
+        if(true) { /*version infos initialization*/
+            Defaults.version = Version.getVersionString();
+            Defaults.nativeLibVersion = Version.getNativeLibVersionString();
+            if (System.getProperty("os.name").startsWith("Windows")) {
+                Defaults.nativeLibName = System.getProperty("user.dir") + "\\jidmclib.dll";
+            }
+            else if (System.getProperty("os.name").startsWith("Linux")) {
+                Defaults.nativeLibName = System.getProperty("user.dir") + "/jidmclib.so";
+            }
+            else {
+                Defaults.nativeLibName = null;
+            }
+        }
+
 
         /* java version check */
         String javaVersion = System.getProperty("java.version");

@@ -93,3 +93,8 @@
 - fixed issue 5 (idmclib errors not reported to the user in trajectory plot)
 - upgraded dependency on idmclib 0.4.0
 - added new detailed idmclib runtime error messages reporting
+
+* 2.0.5
+- upgraded dependency on idmclib 0.5.0
+- minor code cleaning
+

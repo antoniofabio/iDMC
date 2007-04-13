@@ -13,8 +13,8 @@
 <!--            -->
 
     <property name="name"    value="iDmc"/>
-    <property name="version" value="2.0.4"/>
-    <property name="libVersion" value="0.4.0"/>
+    <property name="version" value="2.0.5"/>
+    <property name="libVersion" value="0.5.0"/>
 
     <!-- directories -->
     <property name="src.java"  value="src/java"/>
@@ -26,15 +26,15 @@
     <property name="models"    value="models"/>
 
     <!-- external sources -->
-    <property name="idmclib.src"    location="../idmclib-${libVersion}/jidmc"/>
+    <property name="idmclib.src"    location="../idmclib-${libVersion}-Source/build/jidmc"/>
     <property name="jcommon.src"    location="../jcommon-0.9.3/src"/>
     <property name="jfreechart.src" location="../jfreechart-0.9.18/src"/>
     <property name="forms.src"      location="../forms-1.0.3/src/jforms"/>
     <property name="log4j.src"      location="../logging-log4j-1.2.14/src/java"/>
 
     <!-- files -->
-    <property name="idmclib.lib.unix" value="${idmclib.src}/idmc.so"/>
-    <property name="idmclib.lib.win" value="${idmclib.src}/idmc.dll"/>
+    <property name="idmclib.lib.unix" value="${idmclib.src}/jidmclib.so"/>
+    <property name="idmclib.lib.win" value="${idmclib.src}/jidmclib.dll"/>
     <property name="jar_file"      value="${basedir}/iDmc-${version}.jar"/>
 
 <!--              -->
@@ -156,6 +156,7 @@
           <filterchain>
               <replacetokens begintoken=" " endtoken=" ">
                   <token key="versionAnchor" value="&quot;${version}&quot;" />
+                  <token key="nativeLibVersionAnchor" value="&quot;${libVersion}&quot;" />
               </replacetokens>
           </filterchain>
         </copy>
