@@ -1,15 +1,16 @@
 HOW TO COMPILE dmcDue/iDmc
 --------------------------
 
-Starting from the 2.x.x series, iDmc is a pure Java program.
+Starting from the 2.x.x series, iDmc is a pure Java program
+(although it depends on the native idmclib library).
 
-iDmc was developed under Debian GNU/Linux mainly using the IBM Eclipse
-IDE (www.eclipse.org).
+iDmc was developed under Debian and Ubuntu GNU/Linux mainly using the IBM Eclipse
+IDE (www.eclipse.org) and Netbeans.
 
-The Java part is Java2 1.5 compliant.
+The Java part is Java2 1.6 compliant.
 
 Full and successful compile and runtime testing was done with Sun's Java2 
-SDK/JRE 1.5.0_06 under Ubuntu GNU/Linux (x86_64) and under Micro$oft Windows XP.
+SDK/JRE 1.5.0_08 under Ubuntu GNU/Linux (x86_64/x86_32) and under Micro$oft Windows XP.
 
 The compilation defaults to produce a "static" jar file.
 This is to avoid dependencies hells only and is not stricly
@@ -17,7 +18,7 @@ required.
 
 Sofware you need to compile:
 
-- Java2 SDK 1.4 or above
+- Java2 SDK 1.5 or above
   java.sun.com/j2se/
 
 - Apace ant 1.5 or above
@@ -25,7 +26,7 @@ Sofware you need to compile:
 
 Third part libraries:
 
-- idmclib: The iDMC C support library, version 0.1.1 or compatible
+- idmclib: The iDMC C support library, version 0.5.0 or compatible
   http://code.google.com/p/idmclib
 
 - JGoodies Forms, Java panels layout library
@@ -45,22 +46,34 @@ speaking, you should be able to use more recent versions of this
 library. About JFreeChart, the core library of the program, stick to
 the specified version or you'll certainly have to adapt part of the
 code.
+For compiling idmclib from sources, other dependencies are involved.
+Read idmclib compiling instructions for an up-to-date reference.
 
-To compile under Linux using the included build.xml
-unpack all the packages in a same directory, then use ant to compile all:
+To compile under Linux using the included build.xml unpack all the packages 
+in a same directory.
+Compile the idmclib library by typing:
+$ cd idmclib-x.x.x-Source
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+For more details, read idmclib compiling instructions, or ask 
+in mailing list and/or package mantainers.
+When idmclib is compiled, go to the iDmc folder:
+$ cd ../../iDmc
 
-$ cd iDmc
+Finally, use ant to compile all:
 $ ant dist-linux
 
-look for other ant targets in the build.xml file.
-
-If something goes wrong or you want to compile under that nasty mass
-commercial operative system then you should really have a look to the
-build.xml.
+Look for other ant targets in the build.xml file.
+In principle, the same steps works also under Windows, using the MinGW/MSYS 
+environment for compiling idmclib. Read idmclib documentation for further hints
+about that. Anyway, the project mantainer will generally take care of distributing
+precompiled windows binaries.
 
 In the misc directory you will also find a NSIS (Nullsoft Scriptable
 Install System, http://nsis.sourceforge.net/home/) script to create
 Windows autoinstaller packages.
 
 Daniele Pizzoni <auouo@tin.it>
-Adapted to the 2.x.x series by Antonio Di Narzo on 2/12/2006
+Last modified by Antonio, Fabio Di Narzo on 13/04/2007
