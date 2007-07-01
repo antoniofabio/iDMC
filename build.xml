@@ -14,7 +14,7 @@
 
     <property name="name"    value="iDmc"/>
     <property name="version" value="2.0.5"/>
-    <property name="libVersion" value="0.5.0"/>
+    <property name="libVersion" value="0.6.1"/>
 
     <!-- directories -->
     <property name="src.java"  value="src/java"/>
@@ -86,7 +86,7 @@
     <!-- compile -->
     <!--         -->
     <target name="compile"
-    		depends="init"
+    		depends="init, version"
     		description="compile the java sources in the 'build' directory">
 
         <!-- they say fork resolves some problems on Windows -->
@@ -156,7 +156,6 @@
           <filterchain>
               <replacetokens begintoken=" " endtoken=" ">
                   <token key="versionAnchor" value="&quot;${version}&quot;" />
-                  <token key="nativeLibVersionAnchor" value="&quot;${libVersion}&quot;" />
               </replacetokens>
           </filterchain>
         </copy>
@@ -329,8 +328,8 @@
     <target name="clean-build"
     		description="remove the build directory">
         <delete dir="${build}"/>
+        <delete file="${src.java}/org/tsho/dmc2/Version.java"/>
     </target>
-
 
     <!--            -->
     <!-- clean-dist -->
