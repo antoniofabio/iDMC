@@ -69,7 +69,6 @@ public class DmcDue {
     public static void main(String[] args) {
         if(true) { /*version infos initialization*/
             Defaults.version = Version.getVersionString();
-            Defaults.nativeLibVersion = Version.getNativeLibVersionString();
             if (System.getProperty("os.name").startsWith("Windows")) {
                 Defaults.nativeLibName = System.getProperty("user.dir") + "\\jidmclib.dll";
             }
@@ -154,6 +153,7 @@ public class DmcDue {
         }
 
         System.load(getNativeLibName());
+        Defaults.nativeLibVersion = Version.getNativeLibVersionString();
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

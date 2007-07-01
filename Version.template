@@ -2,6 +2,7 @@
  * 
  */
 package org.tsho.dmc2;
+import org.tsho.jidmclib.*;
 
 /**
  * @author antonio
@@ -10,12 +11,13 @@ package org.tsho.dmc2;
  */
 public class Version {
 	private static String versionString= versionAnchor ;
-	private static String nativeLibVersionString= nativeLibVersionAnchor ;
 	
 	public static String getVersionString() {
 		return versionString;
 	}
 	public static String getNativeLibVersionString() {
-		return nativeLibVersionString;
+		return "" + idmc.idmc_version_major()
+            + "." + idmc.idmc_version_minor()
+            + "." + idmc.idmc_version_micro();
 	}
 }
