@@ -1188,22 +1188,21 @@ ManagerListener2, PlotComponent {
      * Saves current dataset to a user picked file
      * */    
     public void saveDataAs() throws IOException {
+        if(dataobject==null) {
+            JOptionPane.showMessageDialog(null, "No data associated to current chart", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showSaveDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
             String filename = fileChooser.getSelectedFile().getPath();
             try {
-            	if(dataobject!=null)
-            		dataobject.save(new File(filename));
-//TODO: popup an error message box
-            	else throw new RuntimeException("No data associated to current chart");
+                    dataobject.save(new File(filename));
             } catch (IOException e) {
-//            	TODO: popup an error message box
-            	System.err.println("Can't save file");
-            	throw e;
+                JOptionPane.showMessageDialog(null, "Can't save file", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }    	
-    }    
+        }
+    }
     
     protected void finalize() {
         System.out.println("finalizing: " + getClass());
