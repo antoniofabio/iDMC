@@ -106,10 +106,6 @@ public class AbsorbingAreaRenderer implements DmcPlotRenderer {
     //colors
     int attractorColor=15553;
     
-    
-    
-    
-    
     public AbsorbingAreaRenderer(final DifferentiableMap map, final DmcRenderablePlot plot, final AbsorbingAreaComponent plotComponent) {
         type=0;//currently the only type present
         this.map = map;
