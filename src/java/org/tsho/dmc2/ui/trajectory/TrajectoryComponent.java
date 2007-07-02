@@ -169,6 +169,7 @@ public final class TrajectoryComponent extends AbstractPlotComponent
             public void actionPerformed(final ActionEvent e) {
                 stateMachine.parseInput(UserMenuInput.normalMode);
                 controlForm.updateSamplesMenu();
+                getSaveDataAction().setEnabled(true);
             }
         });
         normalPlotMenuItem = menuItem;
@@ -181,6 +182,7 @@ public final class TrajectoryComponent extends AbstractPlotComponent
             public void actionPerformed(final ActionEvent e) {
                 stateMachine.parseInput(UserMenuInput.timeMode);
                 controlForm.updateSamplesMenu();
+                getSaveDataAction().setEnabled(true);
             }
         });
         timePlotMenuItem = menuItem;
@@ -196,6 +198,7 @@ public final class TrajectoryComponent extends AbstractPlotComponent
                 state = ((JCheckBoxMenuItem) e.getSource()).isSelected();
                 privateControlForm.setVariation(state);
                 privateControlForm.updateSamplesMenu();
+                getSaveDataAction().setEnabled(false);
             }
         });
         variationMenuItem = menuItem;

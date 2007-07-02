@@ -270,7 +270,7 @@ public class MainFrame extends JFrame {
     /*
      * Menubar and menus
      */
-    private void updateMenubar(final PlotComponent comp) {
+    public void updateMenubar(final PlotComponent comp) {
         
         menuBar.removeAll();
         

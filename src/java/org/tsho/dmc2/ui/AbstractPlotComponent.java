@@ -1244,6 +1244,10 @@ ManagerListener2, PlotComponent {
 	public Model getModel() {
 		return model;
 	}
+        
+        public AbstractAction getSaveDataAction() {
+            return mainFrame.getSaveDataAction();
+        }
 
 	public AbstractControlForm getControlForm() {
 		return controlForm;

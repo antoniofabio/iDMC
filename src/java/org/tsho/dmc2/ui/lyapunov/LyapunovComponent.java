@@ -239,6 +239,7 @@ implements LyapunovSMItf {
         
         privateControlForm.setType(type);
         manager.setType(type);
+        getSaveDataAction().setEnabled(false);
         
         switch (type) {
             case LyapunovControlForm2.TYPE_VS_PAR:
