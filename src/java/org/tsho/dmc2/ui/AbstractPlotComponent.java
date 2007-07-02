@@ -674,14 +674,15 @@ ManagerListener2, PlotComponent {
         menu.add(menuItem);
         menuItem.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
+            	int ans=123;
             	String s = (String)JOptionPane.showInputDialog(
-            	                    mainFrame, null, "Insert a seed for the RNG",
+            	                    mainFrame, null, "Insert a non-negative integer as RNG seed",
             	                    JOptionPane.PLAIN_MESSAGE, null,
-            	                    null, "100");
-            	int ans=100;
+            	                    null, ""+ans);
             	boolean valid=true;
             	try {
-            		ans = Integer.valueOf(s).intValue();
+                        if(s!=null)
+                            ans = Integer.valueOf(s).intValue();
             	} catch(NumberFormatException nfe) {
             		valid = false;
             	}
