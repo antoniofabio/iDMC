@@ -31,6 +31,7 @@ import java.io.IOException;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import org.tsho.dmc2.core.util.DataObject;
 
 /**
  * @author tsho
@@ -52,6 +53,7 @@ public interface PlotComponent {
 
     void saveImageAs() throws IOException;
     void saveDataAs() throws IOException;
+    DataObject getDataobject();
 
     void dispose();
 }

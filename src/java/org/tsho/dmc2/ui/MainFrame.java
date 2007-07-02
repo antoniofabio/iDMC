@@ -286,7 +286,7 @@ public class MainFrame extends JFrame {
         else {
             saveAsAction.setEnabled(true);
             saveAsAction.setPlotComponent(comp);
-            saveDataAction.setEnabled(true);
+            saveDataAction.setEnabled(comp.getDataobject()!=null);
             saveDataAction.setPlotComponent(comp);
             menuBar.add(comp.getCommandMenu());
             menuBar.add(comp.getPlotMenu());
