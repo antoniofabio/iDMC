@@ -192,6 +192,19 @@
               file="${jar_file}/"
               todir="${dist}"
               overwrite="yes"/>
+              
+        <copy file="${basedir}/runme.sh.template"
+            tofile="${dist}/runme.sh">
+          <filterchain>
+              <replacetokens begintoken=" " endtoken=" ">
+                  <token key="versionAnchor" value="${version}" />
+              </replacetokens>
+          </filterchain>
+        </copy>
+        <exec executable="chmod">
+            <arg value="a+x"/>
+            <arg value="${dist}/runme.sh"/>
+        </exec>
 
         <copy failonerror="true"
               file="${basedir}/README"
