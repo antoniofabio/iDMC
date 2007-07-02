@@ -99,6 +99,7 @@ public class BasinRenderer implements DmcPlotRenderer {
     public void render(
     final Graphics2D g2, final Rectangle2D dataArea,
     final PlotRenderingInfo info) {
+        basinComponent.setDataobject(null);
         attractorsSamplePoints = new Vector();
         
         state = STATE_RUNNING;
