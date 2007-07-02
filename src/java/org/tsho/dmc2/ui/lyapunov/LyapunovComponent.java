@@ -42,11 +42,13 @@ import javax.swing.JToolBar;
 import org.jfree.data.Range;
 import org.tsho.dmc2.core.VariableDoubles;
 import org.tsho.dmc2.core.model.Model;
+import org.tsho.dmc2.core.util.DataObject;
 import org.tsho.dmc2.managers.LyapunovManager;
 import org.tsho.dmc2.sm.Input;
 import org.tsho.dmc2.ui.AbstractPlotComponent;
 import org.tsho.dmc2.ui.MainFrame;
 import org.tsho.dmc2.core.model.ODE;
+import org.tsho.dmc2.core.util.DataObject;
 
 /**
  *
@@ -165,6 +167,7 @@ implements LyapunovSMItf {
                     }
                 }
                 callClearAction(lyapunovFrameSM);
+                setDataobject(null);
                 privateControlForm.updateSamplesMenu();
             }
         });
@@ -184,6 +187,7 @@ implements LyapunovSMItf {
             public void actionPerformed(final ActionEvent e) {
                 setType(LyapunovControlForm2.TYPE_VS_TIME);
                 callClearAction(lyapunovFrameSM);
+                setDataobject(null);
                 while (!lyapunovFrameSM.getState().toString().equals("ready")){
                     try{
                         Thread.sleep(100);
@@ -204,6 +208,7 @@ implements LyapunovSMItf {
         menuItem.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 setType(LyapunovControlForm2.TYPE_PAR_SPACE);
+                setDataobject(null);
                 callClearAction(lyapunovFrameSM);
                 while (!lyapunovFrameSM.getState().toString().equals("ready")){
                     try{
