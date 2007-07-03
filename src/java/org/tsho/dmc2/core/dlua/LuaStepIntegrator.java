@@ -34,7 +34,6 @@ class LuaStepIntegrator {
 	static final SWIGTYPE_p_gsl_odeiv_step_type[] step_funs = 
 		new SWIGTYPE_p_gsl_odeiv_step_type[] {
 		idmc.getGsl_odeiv_step_rk2(),
-		idmc.getGsl_odeiv_step_bsimp(),
 		idmc.getGsl_odeiv_step_gear1(),
 		idmc.getGsl_odeiv_step_gear2(),
 		idmc.getGsl_odeiv_step_rk2(),
@@ -48,7 +47,6 @@ class LuaStepIntegrator {
 	};
 	static final String[] step_names = new String[] {
 		"rk2",
-		"bsimp",
 		"gear1",
 		"gear2",
 		"rk2",

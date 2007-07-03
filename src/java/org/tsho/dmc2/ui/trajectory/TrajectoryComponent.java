@@ -265,7 +265,7 @@ public final class TrajectoryComponent extends AbstractPlotComponent
                                                                                                                         
                 menuItem.setToolTipText(Lua.getStepFunctionDescription(i));
                                                                                                                         
-                if (i == 4) {
+                if (name.equals("rkf45")) {
                     menuItem.setSelected(true);
                 }
                 menuItem.addActionListener(new SetStepFunctionPerform(i));
