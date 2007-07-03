@@ -5,8 +5,8 @@
 
 ; HM NIS Edit Wizard helper defines
 !define APP_NAME "iDmc"
-!define APP_VERSION "0.17.4"
-!define LIB_VERSION "0.14.1"
+!define APP_VERSION "2.0.5"
+!define LIB_VERSION "0.7.0"
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
@@ -36,7 +36,7 @@
 ; MUI end ------
 
 !define APP_FULLNAME "${APP_NAME}-${APP_VERSION}"
-!define LIB_FULLNAME "${APP_NAME}-${LIB_VERSION}"
+!define LIB_FULLNAME "jidmclib"
 !define FILE_JAR "${APP_FULLNAME}.jar"
 !define FILE_DLL "${LIB_FULLNAME}.dll"
 !define DIR_MODELS "$INSTDIR\models"
@@ -48,7 +48,6 @@ InstallDir "$PROGRAMFILES\${APP_FULLNAME}"
 ShowInstDetails show
 ShowUnInstDetails show
 AutoCloseWindow false
-
 
 Section "Executables" SEC01
     SetOutPath "$INSTDIR"
@@ -85,14 +84,13 @@ Section "Models" SEC02
     File "models\standard.lua"
     File "models\tent.lua"
     File "models\tinkerbell.lua"
-
 SectionEnd
 
 Section "Links"
   CreateDirectory "$SMPROGRAMS\${APP_FULLNAME}"
   CreateShortCut "$SMPROGRAMS\${APP_FULLNAME}\${APP_FULLNAME}.lnk" "$INSTDIR\${FILE_JAR}" -library="$INSTDIR\${FILE_DLL}"
   CreateShortCut "$DESKTOP\${APP_FULLNAME}.lnk" "$INSTDIR\${FILE_JAR}" -library="$INSTDIR\${FILE_DLL}"
-#  CreateShortCut "$DESKTOP\iDmc models.lnk" "${DIR_MODELS}"
+  CreateShortCut "$DESKTOP\iDmc models.lnk" "${DIR_MODELS}"
   CreateShortCut "$SMPROGRAMS\${APP_FULLNAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
@@ -149,7 +147,7 @@ Section Uninstall
   Delete "$SMPROGRAMS\${APP_FULLNAME}\Uninstall.lnk"
   Delete "$SMPROGRAMS\${APP_FULLNAME}\${APP_FULLNAME}.lnk"
   Delete "$DESKTOP\${APP_FULLNAME}.lnk"
-#  Delete "$DESKTOP\iDmc models.lnk"
+  Delete "$DESKTOP\iDmc models.lnk"
 
   Delete COPYING
   Delete README
@@ -159,3 +157,4 @@ Section Uninstall
 
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_FULLNAME}"
 SectionEnd
+
