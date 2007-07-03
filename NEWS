@@ -95,6 +95,12 @@
 - added new detailed idmclib runtime error messages reporting
 
 * 2.0.5
-- upgraded dependency on idmclib 0.5.0
-- minor code cleaning
+- upgraded dependency on idmclib 0.7.x
+- misc code cleaning
+- removed broken ODE solver option from trajectory plot (was improperly added in version 2.0.0)
+- fixed 'Save Data as...' menu item enabling/disabling, improved related error messages
+- fixed error messages when setting RNG seed
+- now using dynamic idmclib version info retrieving: native lib can be now cleanly replaced after install
+- added 'runme' script in linux distribution for easier execution
+- misc fixes to the building/distribution system (not user-visible)
 
