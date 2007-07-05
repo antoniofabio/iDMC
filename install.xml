@@ -50,7 +50,6 @@
 	    <file src="logo_new.jpg" targetdir="$INSTALL_PATH"/>
 	    <singlefile src="iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
 	    <singlefile src="jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
-	    <executable targetfile="$INSTALL_PATH/runme.sh" os="unix" stage="never"/>
 	    <singlefile src="jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
         </pack>
 	<pack name="Models" required="no">
