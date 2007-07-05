@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
-
     <native type="izpack" name="ShellLink.dll"/>
 
     <info>
         <appname>iDMC</appname>
-        <appversion>2.0.5</appversion>
+	<appversion>2.0.5</appversion>
         <authors>
             <author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
         </authors>
         <url>http://code.google.com/p/idmc/</url>
+	<javaversion>1.6</javaversion>
     </info>
     
     <guiprefs width="640" height="480" resizable="no"/>
@@ -48,12 +48,10 @@
             <file src="README" targetdir="$INSTALL_PATH"/>
             <file src="COPYING" targetdir="$INSTALL_PATH"/>
 	    <file src="logo_new.jpg" targetdir="$INSTALL_PATH"/>
-	    <file src="iDmc-2.0.5.jar" targetdir="$INSTALL_PATH"/>
+	    <singlefile src="iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
 	    <singlefile src="jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
-	    <singlefile src="runme.sh" target="$INSTALL_PATH/runme.sh" os="unix"/>
 	    <executable targetfile="$INSTALL_PATH/runme.sh" os="unix" stage="never"/>
 	    <singlefile src="jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
-	    <singlefile src="runme.bat" target="$INSTALL_PATH/runme.bat" os="windows"/>
         </pack>
 	<pack name="Models" required="no">
 		<description>Example model files</description>
@@ -64,7 +62,5 @@
             <file src="doc" targetdir="$INSTALL_PATH"/> 
     </pack> -->
     </packs>
-    
-    
-    
+
 </installation>

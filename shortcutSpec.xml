@@ -1,12 +1,12 @@
 <shortcuts>
   <skipIfNotSupported/>
-  <programGroup defaultName="iDMC\iDMC-2.0.5" location="applications||startMenu"/>
+  <programGroup defaultName="iDMC\iDMC-$app-version" location="applications||startMenu"/>
   <shortcut
     name="iDMC 2.0.5"
     target="java"
-    commandLine="-jar iDmc-2.0.5.jar"
+    commandLine="-jar iDmc-$APP_VER.jar"
     workingDirectory="$INSTALL_PATH"
-    description="starts iDMC 2.0.5"
+    description="starts iDMC $APP_VER"
     iconFile="$INSTALL_PATH\iDMC.ico"
     iconIndex="0"
     initialState="maximized"

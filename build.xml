@@ -14,7 +14,7 @@
 
     <property name="name"    value="iDmc"/>
     <property name="version" value="2.0.5"/>
-    <property name="libVersion" value="0.6.1"/>
+    <property name="libVersion" value="0.7.0"/>
 
     <!-- directories -->
     <property name="src.java"  value="src/java"/>
@@ -35,7 +35,7 @@
     <!-- files -->
     <property name="idmclib.lib.unix" value="${idmclib.src}/jidmclib.so"/>
     <property name="idmclib.lib.win" value="${idmclib.src}/jidmclib.dll"/>
-    <property name="jar_file"      value="${basedir}/iDmc-${version}.jar"/>
+    <property name="jar_file"      value="${basedir}/iDmc.jar"/>
 
 <!--              -->
 <!-- work targets -->
@@ -192,19 +192,6 @@
               file="${jar_file}/"
               todir="${dist}"
               overwrite="yes"/>
-              
-        <copy file="${basedir}/runme.sh.template"
-            tofile="${dist}/runme.sh">
-          <filterchain>
-              <replacetokens begintoken=" " endtoken=" ">
-                  <token key="versionAnchor" value="${version}" />
-              </replacetokens>
-          </filterchain>
-        </copy>
-        <exec executable="chmod">
-            <arg value="a+x"/>
-            <arg value="${dist}/runme.sh"/>
-        </exec>
 
         <copy failonerror="true"
               file="${basedir}/README"
