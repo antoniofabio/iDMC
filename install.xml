@@ -15,7 +15,15 @@
 	<javaversion>1.6</javaversion>
     </info>
     
-    <guiprefs width="640" height="480" resizable="no"/>
+    <guiprefs height="600" resizable="yes" width="800">
+	    <laf name="metouia">
+		    <os family="unix" />
+	    </laf>
+	    <laf name="looks">
+		    <os family="windows" />
+		    <param name="variant" value="extwin" />
+	    </laf>
+    </guiprefs>
     
     <locale>
 	    <langpack iso3="eng"/>
@@ -23,18 +31,16 @@
     
     <resources>
         <res id="LicencePanel.licence" src="COPYING"/>
+	<res id="HTMLInfoPanel.info" src="../Info.html"/>
         <res id="InfoPanel.info" src="README"/>
 	<res id="shortcutSpec.xml" src="../shortcutSpec.xml"/>
 	<res id="Unix_shortcutSpec.xml" src="../Unix_shortcutSpec.xml"/>
     </resources>
     
-    <!-- 
-        The panels section.
-        We indicate here which panels we want to use. The order will be respected.
-    -->
     <panels>
-        <panel classname="HelloPanel"/>
-        <panel classname="InfoPanel"/>
+	<panel classname="HTMLInfoPanel"/>
+	<panel classname="HelloPanel"/>
+        <!--<panel classname="InfoPanel"/>-->
         <panel classname="LicencePanel"/>
         <panel classname="TargetPanel"/> 
         <panel classname="PacksPanel"/>
