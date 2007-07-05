@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+
+    <native type="izpack" name="ShellLink.dll"/>
+
+    <info>
+        <appname>iDMC</appname>
+        <appversion>2.0.5</appversion>
+        <authors>
+            <author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
+        </authors>
+        <url>http://code.google.com/p/idmc/</url>
+    </info>
+    
+    <guiprefs width="640" height="480" resizable="no"/>
+    
+    <locale>
+	    <langpack iso3="eng"/>
+    </locale>
+    
+    <resources>
+        <res id="LicencePanel.licence" src="COPYING"/>
+        <res id="InfoPanel.info" src="README"/>
+	<res id="shortcutSpec.xml" src="../shortcutSpec.xml"/>
+	<res id="Unix_shortcutSpec.xml" src="../Unix_shortcutSpec.xml"/>
+    </resources>
+    
+    <!-- 
+        The panels section.
+        We indicate here which panels we want to use. The order will be respected.
+    -->
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/> 
+        <panel classname="PacksPanel"/>
+	<panel classname="SummaryPanel"/>
+        <panel classname="InstallPanel"/>
+	<panel classname="ShortcutPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+    
+    <packs>
+        <pack name="Base" required="yes">
+            <description>The base files</description>
+            <file src="README" targetdir="$INSTALL_PATH"/>
+            <file src="COPYING" targetdir="$INSTALL_PATH"/>
+	    <file src="logo_new.jpg" targetdir="$INSTALL_PATH"/>
+	    <file src="iDmc-2.0.5.jar" targetdir="$INSTALL_PATH"/>
+	    <singlefile src="jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
+	    <singlefile src="runme.sh" target="$INSTALL_PATH/runme.sh" os="unix"/>
+	    <executable targetfile="$INSTALL_PATH/runme.sh" os="unix" stage="never"/>
+	    <singlefile src="jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
+	    <singlefile src="runme.bat" target="$INSTALL_PATH/runme.bat" os="windows"/>
+        </pack>
+	<pack name="Models" required="no">
+		<description>Example model files</description>
+		<fileset dir="models" targetdir="$INSTALL_PATH/models" include="**/*.lua"/>
+	</pack>	
+<!--        <pack name="Docs" required="no">
+            <description>The Documentation</description>
+            <file src="doc" targetdir="$INSTALL_PATH"/> 
+    </pack> -->
+    </packs>
+    
+    
+    
+</installation>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<shortcuts>
+  <programGroup defaultName="iDMC" location="applications"/>
+
+   <shortcut
+     name="iDMC 2.0.5"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="yes"
+     startup="no"
+     target="/usr/bin/java"
+     commandLine="-jar &quot;$INSTALL_PATH/iDmc-2.0.5.jar&quot;"
+     workingDirectory="$INSTALL_PATH"
+     initialState="noShow"
+     iconFile="trashcan_full"
+     iconIndex="0"
+     type="Application"
+     description="Start iDMC 2.0.5">
+	<createForPack name="Base" />
+   </shortcut>
+
+   <shortcut
+     name="iDMC uninstaller"
+     programGroup="yes"
+     desktop="yes"
+     applications="no"
+     startMenu="no"
+     startup="no"
+     target="/usr/bin/java"
+     commandLine="-jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
+     initialState="noShow"
+     iconFile="trashcan_full"
+     iconIndex="0"
+     workingDirectory=""
+     type="Application"
+     encoding="UTF-8"
+     description="Uninstall iDMC 2.0.5">
+     <createForPack name="Base" />
+   </shortcut>
+</shortcuts>
