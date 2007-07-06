@@ -12,13 +12,12 @@ The Java part is Java2 1.6 compliant.
 Full and successful compile and runtime testing was done with Sun's Java2 
 SDK/JRE 1.5.0_08 under Ubuntu GNU/Linux (x86_64/x86_32) and under Micro$oft Windows XP.
 
-The compilation defaults to produce a "static" jar file.
-This is to avoid dependencies hells only and is not stricly
+The compilation defaults to produce a "static" jar file. This is to avoid dependencies hells only and is not stricly
 required.
 
 Sofware you need to compile:
 
-- Java2 SDK 1.5 or above
+- Java2 SDK 1.6 or above
   java.sun.com/j2se/
 
 - Apace ant 1.5 or above
@@ -26,7 +25,7 @@ Sofware you need to compile:
 
 Third part libraries:
 
-- idmclib: The iDMC C support library, version 0.5.0 or compatible
+- idmclib: The iDMC C support library, version 0.7.x
   http://code.google.com/p/idmclib
 
 - JGoodies Forms, Java panels layout library
@@ -50,30 +49,29 @@ For compiling idmclib from sources, other dependencies are involved.
 Read idmclib compiling instructions for an up-to-date reference.
 
 To compile under Linux using the included build.xml unpack all the packages 
-in a same directory.
-Compile the idmclib library by typing:
-$ cd idmclib-x.x.x-Source
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-For more details, read idmclib compiling instructions, or ask 
+in a same directory. Compile the idmclib library by following boundled compiling istructions.
+For more details, or in case of troubles, try ask 
 in mailing list and/or package mantainers.
 When idmclib is compiled, go to the iDmc folder:
-$ cd ../../iDmc
+$ cd ../../iDmc-2.x.x
 
 Finally, use ant to compile all:
 $ ant dist-linux
 
 Look for other ant targets in the build.xml file.
 In principle, the same steps works also under Windows, using the MinGW/MSYS 
-environment for compiling idmclib. Read idmclib documentation for further hints
-about that. Anyway, the project mantainer will generally take care of distributing
+environment for compiling idmclib and issuing 'ant dist' for actual iDMC building. 
+Read idmclib documentation for further hints about that. 
+Anyway, the project mantainer will generally take care of distributing
 precompiled windows binaries.
 
-In the misc directory you will also find a NSIS (Nullsoft Scriptable
+In the misc directory you will also find a no longer maintaned NSIS (Nullsoft Scriptable
 Install System, http://nsis.sourceforge.net/home/) script to create
 Windows autoinstaller packages.
+In the installer directory you will find support files for generating the win/linux 
+IzPack installer. You can generate it under linux, taking care to place the windows native DLL
+in the iDmc root directory.
 
 Daniele Pizzoni <auouo@tin.it>
-Last modified by Antonio, Fabio Di Narzo on 13/04/2007
+Upgraded by Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 06/07/2007
+
