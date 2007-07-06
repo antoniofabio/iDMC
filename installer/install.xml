@@ -7,9 +7,9 @@
         <appname>iDMC</appname>
 	<appversion>2.0.5</appversion>
         <authors>
-		<author name="Daniele Pizzoni" email="auouo@tin.it"/>
-		<author name="Alexei Grigoriev" email="alexei_grigoriev@libero.it"/>
 		<author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
+		<author name="Alexei Grigoriev" email="alexei_grigoriev@libero.it"/>
+		<author name="Daniele Pizzoni" email="auouo@tin.it"/>
         </authors>
         <url>http://code.google.com/p/idmc/</url>
 	<javaversion>1.6</javaversion>
