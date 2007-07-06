@@ -6,7 +6,7 @@
     target="java"
     commandLine="-jar iDmc-$APP_VER.jar"
     workingDirectory="$INSTALL_PATH"
-    description="starts iDMC $APP_VER"
+    description="Start iDMC $APP_VER"
     iconFile=""
     iconIndex="0"
     initialState="maximized"
@@ -16,14 +16,14 @@
     type="Application"
     startMenu="no"
     startup="no">
-    <createForPack name="Base"/>
+    <createForPack name="Core program"/>
   </shortcut>
   <shortcut
 	   name="Uninstall iDMC $APP_VER"
 	   target="java"
 	   commandLine="-jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
 	   workingDirectory="$INSTALL_PATH"
-	   description="uninstall iDMC $APP_VER"
+	   description="Uninstall iDMC $APP_VER"
 	   iconFile=""
 	   iconIndex="0"
 	   initialState="maximized"
@@ -33,6 +33,6 @@
 	   type="Application"
 	   startMenu="no"
 	   startup="no">
-  <createForPack name="Base" />
+  <createForPack name="Core program" />
   </shortcut>
 </shortcuts>

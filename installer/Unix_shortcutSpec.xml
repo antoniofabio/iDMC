@@ -14,15 +14,15 @@
      commandLine="-jar &quot;$INSTALL_PATH/iDmc-$APP_VER.jar&quot;"
      workingDirectory="$INSTALL_PATH"
      initialState="noShow"
-     iconFile="trashcan_full"
+     iconFile=""
      iconIndex="0"
      type="Application"
      description="Start iDMC $APP_VER">
-	<createForPack name="Base" />
+	   <createForPack name="Core program" />
    </shortcut>
 
    <shortcut
-     name="iDMC uninstaller"
+	    name="Uninstall iDMC $APP_VER"
      programGroup="yes"
      desktop="yes"
      applications="no"
@@ -37,6 +37,6 @@
      type="Application"
      encoding="UTF-8"
      description="Uninstall iDMC $APP_VER">
-     <createForPack name="Base" />
+	   <createForPack name="Core program" />
    </shortcut>
 </shortcuts>

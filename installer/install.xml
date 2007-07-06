@@ -30,11 +30,11 @@
     </locale>
     
     <resources>
-        <res id="LicencePanel.licence" src="COPYING"/>
-	<res id="HTMLInfoPanel.info" src="../Info.html"/>
-        <res id="InfoPanel.info" src="README"/>
-	<res id="shortcutSpec.xml" src="../shortcutSpec.xml"/>
-	<res id="Unix_shortcutSpec.xml" src="../Unix_shortcutSpec.xml"/>
+        <res id="LicencePanel.licence" src="../COPYING"/>
+	<res id="HTMLInfoPanel.info" src="Info.html"/>
+        <res id="InfoPanel.info" src="../README"/>
+	<res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+	<res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
     </resources>
     
     <panels>
@@ -51,22 +51,22 @@
     </panels>
     
     <packs>
-        <pack name="Base" required="yes">
-            <description>The base files</description>
-            <file src="README" targetdir="$INSTALL_PATH"/>
-            <file src="COPYING" targetdir="$INSTALL_PATH"/>
-	    <file src="logo_new.jpg" targetdir="$INSTALL_PATH"/>
-	    <singlefile src="iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
-	    <singlefile src="jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
-	    <singlefile src="jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
+        <pack name="Core program" required="yes">
+            <description>The base program files</description>
+            <file src="../README" targetdir="$INSTALL_PATH"/>
+            <file src="../COPYING" targetdir="$INSTALL_PATH"/>
+	    <file src="../logo_new.jpg" targetdir="$INSTALL_PATH"/>
+	    <singlefile src="../iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
+	    <singlefile src="../dist/jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
+	    <singlefile src="../jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
         </pack>
-	<pack name="Models" required="no">
-		<description>Example model files</description>
-		<fileset dir="models" targetdir="$INSTALL_PATH/models" include="**/*.lua"/>
+	<pack name="Sample models" required="no">
+		<description>Sample model files</description>
+		<fileset dir="../models" targetdir="$INSTALL_PATH/models" include="**/*.lua"/>
 	</pack>	
 <!--        <pack name="Docs" required="no">
             <description>The Documentation</description>
-            <file src="doc" targetdir="$INSTALL_PATH"/> 
+            <file src="../doc" targetdir="$INSTALL_PATH"/> 
     </pack> -->
     </packs>
 
