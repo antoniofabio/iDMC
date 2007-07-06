@@ -15,7 +15,7 @@
 	<javaversion>1.6</javaversion>
     </info>
     
-    <guiprefs height="600" resizable="yes" width="800">
+    <guiprefs height="400" resizable="yes" width="550">
 	    <laf name="metouia">
 		    <os family="unix" />
 	    </laf>
