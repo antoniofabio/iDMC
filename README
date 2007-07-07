@@ -27,7 +27,7 @@ General Public License for more details.
 ============================
 2. What's new in this 2.x.x
 ============================
-In this version w.r.t. version 1.9.2 there are some new features.
+In this version there are some new features w.r.t. version 1.9.3.
 
 * Data exporting
 - ability to export trajectory, Lyapunov exponents and basins of attraction data
