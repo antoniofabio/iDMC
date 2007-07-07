@@ -1,5 +1,5 @@
 =======================================
-1. iDmc -  Dynamical Model Cruncher Due
+1. iDmc -  Dynamical Model Cruncher
 =======================================
 
 This is iDMC the interactive Dynamical Model Calculator simulates and
@@ -9,7 +9,7 @@ and difference equations.
 iDmc is Copyright (C) 2004-2007 Marji Lines and Alfredo Medio.
 
 iDmc was designed and written by Daniele Pizzoni <auouo@tin.it>, and 
-subsequently modified by A. Grigoriev and A. Di Narzo.
+subsequently modified by A. Grigoriev and A. F. Di Narzo.
 
 iDmc was developed within a research project financed by the Italian
 Ministry of Universities, the Universities of Udine and Ca'Foscari of
@@ -24,16 +24,49 @@ WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
+============================
+2. What's new in this 2.x.x
+============================
+In this version w.r.t. version 1.9.2 there are some new features.
+
+* Data exporting
+- ability to export trajectory, Lyapunov exponents and basins of attraction data
+to external files, ready to be opened with the software of your choice
+
+* Basins of attraction
+- added a new faster algorithm for basins of attractions
+- added full colors customization in basin of attraction plots, with possibility
+  of saving settings between one session and another
+
+* Random numbers
+- added many new random distributions
+- added a whole new random number generator with good statistical properties
+- added possibility of setting RNG seed for reproducibility of results
+
+* Periodic cycles
+- added cycles classification basing on stability
+- improved input mask
+
+* Error messages
+- more detailed syntax and runtime LUA error messages reporting
+
+* Bug fixes
+- misc problems in Lyapunov exponent plots when diverging exponents
+
+* Non user visible
+- removed C code from the software. Now iDMC (i.e., GUI and plotting)
+  is written entirely in Java, while using a separated specialized library, 
+  idmclib, for actual numerical analysis
+- upgraded external libraries to more recent versions
 
 ==================================
-2. Other software included in iDmc
+3. Other software included in iDmc
 ==================================
 
 iDmc includes or may include (depending on how you compile it) parts
 from different free software packages distributed with GPL-compatible
 licenses. You can find copies of the licenses under the directory
 doc/licenses. A comprehensive list follows.
-
 
 idmclib
 -------
@@ -96,38 +129,25 @@ Licensed with The Apache Software License, Version 1.1
 
 
 ===============
-3. Availability
+4. Availability
 ===============
 
-...
-
+iDMC is distributed in precompiled binary and source form.
+Binaries are distributed for win32 and linux-i386-32 OS.
+Istructions are boundled for compiling iDMC yourself for other 
+platforms.
 
 ===============
-4. Installation
+5. Installation
 ===============
 
+Execute "java -jar iDmc-xx.xx.xx-install.jar" to run the installer under windows
+and i386-32 linux.
 See COMPILING to install from sources.
-Unzip or untar; execute with "java -jar iDmc-xx.xx.xx.jar" or by
-double clicking over the jar file.
-
-
-================================
-5. More information about iDmc
-================================
-
-...
-
 
 =================
 6. Reporting Bugs
 =================
 
-...
-
-
-=========================
-7. Contributing to iDmc
-=========================
-
-...
+Send mail to idmc-discussion@googlegroups.com to report bugs and/or request help.
 
