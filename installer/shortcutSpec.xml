@@ -35,4 +35,20 @@
 	   startup="no">
   <createForPack name="Core program" />
   </shortcut>
+  <shortcut
+	   name="iDMC homepage"
+	   target="http://www.dss.uniud.it/nonlinear/"
+	   workingDirectory=""
+	   description="iDMC homepage"
+	   iconFile=""
+	   iconIndex="0"
+	   initialState="maximized"
+	   programGroup="yes"
+	   desktop="yes"
+	   applications="no"
+	   type="Link"
+	   startMenu="no"
+	   startup="no">
+	  <createForPack name="Core program"/>
+  </shortcut>
 </shortcuts>

@@ -39,4 +39,23 @@
      description="Uninstall iDMC $APP_VER">
 	   <createForPack name="Core program" />
    </shortcut>
+   <shortcut
+	    name="iDMC homepage"
+	    programGroup="yes"
+	    desktop="yes"
+	    applications="no"
+	    startMenu="no"
+	    startup="no"
+	    target=""
+	    commandLine=""
+	    initialState="noShow"
+	    iconFile=""
+	    iconIndex="0"
+	    workingDirectory=""
+	    url="http://www.dss.uniud.it/nonlinear/"
+	    type="Link"
+	    encoding="UTF-8"
+	    description="iDMC homepage">
+	   <createForPack name="Core program" />
+   </shortcut>
 </shortcuts>
