@@ -35,7 +35,7 @@
     <!-- files -->
     <property name="idmclib.lib.unix" value="${idmclib.src}/jidmclib.so"/>
     <property name="idmclib.lib.win" value="${idmclib.src}/jidmclib.dll"/>
-    <property name="jar_file"      value="${basedir}/iDmc.jar"/>
+    <property name="jar_file"      value="${basedir}/${name}.jar"/>
 
 <!--              -->
 <!-- work targets -->
@@ -190,7 +190,7 @@
 
         <copy failonerror="true"
               file="${jar_file}/"
-              todir="${dist}"
+	      tofile="${dist}/${name}-${version}.jar"
               overwrite="yes"/>
 
         <copy failonerror="true"
@@ -253,7 +253,7 @@
 
         <copy failonerror="true"
               file="${jar_file}/"
-              todir="${dist-win}"
+	      tofile="${dist-win}/${name}-${version}.jar"
               overwrite="yes"/>
 
         <copy failonerror="true"
