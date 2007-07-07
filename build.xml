@@ -199,11 +199,16 @@
               overwrite="yes"/>
 
         <copy failonerror="true"
-              file="${basedir}/COPYING"
+              file="${basedir}/NEWS"
               todir="${dist}"
               overwrite="yes"/>
 
-        <copy failonerror="true"
+	<copy failonerror="true"
+	      file="${basedir}/COPYING"
+	      todir="${dist}"
+	      overwrite="yes"/>
+        
+	<copy failonerror="true"
               file="${basedir}/logo_new.jpg"
               todir="${dist}"
               overwrite="yes"/>
@@ -256,7 +261,12 @@
               todir="${dist-win}"
               overwrite="yes"/>
 
-        <copy failonerror="true"
+	<copy failonerror="true"
+	      file="${basedir}/NEWS"
+	      todir="${dist}"
+	      overwrite="yes"/>
+        
+	<copy failonerror="true"
               file="${basedir}/COPYING"
               todir="${dist-win}"
               overwrite="yes"/>
