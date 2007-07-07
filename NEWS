@@ -101,6 +101,6 @@
 - fixed 'Save Data as...' menu item enabling/disabling, improved related error messages
 - fixed error messages when setting RNG seed
 - now using dynamic idmclib version info retrieving: native lib can be now cleanly replaced after install
-- added 'runme' script in linux distribution for easier execution
-- misc fixes to the building/distribution system (not user-visible)
+- now distributing java installer for win32 and linux-i386 platforms
+- misc fixes to the building/distribution system (non user-visible)
 
