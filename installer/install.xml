@@ -39,8 +39,8 @@
     
     <panels>
 	<panel classname="HTMLInfoPanel"/>
-	<panel classname="HelloPanel"/>
-        <!--<panel classname="InfoPanel"/>-->
+	<!--<panel classname="HelloPanel"/>-->
+        <panel classname="InfoPanel"/>
         <panel classname="LicencePanel"/>
         <panel classname="TargetPanel"/> 
         <panel classname="PacksPanel"/>
@@ -55,6 +55,7 @@
             <description>The base program files</description>
             <file src="../README" targetdir="$INSTALL_PATH"/>
             <file src="../COPYING" targetdir="$INSTALL_PATH"/>
+	    <file src="../NEWS" targetdir="$INSTALL_PATH"/>
 	    <file src="../logo_new.jpg" targetdir="$INSTALL_PATH"/>
 	    <singlefile src="../iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
 	    <singlefile src="../dist/jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
