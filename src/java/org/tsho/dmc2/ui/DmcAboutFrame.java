@@ -45,11 +45,8 @@ public class DmcAboutFrame extends JFrame {
         + "difference equations."
         + "\n"
         + "\n"
-        + "The software program was developed within a research project financed "
-        + "by the Italian Ministry of Universities, the Universities of Udine and "
-        + "Ca'Foscari of Venice, the Friuli-Venezia Giulia Region.";
-
-    
+        + "For support and bug report contact authors, or send an e-mail to\n"
+        + "idmc-discussion@googlegroups.com";
     
     DmcAboutFrame() {
         this("iDmc", new DmcDueInfo());
@@ -68,9 +65,9 @@ public class DmcAboutFrame extends JFrame {
 
             setContributors(Arrays.asList(
                 new Contributor[]{
-                    new Contributor("Daniele Pizzoni", "auouo@tin.it"),
-			  new Contributor("Alexei Grigoriev","alexei_grigoriev@libero.it"),
-			  new Contributor("Antonio, Fabio Di Narzo", "antonio.fabio@gmail.com")
+                        new Contributor("Antonio, Fabio Di Narzo", "antonio.fabio@gmail.com"),
+                        new Contributor("Alexei Grigoriev","alexei_grigoriev@libero.it"),
+                        new Contributor("Daniele Pizzoni", "auouo@tin.it")
                 }
             ));
 
