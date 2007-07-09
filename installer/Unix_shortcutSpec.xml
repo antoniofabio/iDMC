@@ -14,7 +14,7 @@
      commandLine="-jar &quot;$INSTALL_PATH/iDmc-$APP_VER.jar&quot;"
      workingDirectory="$INSTALL_PATH"
      initialState="noShow"
-     iconFile=""
+     iconFile="$INSTALL_PATH/logo_32x32.png"
      iconIndex="0"
      type="Application"
      description="Start iDMC $APP_VER">

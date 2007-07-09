@@ -60,6 +60,8 @@
 	    <singlefile src="../iDmc.jar" target="$INSTALL_PATH/iDmc-$APP_VER.jar"/>
 	    <singlefile src="../dist/jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
 	    <singlefile src="../jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
+	    <singlefile src="logo_32x32.png" target="$INSTALL_PATH/logo_32x32.png" os="unix"/>
+	    <singlefile src="logo_32x32.ico" target="$INSTALL_PATH/logo_32x32.ico" os="windows"/>
         </pack>
 	<pack name="Sample models" required="no">
 		<description>Sample model files</description>

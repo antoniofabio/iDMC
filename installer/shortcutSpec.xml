@@ -1,5 +1,5 @@
 <shortcuts>
-  <!--<skipIfNotSupported/>-->
+  <skipIfNotSupported/>
   <programGroup defaultName="iDMC" location="startMenu"/>
   <shortcut
     name="iDMC $APP_VER"
@@ -7,9 +7,9 @@
     commandLine="-jar iDmc-$APP_VER.jar"
     workingDirectory="$INSTALL_PATH"
     description="Start iDMC $APP_VER"
-    iconFile=""
+    iconFile="$INSTALL_PATH\logo_32x32.ico"
     iconIndex="0"
-    initialState="maximized"
+    initialState="noShow"
     programGroup="yes"
     desktop="yes"
     applications="no"
