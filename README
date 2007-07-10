@@ -44,18 +44,18 @@ to external files, ready to be opened with the software of your choice
 - added possibility of setting RNG seed for reproducibility of results
 
 * Periodic cycles
-- added cycles classification basing on stability
+- added cycles classification based on stability
 - improved input mask
 
 * Error messages
 - more detailed syntax and runtime LUA error messages reporting
 
 * Bug fixes
-- misc problems in Lyapunov exponent plots when diverging exponents
+- misc problems in Lyapunov exponent plots with diverging exponents
 
-* Non user visible
+* Invisible to user
 - removed C code from the software. Now iDMC (i.e., GUI and plotting)
-  is written entirely in Java, while using a separated specialized library, 
+  is written entirely in Java, while using a separate specialized library, 
   idmclib, for actual numerical analysis
 - upgraded external libraries to more recent versions
 
@@ -133,7 +133,7 @@ Licensed with The Apache Software License, Version 1.1
 ===============
 
 iDMC is distributed in precompiled binary and source form.
-Binaries are distributed for win32 and linux-i386-32 OS.
+Self-installing binaries are distributed for win32 and linux-i386 OS.
 Istructions are boundled for compiling iDMC yourself for other 
 platforms.
 
@@ -141,8 +141,8 @@ platforms.
 5. Installation
 ===============
 
-Execute "java -jar iDmc-xx.xx.xx-install.jar" to run the installer under windows
-and i386-32 linux.
+Execute "java -jar iDmc-xx.xx.xx-install.jar" to run the installer under Windows
+and i386 GNU/Linux.
 See COMPILING to install from sources.
 
 =================
