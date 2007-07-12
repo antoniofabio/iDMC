@@ -1,0 +1,9 @@
+- build linux distribution via 
+$ ant dist-linux
+
+- copy win32 jidmclib.dll in root project folder
+
+- copy win32 iDmc.jar in root project folder as iDmc-win32.jar
+
+- make installer by running:
+$ sh makeInstaller.sh
