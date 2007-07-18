@@ -520,19 +520,22 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                     int zer=0;
                     int pos=0;
                     int neg=0;
+                    int nan=0;
                     for (int ii=0;ii<result.length;ii++){
-                        if (Math.abs(result[ii])<=epsilon)
+                        if (Math.abs(result[ii])==(1.0/0.0))
+                            nan++;
+                        else if (Math.abs(result[ii])<=epsilon)
                             zer=zer+1;
-                        else{
-                            if (result[ii]>epsilon)
-                                pos=pos+1;
-                            else
-                                neg=neg+1;
-                        }
+                        else if (result[ii]>epsilon)
+                            pos=pos+1;
+                        else if (result[ii]< (-epsilon))
+                            neg=neg+1;
+                        else
+                            nan++;
                     }
                     
-                    color=(lyapunovColors.getColor(zer,pos,neg)).getRGB();
-                    ExpsSigns es=new ExpsSigns(zer,pos,neg);
+                    color=(lyapunovColors.getColor(zer,pos,neg,nan)).getRGB();
+                    ExpsSigns es=new ExpsSigns(zer,pos,neg,nan);
                     if (signsSet.contains(es)){
                         
                     }
@@ -579,19 +582,22 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                     int zer=0;
                     int pos=0;
                     int neg=0;
+                    int nan=0;
                     for (int ii=0;ii<result.length;ii++){
-                        if (Math.abs(result[ii])<=epsilon)
+                        if (Math.abs(result[ii])==(1.0/0.0))
+                            nan++;
+                        else if (Math.abs(result[ii])<=epsilon)
                             zer=zer+1;
-                        else{
-                            if (result[ii]>epsilon)
-                                pos=pos+1;
-                            else
-                                neg=neg+1;
-                        }
+                        else if (result[ii]>epsilon)
+                            pos=pos+1;
+                        else if (result[ii]< (-epsilon))
+                            neg=neg+1;
+                        else
+                            nan++;
                     }
                     
-                    color=(lyapunovColors.getColor(zer,pos,neg)).getRGB();
-                    ExpsSigns es=new ExpsSigns(zer,pos,neg);
+                    color=(lyapunovColors.getColor(zer,pos,neg,nan)).getRGB();
+                    ExpsSigns es=new ExpsSigns(zer,pos,neg,nan);
                     if (signsSet.contains(es)){
                         
                     }
@@ -753,7 +759,7 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         Iterator i= signsSet.iterator();
         while(i.hasNext()){
             ExpsSigns es=(ExpsSigns) i.next();
-            Color color=lyapunovColors.getColor(es.zer,es.pos,es.neg);
+            Color color=lyapunovColors.getColor(es.zer,es.pos,es.neg,es.nan);
             legendItems.add(new LegendItem(es.toString(),
             "",
             shape,
@@ -816,75 +822,34 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
     }    
     
     
-    
-    
-    
-    
-    
-    
-    
     class ExpsSigns{
         int neg;
         int zer;
         int pos;
+        int nan;
         
-        ExpsSigns(int z,int p,int n){
-            neg=n;zer=z;pos=p;
+        ExpsSigns(int z,int p,int n,int nan){
+            neg=n;zer=z;pos=p;nan=nan;
         }
         
         public int hashCode(){
-            String s="n"+neg+"p"+pos+"z"+zer;
+            String s="n"+neg+"p"+pos+"z"+zer+"nan"+nan;
             return s.hashCode();
         }
         
         public String toString(){
-            String s="";
-            if (zer==0){
-                if (pos==0){
-                    if (neg==0){
-                        
-                    }
-                    else{
-                        s=(neg)+" negative"+s;
-                    }
-                }
-                else{
-                    if (neg==0){
-                        
-                    }
-                    else{
-                        s=(neg)+" negative"+s;
-                    }
-                    s=(pos)+" positive  "+s;
-                }
-            }
-            else{
-                if (pos==0){
-                    if (neg==0){
-                        
-                    }
-                    else{
-                        s=(neg)+" negative"+s;
-                    }
-                }
-                else{
-                    if (neg==0){
-                        
-                    }
-                    else{
-                        s=(neg)+" negative"+s;
-                    }
-                    s=(pos)+" positive  "+s;
-                }
-                s=(zer)+" zero  "+s;
-            }
+            String s;
+            s = "" + zer + "zero, "
+                    + neg + "negative, "
+                    + pos + "positive, "
+                    + nan + "diverging";
             return s;
         }
         
         public boolean equals(Object o){
             try{
                 ExpsSigns es=(ExpsSigns) o;
-                if (es.neg==neg && es.pos==pos && es.zer==zer)
+                if (es.neg==neg && es.pos==pos && es.zer==zer && es.nan==nan)
                     return true;
                 else
                     return false;

@@ -23,7 +23,7 @@ public class LyapunovColors {
     
     
     /** Creates a new instance of LyapunovColors */
-    public LyapunovColors(int n) {//n is the number of model parameters
+    public LyapunovColors(int n) {//n is the number of model variables
         numberOfExps=n;
         int m=lyapunovPartition(n);
         partitionCardinality=m;
@@ -35,8 +35,8 @@ public class LyapunovColors {
         createMaps();
     }
     
-    public Color getColor(int zer,int pos, int neg){
-        String key="0"+zer+"+"+pos+"-"+neg;
+    public Color getColor(int zer,int pos, int neg, int nan){
+        String key="0"+zer+"+"+pos+"-"+neg+"="+nan;
         return (Color) colorMap.get(key);
     }
     
@@ -61,11 +61,10 @@ public class LyapunovColors {
     
     private int lyapunovPartition(int n){
         int count=0;
-        for (int i=0;i<=n;i++){
-            for (int j=0;j<=n-i;j++){
-                count++;
-            }
-        }
+        for (int i=0;i<=n;i++)
+            for (int j=0;j<=n-i;j++)
+                    for (int k=0; k<=n-j-i; k++)
+                        count++;
         return count;
     }
     
@@ -73,8 +72,13 @@ public class LyapunovColors {
         int count=0;
         for (int i=0;i<=n;i++){
             for (int j=0;j<=n-i;j++){
-                description[count] =" "+i+" zero,"+j+" positive,"+(n-i-j)+"negative ";
-                count++;
+                for(int k=0; k<=n-i-j; k++){
+                    description[count] =" "+i+" zero,"
+                            +j+" positive,"
+                            +k+" negative,"
+                            +(n-i-j-k)+ "diverging";
+                    count++;
+                }
             }
         }
     }
@@ -83,18 +87,20 @@ public class LyapunovColors {
         int count=0;
         int n=numberOfExps;
         for (int i=0;i<=n;i++){
-            for (int j=0;j<=n-i;j++){
-                String key="0"+i+"+"+j+"-"+(n-i-j);
-                colorMap.put(key, colorArray.getColor(count));
-                descriptionMap.put(key,description[count]);
-                count++;  
+            for (int j=0;j<=n-i;j++) {
+                for (int k=0; k<=n-i-j; k++) {
+                    String key="0"+i+"+"+j+"-"+k+"="+(n-i-j-k);
+                    colorMap.put(key, colorArray.getColor(count));
+                    descriptionMap.put(key,description[count]);
+                    count++;
+                }
             }
         }
     }
     
     public static void main(String[] args){
-        LyapunovColors l=new LyapunovColors(3);
-        Color c=l.getColor(1,1,1);
+        LyapunovColors l=new LyapunovColors(4);
+        Color c=l.getColor(1,1,1,1);
         int b=c.getBlue();
         int r=c.getGreen();
     }
