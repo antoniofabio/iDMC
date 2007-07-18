@@ -126,7 +126,7 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         for (int i = 0; i < model.getNVar(); i++) {
             paintSequence[i] = plot.getDrawingSupplier().getNextPaint();
         }
-        lyapunovColors=new LyapunovColors(model.getNVar());
+        lyapunovColors = new LyapunovColors(model.getNVar());
         
         signsSet=new HashSet();
     }
@@ -154,7 +154,6 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         
         state = STATE_FINISHED;
     }
-    
     
     public boolean renderVsTime(
     Graphics2D g2,
@@ -295,9 +294,6 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         
         return true;
     }
-    
-
-    
     
     public boolean renderVsParameter(
     Graphics2D g2,
@@ -444,8 +440,6 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         return true;
     }
     
-    
-    
     public boolean renderArea(
     Graphics2D g2, Rectangle2D dataArea) {
         
@@ -515,8 +509,7 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                         g2.drawImage(image, null, (int)dataArea.getX() + 1, (int)dataArea.getY() + 1);
                         return false;
                     }
-                    
-                    
+
                     int zer=0;
                     int pos=0;
                     int neg=0;
@@ -525,40 +518,32 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                         if (Math.abs(result[ii])==(1.0/0.0))
                             nan++;
                         else if (Math.abs(result[ii])<=epsilon)
-                            zer=zer+1;
+                            zer++;
                         else if (result[ii]>epsilon)
-                            pos=pos+1;
+                            pos++;
                         else if (result[ii]< (-epsilon))
-                            neg=neg+1;
+                            neg++;
                         else
                             nan++;
                     }
                     
                     color=(lyapunovColors.getColor(zer,pos,neg,nan)).getRGB();
                     ExpsSigns es=new ExpsSigns(zer,pos,neg,nan);
-                    if (signsSet.contains(es)){
-                        
-                    }
-                    else{
-                        signsSet.add(es);
-                        
-                    }
-                    
+                    if (!signsSet.contains(es))
+                        signsSet.add(es);                    
                     
                     data[i + j * (int)dataArea.getWidth()] = color;
                     
-                    if (stopped == true) {
+                    if (stopped == true)
                         return false;
-                    }
+
                     if (j == (int)dataArea.getHeight() - 1) {
                         g2.drawImage(image, null, (int)dataArea.getX() + 1, (int)dataArea.getY() + 1);
                     }
-                }
-            }
-        }
+                }//end for
+            }//end for
+        }//end if ODE
         else{
-            
-            
             for (int i = 0; i < (int)dataArea.getWidth(); i++) {
                 for (int j = 0; j < (int)dataArea.getHeight(); j++) {
                     
@@ -587,41 +572,33 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                         if (Math.abs(result[ii])==(1.0/0.0))
                             nan++;
                         else if (Math.abs(result[ii])<=epsilon)
-                            zer=zer+1;
+                            zer++;
                         else if (result[ii]>epsilon)
-                            pos=pos+1;
+                            pos++;
                         else if (result[ii]< (-epsilon))
-                            neg=neg+1;
+                            neg++;
                         else
                             nan++;
                     }
                     
                     color=(lyapunovColors.getColor(zer,pos,neg,nan)).getRGB();
                     ExpsSigns es=new ExpsSigns(zer,pos,neg,nan);
-                    if (signsSet.contains(es)){
-                        
-                    }
-                    else{
+                    if (!signsSet.contains(es))
                         signsSet.add(es);
-                    }
-                    
                     
                     data[i + j * (int)dataArea.getWidth()] = color;
                     
-                    if (stopped == true) {
+                    if (stopped == true)
                         return false;
-                    }
-                    if (j == (int)dataArea.getHeight() - 1) {
+
+                    if (j == (int)dataArea.getHeight() - 1)
                         g2.drawImage(image, null, (int)dataArea.getX() + 1, (int)dataArea.getY() + 1);
-                    }
-                }
-            }
-        }
+                }//end for
+            }//end for
+        }//end else
         return true;
     }
-    
-    
-    
+
     public void stop() {
         stopped = true;
     }
@@ -761,14 +738,14 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
             ExpsSigns es=(ExpsSigns) i.next();
             Color color=lyapunovColors.getColor(es.zer,es.pos,es.neg,es.nan);
             legendItems.add(new LegendItem(es.toString(),
-            "",
-            shape,
-            true,
-            color,
-            stroke,
-            Color.yellow,
-            stroke
-            ));
+                "",
+                shape,
+                true,
+                color,
+                stroke,
+                Color.yellow,
+                stroke
+                ));
         }
         if (pass==0) {
             signsSet.clear();
@@ -829,7 +806,10 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         int nan;
         
         ExpsSigns(int z,int p,int n,int nan){
-            neg=n;zer=z;pos=p;nan=nan;
+            neg=n;
+            zer=z;
+            pos=p;
+            nan=nan;
         }
         
         public int hashCode(){
@@ -839,22 +819,18 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         
         public String toString(){
             String s;
-            s = "" + zer + "zero, "
-                    + neg + "negative, "
-                    + pos + "positive, "
-                    + nan + "diverging";
+            s = "" + zer + " zero, "
+                    + neg + " negative, "
+                    + pos + " positive, "
+                    + nan + " diverging";
             return s;
         }
         
         public boolean equals(Object o){
             try{
                 ExpsSigns es=(ExpsSigns) o;
-                if (es.neg==neg && es.pos==pos && es.zer==zer && es.nan==nan)
-                    return true;
-                else
-                    return false;
-            }
-            catch(Exception e){
+                return (es.neg==neg && es.pos==pos && es.zer==zer && es.nan==nan);
+            } catch(Exception e){
                 return false;
             }
         }
