@@ -44,8 +44,8 @@ public class LyapunovColors {
         return colorArray.getColor(i);
     }
     
-    public String getDescription(int zer,int pos, int neg){
-        String key="0"+zer+"+"+pos+"-"+neg;
+    public String getDescription(int zer,int pos, int neg, int nan){
+        String key="0"+zer+"+"+pos+"-"+neg+"="+nan;
         return (String) descriptionMap.get(key);
     }
     
@@ -56,9 +56,7 @@ public class LyapunovColors {
     public int getCardinality(){
         return partitionCardinality;
     }
-    
-    
-    
+
     private int lyapunovPartition(int n){
         int count=0;
         for (int i=0;i<=n;i++)

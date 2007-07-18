@@ -500,7 +500,7 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
                     
                     int color;
                     result = Lua.evaluateLyapunovExponentsODE(
-                    model, parameters, initialPoint, timePeriod,stepSize);
+                        model, parameters, initialPoint, timePeriod,stepSize);
                     
                     if (result == null) {
                         System.out.println("i: " + i + " j: " + j);
@@ -722,17 +722,15 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
     }
     //?
     
-    
     public LegendItemCollection getLegendItems() {
         if (type != TYPE_AREA)
             return null;
         LegendItemCollection legendItems = new LegendItemCollection();
         
         Stroke stroke = new BasicStroke(1.0f, BasicStroke.CAP_SQUARE,
-        BasicStroke.JOIN_BEVEL);
+            BasicStroke.JOIN_BEVEL);
         Shape shape = new Rectangle2D.Double(-3, -3, 6, 6);
         
-           
         Iterator i= signsSet.iterator();
         while(i.hasNext()){
             ExpsSigns es=(ExpsSigns) i.next();
@@ -800,36 +798,36 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
     
     
     class ExpsSigns{
-        int neg;
         int zer;
         int pos;
+        int neg;
         int nan;
         
         ExpsSigns(int z,int p,int n,int nan){
-            neg=n;
             zer=z;
             pos=p;
-            nan=nan;
+            neg=n;
+            this.nan=nan;
         }
         
         public int hashCode(){
-            String s="n"+neg+"p"+pos+"z"+zer+"nan"+nan;
+            String s="z"+zer+"p"+pos+"n"+neg+"nan"+nan;
             return s.hashCode();
         }
         
         public String toString(){
             String s;
             s = "" + zer + " zero, "
-                    + neg + " negative, "
                     + pos + " positive, "
+                    + neg + " negative, "
                     + nan + " diverging";
             return s;
         }
         
         public boolean equals(Object o){
             try{
-                ExpsSigns es=(ExpsSigns) o;
-                return (es.neg==neg && es.pos==pos && es.zer==zer && es.nan==nan);
+                ExpsSigns es = (ExpsSigns) o;
+                return (es.zer==zer && es.pos==pos && es.neg==neg && es.nan==nan);
             } catch(Exception e){
                 return false;
             }
