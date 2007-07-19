@@ -816,11 +816,30 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
         }
         
         public String toString(){
-            String s;
-            s = "" + zer + " zero, "
-                    + pos + " positive, "
-                    + neg + " negative, "
-                    + nan + " diverging";
+            String s="";
+            boolean prec=false;
+            if(zer>0) {
+                s += zer + "zero";
+                prec = true;
+            }
+            if(pos>0) {
+                if(prec)
+                    s += ", ";
+                s += pos + "positive";
+                prec = true;
+            }
+            if(neg>0) {
+                if(prec)
+                    s += ", ";
+                s += neg + "negative";
+                prec = true;
+            }
+            if(nan>0) {
+                if(prec)
+                    s += ", ";
+                s += nan + "divergent";
+            }                
+            
             return s;
         }
         
