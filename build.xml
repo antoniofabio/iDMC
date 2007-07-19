@@ -13,7 +13,7 @@
 <!--            -->
 
     <property name="name"    value="iDmc"/>
-    <property name="version" value="2.0.5"/>
+    <property name="version" value="2.0.6"/>
     <property name="libVersion" value="0.7.0"/>
 
     <!-- directories -->
@@ -62,7 +62,7 @@
     <!--           -->
     <target name="all-linux"
     		description="compiles and creates all the bonary archives"
-    		depends="tar-dist, zip-dist-linux, tar-src, zip-src"/>
+    		depends="tar-dist, zip-dist, tar-src, zip-src"/>
 
 
     <!--         -->
@@ -176,10 +176,10 @@
     </target>
 
 
-    <!--            -->
-    <!-- dist-linux -->
-    <!--            -->
-    <target name="dist-linux"
+    <!--                                    -->
+    <!-- dist target for non-win32 platforms-->
+    <!--                                    -->
+    <target name="dist"
             depends="jar"
             description="populate the linux distribuition directory">
 			
@@ -263,7 +263,7 @@
 
 	<copy failonerror="true"
 	      file="${basedir}/NEWS"
-	      todir="${dist}"
+	      todir="${dist-win}"
 	      overwrite="yes"/>
         
 	<copy failonerror="true"
@@ -436,7 +436,7 @@
     <!-- tar-dist -->
     <!--          -->
     <target name="tar-dist" 
-            depends="dist-linux"
+            depends="dist"
             description="create the distribution tar archive">
 
         <property name="prefix" value="${name}-${version}"/>
@@ -470,11 +470,11 @@
 
 
     <!--                -->
-    <!-- zip-dist-linux -->
+    <!-- zip-dist       -->
     <!--                -->
-    <target name="zip-dist-linux"
+    <target name="zip-dist"
             description="create the linux distribution zip archive"
-            depends="dist-linux">
+            depends="dist">
 
         <zip destfile="${name}-${version}-linux.zip">
             <zipfileset dir="${dist}"
