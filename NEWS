@@ -104,3 +104,5 @@
 - now distributing java installer for win32 and linux-i386 platforms
 - misc fixes to the building/distribution system (non user-visible)
 
+* 2.0.6
+- fixed Lyap. exponents plot in par. space when diverging exponents
