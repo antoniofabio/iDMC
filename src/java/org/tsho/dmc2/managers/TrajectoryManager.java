@@ -211,7 +211,7 @@ public class TrajectoryManager extends AbstractManager
                     deltaVar, deltaPar,
                     xLabel, yLabel);
 
-            renderer = new TrajectoryMultiRenderer(plot, steppersList);
+            renderer = new TrajectoryMultiRenderer(plot, steppersList, component);
             plot.setPlotRenderer(renderer);
         }
 

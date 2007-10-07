@@ -44,6 +44,7 @@ import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.tsho.dmc2.core.Stepper;
 import org.tsho.dmc2.core.model.ModelException;
+import org.tsho.dmc2.ui.trajectory.TrajectoryComponent;
 
 public class TrajectoryMultiRenderer extends TrajectoryRenderer {
 
@@ -80,9 +81,9 @@ public class TrajectoryMultiRenderer extends TrajectoryRenderer {
 
     public TrajectoryMultiRenderer(
             final DmcRenderablePlot plot,
-            final Stepper[] list) {
+            final Stepper[] list, TrajectoryComponent component) {
 
-        super(plot, null, null);
+        super(plot, null, component);
 
         this.plot = plot;
         this.stepperList = list;
