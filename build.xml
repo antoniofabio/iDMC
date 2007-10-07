@@ -75,7 +75,7 @@
     <!--         -->
     <!-- run     -->
     <!--         -->
-    <target name="run-linux" description="run the application" depends="jar">
+    <target name="run-linux" description="run the application" depends="dist">
         <java jar="${jar_file}" fork="true" dir="${dist}" classpath="${dist}" spawn="true"/>
     </target>
     <target name="run-windows" description="run the application" depends="dist-win">
