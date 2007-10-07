@@ -106,3 +106,4 @@
 
 * 2.0.6
 - fixed Lyap. exponents plot in par. space when diverging exponents
+- fixed bug: variation option was not working in trajectory plot
