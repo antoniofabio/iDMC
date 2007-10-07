@@ -59,6 +59,8 @@ to external files, ready to be opened with the software of your choice
   idmclib, for actual numerical analysis
 - upgraded external libraries to more recent versions
 
+Read the NEWS file for a detailed history of changes for subsequent iDMC versions.
+
 ==================================
 3. Other software included in iDmc
 ==================================
