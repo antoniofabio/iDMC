@@ -56,6 +56,7 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
     private int transients;
     private int iterations;
     private int rangeIterations;
+    private double[] startPoint;
 
     // options
 
@@ -112,6 +113,8 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         Stroke stroke = new BasicStroke(7f);
         Stroke origStroke = g2.getStroke();
         Color color = Color.BLACK;
+
+        stepper.setInitialValue(startPoint);
 
         /* transients */
         if (!continua) {
@@ -252,6 +255,8 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         stepper.initialize();
 
         point = stepper.getCurrentPoint2D();
+        this.startPoint = new double[2];
+        stepper.getCurrentValue(startPoint);
         xLower = point.getX();
         xUpper = point.getX();
         yLower = point.getY();
