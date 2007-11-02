@@ -5,13 +5,13 @@
 
     <info>
         <appname>iDMC</appname>
-	<appversion>2.0.6</appversion>
+	<appversion>2.0.7</appversion>
         <authors>
 		<author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
 		<author name="Alexei Grigoriev" email="alexei_grigoriev@libero.it"/>
 		<author name="Daniele Pizzoni" email="auouo@tin.it"/>
         </authors>
-        <url>http://code.google.com/p/idmc/</url>
+        <url>http://idmc.googlecode.com</url>
 	<javaversion>1.5</javaversion>
     </info>
     
