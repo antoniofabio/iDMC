@@ -4,8 +4,8 @@ HOW TO COMPILE dmcDue/iDmc
 Starting from the 2.x.x series, iDmc is a pure Java program
 (although it depends on the native idmclib library).
 
-iDmc was developed under Debian and Ubuntu GNU/Linux mainly using the IBM Eclipse
-IDE (www.eclipse.org) and Netbeans.
+iDmc was developed under Debian and Ubuntu GNU/Linux mainly using the 
+IBM Eclipse IDE (www.eclipse.org) and Netbeans.
 
 The Java part is Java2 1.6 compliant.
 
@@ -48,30 +48,89 @@ code.
 For compiling idmclib from sources, other dependencies are involved.
 Read idmclib compiling instructions for an up-to-date reference.
 
-To compile under Linux using the included build.xml unpack all the packages 
-in a same directory. Compile the idmclib library by following boundled compiling istructions.
-For more details, or in case of troubles, try ask 
-in mailing list and/or package mantainers.
-When idmclib is compiled, go to the iDmc folder:
-$ cd ../../iDmc-2.x.x
+----------------------------
+LINUX BUILDING INSTRUCTIONS
+----------------------------
+Follows step-by-step compiling instructions of iDMC + idmclib
+for linux systems.
 
-Finally, use ant to compile all:
-$ ant dist-linux
+= Required software =
+Before starting, you need to install the following software:
+  * JDK 6
+  * SWIG 1.3.31
+  * Ant 1.6.5
+  * GCC (3.4 or 4.x): gcc and g77/gfortran
+  * GNU make
+  * CMake-2.4.6
 
-Look for other ant targets in the build.xml file.
+You will also need the following libraries:
+  * lua 5.0
+  * gsl 1.8
+
+On Ubuntu Feisty, you can type:
+
+# sudo apt-get install gcc g77 make cmake swig ant sun-java6-jdk gsl-dev liblua50-dev liblualib50-dev libgsl0-dev
+
+and you're ok. Similar package names should work on other Debian-based distributions. For other linux distributions, read your distro documentation for how to install the above software.
+
+= The building toolset =
+Download all the required source packages from the web and unpack them 
+all in a same folder with the commands:
+
+# wget http://idmc.googlecode.com/files/iDMC_building_toolset.tar.bz2
+# tar xjf iDMC_building_toolset.tar.bz2
+# cd iDMC_building_toolset
+# wget http://idmclib.googlecode.com/files/idmclib-0.7.0-Source.tar.gz
+# tar xzf idmclib-0.7.0-Source.tar.gz
+# wget http://idmc.googlecode.com/files/iDmc-2.x.x-src.tar.bz2
+# tar xjf iDmc-2.x.x-src.tar.bz2
+
+(replace 2.x.x with your version of iDMC)
+
+= Compiling the native library =
+Enter the `iDMC_building_toolset\idmclib-0.7.0-Source` folder, and type:
+# mkdir build
+# cd build
+# cmake ..
+
+If all goes right, you can now compile with:
+# make
+
+= Compiling the java part =
+If you passed the previous section, you're almost ok.
+Enter the `iDMC_building_toolset/iDmc-2.x.x` folder and type:
+# ant dist-linux
+
+This will create the `dist` subfolder containing the full iDMC distribution.
+
+In case of troubles, ask project mantainers and/or in mailing list.
+
+= Installing =
+Copy the `iDMC_building_toolset/iDmc-2.x.x/dist` folder in a location of your 
+choice. For example, copy it in your home directory by typing:
+# cp -r dist ~/iDMC-2.0.5
+
+= Running =
+Run iDMC by:
+# cd ~/iDMC-2.x.x
+# java -jar iDmc-2.x.x.jar
+
+------------------------------
+WINDOWS BUILDING INSTRUCTIONS
+------------------------------
 In principle, the same steps works also under Windows, using the MinGW/MSYS 
-environment for compiling idmclib and issuing 'ant dist' for actual iDMC building. 
+environment for compiling idmclib and issuing 'ant dist' for actual iDMC 
+building. 
 Read idmclib documentation for further hints about that. 
 Anyway, the project mantainer will generally take care of distributing
 precompiled windows binaries.
 
-In the misc directory you will also find a no longer maintaned NSIS (Nullsoft Scriptable
-Install System, http://nsis.sourceforge.net/home/) script to create
+In the misc directory you will also find a no longer maintaned NSIS (Nullsoft Scriptable Install System, http://nsis.sourceforge.net/home/) script to create
 Windows autoinstaller packages.
-In the installer directory you will find support files for generating the win/linux 
-IzPack installer. You can generate it under linux, taking care to place the windows native DLL
-in the iDmc root directory.
 
-Daniele Pizzoni <auouo@tin.it>
-Upgraded by Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 06/07/2007
+-----------------------
+Building the installer
+-----------------------
+In the installer directory you will find support files for generating the win/linux IzPack installer. You can generate it under linux, taking care to place the windows native DLL in the iDmc root directory.
 
+Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 02/11/2007
