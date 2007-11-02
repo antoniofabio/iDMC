@@ -37,6 +37,12 @@
     <property name="idmclib.lib.win" value="${idmclib.src}/jidmclib.dll"/>
     <property name="jar_file"      value="${basedir}/${name}.jar"/>
 
+    <!-- installer resources -->
+    <property name="installer.dir" value="installer"/>
+    <property name="izpack.dir" value="/opt/IzPack"/>
+    <taskdef name="izpack" classpath="${izpack.dir}/lib/compiler.jar" 
+      classname="com.izforge.izpack.ant.IzPackTask"/>
+
 <!--              -->
 <!-- work targets -->
 <!--              -->
@@ -300,8 +306,7 @@
                  includes="COPYING"
         />
     </target>
-
-
+    
     <!--         -->
     <!-- javadoc -->
     <!--         -->
@@ -530,5 +535,15 @@
             </fileset>
         </move>
      </target>  
+     
+    <!--                     -->
+    <!-- linux-win installer -->
+    <!--                     -->
+    <target name="linux-win-installer"
+            description="create the linux-windows installer package from linux with IzPack"
+            depends="dist">
+        <izpack input="${installer.dir}/install.xml" output="${installer.dir}/${name}-${version}-install.jar"
+            installerType="standard" basedir="${installer.dir}" izPackDir="${izpack.dir}/"/>
+    </target>
 
 </project>
