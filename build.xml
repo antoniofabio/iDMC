@@ -405,6 +405,7 @@
 	<exclude name="${dist}/"/>
 	<exclude name="${dist-win}/"/>
 	<exclude name="**/.*"/>
+	<exclude name=".git/**"/>
 	<exclude name="**/*.class"/>
 	<exclude name="**/*.o"/>
 	<exclude name="**/*.d"/>
