@@ -110,3 +110,6 @@
 
 * 2.0.7
 - fixed bug in trajectory plot: when automatic bounds, incorrect starting point
+
+* 2.0.8
+- upgraded dependency on idmclib 0.8.0
