@@ -106,7 +106,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
     public void render(
             final Graphics2D g2, final Rectangle2D dataArea,
             final PlotRenderingInfo info) {
-
         ValueAxis domainAxis = plot.getDomainAxis();
         ValueAxis rangeAxis = plot.getRangeAxis();
 
