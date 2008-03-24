@@ -254,7 +254,7 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         stepper.initialize();
 
         point = stepper.getCurrentPoint2D();
-        this.startPoint = new double[2];
+        this.startPoint = new double[dataset.getNcol()];
         stepper.getCurrentValue(startPoint);
         xLower = point.getX();
         xUpper = point.getX();
