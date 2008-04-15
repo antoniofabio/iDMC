@@ -117,4 +117,5 @@
 
 * 2.0.9
 - upgraded dependency on idmclib 0.9.0 (fixes some serious numerical bugs)
+- fixed bug in manual bounds trajectory plot for models with >2 variables
 

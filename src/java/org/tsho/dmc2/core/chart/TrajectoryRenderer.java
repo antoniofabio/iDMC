@@ -113,6 +113,7 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         Stroke origStroke = g2.getStroke();
         Color color = Color.BLACK;
 
+        this.startPoint = new double[dataset.getNcol()];
         stepper.setInitialValue(startPoint);
 
         /* transients */
@@ -155,7 +156,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         }
 
         for (; index < end; index++) {
-
             point = stepper.getCurrentPoint2D();
             stepper.getCurrentValue(fullPoint);
             try{
