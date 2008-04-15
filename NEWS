@@ -115,4 +115,6 @@
 - upgraded dependency on idmclib 0.8.0
 - fixed regression introduced in 2.0.7: cannot compute trajectories of models with >2 dimensions
 
+* 2.0.9
+- upgraded dependency on idmclib 0.9.0 (fixes some serious numerical bugs)
 
