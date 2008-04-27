@@ -77,18 +77,20 @@ and you're ok. Similar package names should work on other Debian-based distribut
 Download all the required source packages from the web and unpack them 
 all in a same folder with the commands:
 
-# wget http://idmc.googlecode.com/files/iDMC_building_toolset.tar.bz2
-# tar xjf iDMC_building_toolset.tar.bz2
-# cd iDMC_building_toolset
-# wget http://idmclib.googlecode.com/files/idmclib-0.8.0-Source.tar.gz
-# tar xzf idmclib-0.8.0-Source.tar.gz
-# wget http://idmc.googlecode.com/files/iDmc-2.x.x-src.tar.bz2
-# tar xjf iDmc-2.x.x-src.tar.bz2
+##COPY&PASTE FROM HERE...
+wget http://idmc.googlecode.com/files/iDMC_building_toolset.tar.bz2
+tar xjf iDMC_building_toolset.tar.bz2
+cd iDMC_building_toolset
+wget http://idmclib.googlecode.com/files/idmclib-0.9.0-Source.tar.gz
+tar xzf idmclib-0.9.0-Source.tar.gz
+wget http://idmc.googlecode.com/files/iDmc-2.0.10-src.tar.bz2
+tar xjf iDmc-2.0.10-src.tar.bz2
+##TO HERE.
 
-(replace 2.x.x with your version of iDMC)
+(replace 2.0.10 with your version of iDMC)
 
 = Compiling the native library =
-Enter the `iDMC_building_toolset\idmclib-0.8.0-Source` folder, and type:
+Enter the `iDMC_building_toolset\idmclib-0.9.0-Source` folder, and type:
 # mkdir build
 # cd build
 # cmake ..
@@ -108,11 +110,11 @@ In case of troubles, ask project mantainers and/or in mailing list.
 = Installing =
 Copy the `iDMC_building_toolset/iDmc-2.x.x/dist` folder in a location of your 
 choice. For example, copy it in your home directory by typing:
-# cp -r dist ~/iDMC-2.0.5
+# cp -r dist ~/iDMC
 
 = Running =
 Run iDMC by:
-# cd ~/iDMC-2.x.x
+# cd ~/iDMC
 # java -jar iDmc-2.x.x.jar
 
 ------------------------------
@@ -125,12 +127,11 @@ Read idmclib documentation for further hints about that.
 Anyway, the project mantainer will generally take care of distributing
 precompiled windows binaries.
 
-In the misc directory you will also find a no longer maintaned NSIS (Nullsoft Scriptable Install System, http://nsis.sourceforge.net/home/) script to create
-Windows autoinstaller packages.
+In the misc directory you will also find a no longer maintaned NSIS (Nullsoft Scriptable Install System, http://nsis.sourceforge.net/home/) script to create Windows autoinstaller packages.
 
 -----------------------
 Building the installer
 -----------------------
 In the installer directory you will find support files for generating the win/linux IzPack installer. You can generate it under linux, taking care of placing the windows native DLL in the iDmc root directory.
 
-Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 05/12/2007
+Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 27/04/2008

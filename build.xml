@@ -13,7 +13,7 @@
 <!--            -->
 
     <property name="name"    value="iDmc"/>
-    <property name="version" value="2.0.9"/>
+    <property name="version" value="2.0.10"/>
     <property name="libVersion" value="0.9.0"/>
 
     <!-- directories -->
