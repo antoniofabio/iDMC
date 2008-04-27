@@ -837,7 +837,7 @@ public class LyapunovRenderer implements DmcPlotRenderer, ImageObserver {
             if(nan>0) {
                 if(prec)
                     s += ", ";
-                s += nan + "divergent";
+                s += nan + "NA";
             }                
             
             return s;
