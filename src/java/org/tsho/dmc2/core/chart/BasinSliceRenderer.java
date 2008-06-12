@@ -133,11 +133,10 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         
         int i=0;
         while(!bs.finished() & (!stopped)) {
-            //FIXME: refresh on-screen display
-            if((i % rate)==0)
-                System.out.println("" +
-                        ((double) bs.getIndex())*100.0/(gridWidth*gridHeight)
-                        + " % done");
+            if((i % rate)==0) {
+                drawImage();
+                //TODO: update progress bar
+            }
             bs.step();
             i++;
         }
@@ -157,19 +156,19 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     public void drawImage() {
     	gridColors = colorSettings.getArray();
     	int code;
-        /*FIXME
+        
+        gridData = bs.getData();
     	for(int i=0; i<gridData.length; i++) { //color code traslation
-    		code = gridData[i];
-    		if(code<gridColors.length)
-    			imageData[i] = gridColors[gridData[i]];
-    		else
-    			imageData[i] = gridColors[gridColors.length-1];
+            code = gridData[i];
+            if(code<gridColors.length)
+                    imageData[i] = gridColors[gridData[i]];
+            else
+                    imageData[i] = gridColors[gridColors.length-1];
     	}
         g2.drawImage(image, null, imageX, imageY);
         if(bigDotsEnabled) {
                 // FIXME: step through basins attractors
         }
-        */
     }
     
     public void initialize(
