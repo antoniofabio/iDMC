@@ -56,6 +56,10 @@ public class LuaBasinMulti {
         return bs.getNAttractors();
     }
     
+    public int[] getData() {
+        return as_Java_array(bs.getRaster().getData(), bs.getDataLength());
+    }
+    
     public Vector getAttractors() {
         Vector ans = new Vector();
         cattr = bs.getAttr_head();
@@ -76,18 +80,26 @@ public class LuaBasinMulti {
     }
 
     static SWIGTYPE_p_double as_C_array(double[] x) {
-            SWIGTYPE_p_double ans = idmc.new_doubleArray(x.length);
-            for(int i=0; i<x.length; i++) {
-                    idmc.doubleArray_setitem(ans, i, x[i]);
-            }
-            return ans;
+        SWIGTYPE_p_double ans = idmc.new_doubleArray(x.length);
+        for(int i=0; i<x.length; i++) {
+                idmc.doubleArray_setitem(ans, i, x[i]);
+        }
+        return ans;
     }
 
     static double[] as_Java_array(SWIGTYPE_p_double x, int size) {
-            double ans[] = new double[size];
-            for(int i=0; i<ans.length; i++) {
-                    ans[i] = idmc.doubleArray_getitem(x, i);
-            }
-            return ans;
+        double ans[] = new double[size];
+        for(int i=0; i<ans.length; i++) {
+                ans[i] = idmc.doubleArray_getitem(x, i);
+        }
+        return ans;
+    }
+    
+    static int[] as_Java_array(SWIGTYPE_p_int x, int size) {
+        int ans[] = new int[size];
+        for(int i=0; i<ans.length; i++) {
+                ans[i] = idmc.intArray_getitem(x, i);
+        }
+        return ans;        
     }
 }
