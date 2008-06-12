@@ -28,6 +28,7 @@ package org.tsho.dmc2.ui.basinslice;
 
 import java.awt.Component;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.jfree.data.Range;
@@ -48,20 +49,37 @@ import com.jgoodies.forms.layout.RowSpec;
 public final class BasinSliceControlForm extends AbstractControlForm {
 
     private VariableItems parFields;
-    private GetInt limitField;
-    private GetInt iterationsField;
-    private GetInt trialsField;
-    private GetFloat epsilonField;
     private GetFloat lowerHRangeField;
     private GetFloat upperHRangeField;
     private GetFloat lowerVRangeField;
     private GetFloat upperVRangeField;
+    private GetFloat epsilonField;
+    private GetInt limitField;
+    private GetInt iterationsField;
+    private GetInt trialsField;
+    private JComboBox xBox;
+    private JComboBox yBox;
+
+    private VariableItems varFields;
     
     public BasinSliceControlForm(final Model model, AbstractPlotComponent frame) {
         super(frame);
         setOpaque(true);
-        //TODO: look at BasinControlForm2 implementation
+
         parFields = FormHelper.createFields(model.getParNames(), "parameter");
+        
+        lowerHRangeField = new GetFloat(
+            "lower horizontal range", FormHelper.FIELD_LENGTH);
+        upperHRangeField = new GetFloat(
+            "upper horizontal range", FormHelper.FIELD_LENGTH);
+        lowerVRangeField = new GetFloat(
+            "lower vertical range", FormHelper.FIELD_LENGTH);
+        upperVRangeField = new GetFloat(
+            "upper vertical range", FormHelper.FIELD_LENGTH);
+
+        epsilonField = new GetFloat(
+                "epsilon", FormHelper.FIELD_LENGTH,
+                new Range(0, Double.MAX_VALUE));
 
         limitField = new GetInt(
                 "limit", FormHelper.FIELD_LENGTH,
@@ -75,18 +93,15 @@ public final class BasinSliceControlForm extends AbstractControlForm {
                 "trials",FormHelper.FIELD_LENGTH, 
                 new Range(1,Integer.MAX_VALUE));
 
-        epsilonField = new GetFloat(
-                "epsilon", FormHelper.FIELD_LENGTH,
-                new Range(0, Double.MAX_VALUE));
+        xBox = new JComboBox(model.getVarNames());
+        yBox = new JComboBox(model.getVarNames());
 
-        lowerHRangeField = new GetFloat(
-                "lower horizontal range", FormHelper.FIELD_LENGTH);
-        upperHRangeField = new GetFloat(
-                "upper horizontal range", FormHelper.FIELD_LENGTH);
-        lowerVRangeField = new GetFloat(
-                "lower vertical range", FormHelper.FIELD_LENGTH);
-        upperVRangeField = new GetFloat(
-                "upper vertical range", FormHelper.FIELD_LENGTH);
+        xBox.setSelectedIndex(0);
+        if (model.getNVar() > 1) {
+            yBox.setSelectedIndex(1);
+        }
+
+        varFields = FormHelper.createFields(model.getVarNames(), "variables");
 
         FormLayout layout = new FormLayout("f:p:n", "");
         
@@ -114,6 +129,9 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         builder.addRow("iterations", iterationsField);
         builder.addRow("trials",trialsField);
         builder.addRow("epsilon",epsilonField);
+        builder.addSubtitle("axes");
+        builder.addRow("x", xBox);
+        builder.addRow("y", yBox);
         builder.addGap();
         
         builder.addTitle("Ranges");
@@ -124,6 +142,13 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         builder.addSubtitle("vertical");
         builder.addRow("min", lowerVRangeField);
         builder.addRow("max", upperVRangeField);
+        builder.addGap();
+        
+        builder.addTitle("Variables");
+        i = varFields.iterator();
+        while (i.hasNext()) {
+            builder.addRow(i.nextLabel(), (Component) i.value());
+        }
 
         return builder.getPanel();
     }
