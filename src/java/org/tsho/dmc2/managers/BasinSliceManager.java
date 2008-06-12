@@ -64,8 +64,8 @@ public class BasinSliceManager extends AbstractManager
 
         super((ManagerListener2) component);
         this.component = component;
-        this.model = (SimpleMap) component.getModel();
-        this.form = (BasinSliceControlForm) component.getControlForm();
+        model = (SimpleMap) component.getModel();
+        form = (BasinSliceControlForm) component.getControlForm();
 
         crosshair = false;
 
@@ -73,7 +73,9 @@ public class BasinSliceManager extends AbstractManager
         chartPanel.setPopupMenu(null);
         setCrosshair(crosshair);
 
+        System.out.println("BasinSliceManager: 76");
         plotRenderer = new BasinSliceRenderer(model, plot, component);
+        System.out.println("BasinSliceManager: 78");
         plot.setPlotRenderer(plotRenderer);
 
         plot.setDrawGridLines(false);
@@ -100,6 +102,8 @@ public class BasinSliceManager extends AbstractManager
 
     public boolean doRendering() {
         try {
+            plotRenderer.initialize();
+            
             plot.setNoData(false);
             
             //TODO: set axes labels:

@@ -38,6 +38,10 @@ public class LuaBasinMulti {
         return (bs.finished()!=0);
     }
     
+    public int getIndex() {
+        return bs.getCurrId();
+    }
+    
     public int findNextAttractor() {
          return bs.find_next_attractor();
     }

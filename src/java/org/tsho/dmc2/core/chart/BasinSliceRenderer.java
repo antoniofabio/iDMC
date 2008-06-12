@@ -78,17 +78,18 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         this.plot = plot;
         
         controlForm = bc.getBasinSliceControlForm();
+    }
+    
+    public void initialize() {
+        this.stopped = false;
         try{
             par = controlForm.getParameterValues().toArray(controlForm.getParameterValues());
             var = controlForm.getVariableValues().toArray(controlForm.getVariableValues());
         } catch(Exception e) {
             //FIXME: show pertinent error message box
+            System.out.println("error getting parameters and variables settings");
             System.out.println(e.getMessage());
         }
-    }
-    
-    public void initialize() {
-        this.stopped = false;
     }
 
     public void render(
@@ -123,7 +124,7 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
             rx.getLowerBound(), rx.getUpperBound(), (int) gridWidth,
             ry.getLowerBound(), ry.getUpperBound(), (int) gridHeight,
             controlForm.getEpsilon(), controlForm.getLimit(), controlForm.getIterations(),
-            controlForm.getTrials(), controlForm.getX(), controlForm.getY(),
+            controlForm.getTrials(), controlForm.getXVar(), controlForm.getYVar(),
             var);
         } catch (Exception e) {
             //FIXME: show pertinent err msg box
@@ -131,11 +132,12 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         }
         
         int i=0;
-        while(!bs.finished()) {
+        while(!bs.finished() & (!stopped)) {
             //FIXME: refresh on-screen display
             if((i % rate)==0)
                 System.out.println("" +
-                        ((double)i)*100.0/(gridWidth*gridHeight) + " % done");
+                        ((double) bs.getIndex())*100.0/(gridWidth*gridHeight)
+                        + " % done");
             bs.step();
             i++;
         }
@@ -144,12 +146,18 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         basinComponent.setDataobject(null);
 
         drawImage();
-        state = STATE_FINISHED;
+        if(stopped) {
+            stopped = false;
+            state = STATE_STOPPED;
+        } else {
+            state = STATE_FINISHED;
+        }
     }
     
     public void drawImage() {
     	gridColors = colorSettings.getArray();
     	int code;
+        /*FIXME
     	for(int i=0; i<gridData.length; i++) { //color code traslation
     		code = gridData[i];
     		if(code<gridColors.length)
@@ -159,8 +167,9 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     	}
         g2.drawImage(image, null, imageX, imageY);
         if(bigDotsEnabled) {
-                // TODO: step through basins attractors
+                // FIXME: step through basins attractors
         }
+        */
     }
     
     public void initialize(

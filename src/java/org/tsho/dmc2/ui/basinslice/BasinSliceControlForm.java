@@ -254,5 +254,13 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         return "BASINSLICE"+"_B";
     }
     
+    public int getXVar() {
+        return xBox.getSelectedIndex()-1;
+    }
+    
+    public int getYVar() {
+        return yBox.getSelectedIndex()-1;
+    }
+    
 }
 
