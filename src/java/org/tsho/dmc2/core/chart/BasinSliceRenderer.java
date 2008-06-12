@@ -71,7 +71,7 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     private int[] gridColors;
     private int[] gridData;
     private double[] par, var;
-    private static ColorSettings colorSettings = new ColorSettings(BasinRenderer.class);
+    private static ColorSettings colorSettings = new ColorSettings(BasinSliceRenderer.class);
 
     public BasinSliceRenderer(final SimpleMap map, final DmcRenderablePlot plot, BasinSliceComponent bc) {
         this.basinComponent = bc;
@@ -131,6 +131,8 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
             System.out.println(e.getMessage());
         }
         
+        bs.findAttractors();
+        
         int i=0;
         while(!bs.finished() & (!stopped)) {
             if((i % rate)==0) {
@@ -158,10 +160,10 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     	int code;
         
         gridData = bs.getData();
-    	for(int i=0; i<gridData.length; i++) { //color code traslation
-            code = gridData[i];
+    	for(int i=0; i<getGridData().length; i++) { //color code traslation
+            code = getGridData()[i];
             if(code<gridColors.length)
-                    imageData[i] = gridColors[gridData[i]];
+                    imageData[i] = gridColors[getGridData()[i]];
             else
                     imageData[i] = gridColors[gridColors.length-1];
     	}
@@ -222,5 +224,9 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
 	 */
 	public void setColorSettings(ColorSettings colorSettings) {
 		BasinSliceRenderer.colorSettings = colorSettings;
-	}    
+	}
+
+    public int[] getGridData() {
+        return gridData;
+    }
 }

@@ -66,17 +66,15 @@ public class BasinSliceComponent extends AbstractPlotComponent
     	}
     	public void actionPerformed(ActionEvent ae) {
             //TODO: FIXME
-            /*
-            BasinSliceRenderer plotRenderer = manager.getPlotRenderer();            	
-        	ColorSettingsDialog csd = new ColorSettingsDialog(
-        			plotRenderer.getColorSettings());
-        	csd.show();
-        	plotRenderer.setColorSettings(csd.getColorSettings());
-        	if(plotRenderer.getGrid()!=null) {//some data already computed
-        		plotRenderer.drawImage();
-        		manager.getChartPanel().repaint();
-        	}    		
-            */
+            BasinSliceRenderer plotRenderer = manager.getPlotRenderer();
+            ColorSettingsDialog csd = new ColorSettingsDialog(
+                plotRenderer.getColorSettings());
+            csd.show();
+            plotRenderer.setColorSettings(csd.getColorSettings());
+            if(plotRenderer.getGridData()!=null) {//some data already computed
+                plotRenderer.drawImage();
+                manager.getChartPanel().repaint();
+            }
     	}
     };
     private final Action colorSettingsAction = new ColorSettingsAction();
