@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2008 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -37,7 +37,8 @@ import java.util.Vector;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.tsho.dmc2.core.algorithms.Grid;
+import org.tsho.dmc2.core.dlua.LuaModel;
+import org.tsho.dmc2.core.dlua.LuaBasinMulti;
 import org.tsho.dmc2.core.model.SimpleMap;
 import org.tsho.dmc2.ui.basinslice.*;
 import org.tsho.dmc2.core.algorithms.*;
@@ -45,10 +46,14 @@ import org.tsho.dmc2.core.algorithms.*;
 public class BasinSliceRenderer implements DmcPlotRenderer {
 	/** this is needed for comunicating data to be saved*/
     private BasinSliceComponent basinComponent;
+    
+    private BasinSliceControlForm controlForm;
+    
     /** plotting area */
     private DmcRenderablePlot plot;
-    /** map to be analysed */
-    private SimpleMap map;
+    
+    /** low level basin_multi object*/
+    LuaBasinMulti bs;
     
     // flags    
     private boolean stopped;
@@ -64,12 +69,22 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     private int imageX, imageY, rate;
     private int[] imageData;
     private int[] gridColors;
+    private int[] gridData;
+    private double[] par, var;
     private static ColorSettings colorSettings = new ColorSettings(BasinRenderer.class);
 
     public BasinSliceRenderer(final SimpleMap map, final DmcRenderablePlot plot, BasinSliceComponent bc) {
         this.basinComponent = bc;
-        this.map = map;
         this.plot = plot;
+        
+        controlForm = bc.getBasinSliceControlForm();
+        try{
+            par = controlForm.getParameterValues().toArray(controlForm.getParameterValues());
+            var = controlForm.getVariableValues().toArray(controlForm.getVariableValues());
+        } catch(Exception e) {
+            //FIXME: show pertinent error message box
+            System.out.println(e.getMessage());
+        }
     }
     
     public void initialize() {
@@ -79,36 +94,51 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     public void render(
     final Graphics2D g2, final Rectangle2D dataArea,
     final PlotRenderingInfo info) {
-        basinComponent.setDataobject(null);
-
-        state = STATE_RUNNING;
-
         gridWidth = (int) dataArea.getWidth();
         gridHeight = (int) dataArea.getHeight();
+        
+    	gridData = new int[gridWidth * gridHeight];
+
+        state = STATE_RUNNING;
 
         this.imageX = (int) dataArea.getX() + 1;
         this.imageY = (int) dataArea.getY();
         
         this.image = new BufferedImage(
                         gridWidth, gridHeight, BufferedImage.TYPE_INT_RGB);
-    	this.g2 = g2;
+        
+        basinComponent.setDataobject(null);
+        
+        this.g2 = g2;
         WritableRaster raster = image.getRaster();
 
-        ValueAxis domainAxis = plot.getDomainAxis();
-        ValueAxis rangeAxis = plot.getRangeAxis();
-        
-        double maxCoordinate=Math.abs(domainAxis.getUpperBound());
-        if (Math.abs(domainAxis.getLowerBound())>maxCoordinate )
-            maxCoordinate=Math.abs(domainAxis.getLowerBound());
-        if (Math.abs(rangeAxis.getLowerBound())>maxCoordinate)
-            maxCoordinate=Math.abs(rangeAxis.getLowerBound());
-        if (Math.abs(rangeAxis.getUpperBound())>maxCoordinate)
-            maxCoordinate=Math.abs(rangeAxis.getUpperBound());
+        try{
+        ValueAxis rx = plot.getDomainAxis();
+        ValueAxis ry = plot.getRangeAxis();
         
         imageData = ((DataBufferInt) raster.getDataBuffer()).getData();
-        rate = gridHeight * gridWidth / 100;
+        rate = Math.max(1, gridHeight * gridWidth / 100);
+
+        bs = new LuaBasinMulti((LuaModel) basinComponent.getModel(), par,
+            rx.getLowerBound(), rx.getUpperBound(), (int) gridWidth,
+            ry.getLowerBound(), ry.getUpperBound(), (int) gridHeight,
+            controlForm.getEpsilon(), controlForm.getLimit(), controlForm.getIterations(),
+            controlForm.getTrials(), controlForm.getX(), controlForm.getY(),
+            var);
+        } catch (Exception e) {
+            //FIXME: show pertinent err msg box
+            System.out.println(e.getMessage());
+        }
         
-        //TODO: step through C level basin object
+        int i=0;
+        while(!bs.finished()) {
+            //FIXME: refresh on-screen display
+            if((i % rate)==0)
+                System.out.println("" +
+                        ((double)i)*100.0/(gridWidth*gridHeight) + " % done");
+            bs.step();
+            i++;
+        }
         
         /** TODO: pass basin data to the plot component */
         basinComponent.setDataobject(null);
@@ -118,7 +148,6 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     }
     
     public void drawImage() {
-    	int [] gridData = new int[gridWidth * gridHeight];
     	gridColors = colorSettings.getArray();
     	int code;
     	for(int i=0; i<gridData.length; i++) { //color code traslation
@@ -130,19 +159,7 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     	}
         g2.drawImage(image, null, imageX, imageY);
         if(bigDotsEnabled) {
-        	double[] tmpAttr;
-        	int [] tmpXy;
-                /* TODO: step through basins attractors
-	        for(int j=0; j<attractorsSamplePoints.size(); j++) {
-	        	g2.setColor(new Color(gridColors[Math.min(2+j*2, gridColors.length-1)]));
-	        	tmpAttr = (double[]) attractorsSamplePoints.elementAt(j);
-	        	for(int i=0; i<attractorIterations; i++) {
-	        		tmpXy = grid.pointToXy(tmpAttr);
-	        		g2.fillRect(imageX + tmpXy[0] - 1, imageY + gridHeight - tmpXy[1] - 1, 3, 3);
-	        		iterate(tmpAttr);
-	        	}
-	        }
-                 */
+                // TODO: step through basins attractors
         }
     }
     

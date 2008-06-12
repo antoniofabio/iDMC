@@ -39,6 +39,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import org.jfree.data.Range;
+import org.tsho.dmc2.core.dlua.LuaBasinMulti;
 import org.tsho.dmc2.core.chart.BasinSliceRenderer;
 import org.tsho.dmc2.core.model.SimpleMap;
 import org.tsho.dmc2.managers.BasinSliceManager;
@@ -94,6 +95,10 @@ public class BasinSliceComponent extends AbstractPlotComponent
         stateMachine.addSensibleItem(controlForm);
         stateMachine.parseInput(Input.go);
         finishInit(controlForm);
+    }
+
+    public BasinSliceControlForm getBasinSliceControlForm() {
+        return (BasinSliceControlForm) controlForm;
     }
 
     protected JMenu createPlotMenu() {

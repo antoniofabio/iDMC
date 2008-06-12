@@ -181,6 +181,11 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         FormHelper.setFieldValues(parFields, init);
     }
 
+    // Variables
+    public VariableDoubles getVariableValues() throws InvalidData {
+        return FormHelper.collectFieldValues(varFields);
+    }
+
     // Limit
     public int getLimit() throws InvalidData {
         return limitField.getValue();
