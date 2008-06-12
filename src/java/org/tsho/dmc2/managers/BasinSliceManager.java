@@ -73,9 +73,7 @@ public class BasinSliceManager extends AbstractManager
         chartPanel.setPopupMenu(null);
         setCrosshair(crosshair);
 
-        System.out.println("BasinSliceManager: 76");
         plotRenderer = new BasinSliceRenderer(model, plot, component);
-        System.out.println("BasinSliceManager: 78");
         plot.setPlotRenderer(plotRenderer);
 
         plot.setDrawGridLines(false);
