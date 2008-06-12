@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
     private final CowebAction cowebAction = new CowebAction();
     private final BifurAction bifurAction = new BifurAction();
     private final BasinAction basinACtion = new BasinAction();
+    private final BasinSliceAction basinsliceAction = new BasinSliceAction();
     private final LyapunovAction lyapunovAction = new LyapunovAction();
     private final ManifoldsAction manifoldsAction = new ManifoldsAction();
     private final AbsorbingAreaAction absorbingAreaAction =new AbsorbingAreaAction();
@@ -209,7 +210,7 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
         
     }
-    
+
     /*
      * tabbed pane change listener
      */
@@ -377,6 +378,9 @@ public class MainFrame extends JFrame {
         menuItem = new JMenuItem(basinACtion);
         plotMenu.add(menuItem);
         
+        menuItem = new JMenuItem(getBasinSliceAction());
+        plotMenu.add(menuItem);
+
         menuItem = new JMenuItem(lyapunovAction);
         plotMenu.add(menuItem);
         
@@ -773,6 +777,20 @@ public class MainFrame extends JFrame {
         }
     }
     
+    protected class BasinSliceAction extends AbstractAction {
+        public BasinSliceAction() {
+            super();
+            
+            putValue(NAME, "Basin of attraction slice");
+            putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
+            putValue(SHORT_DESCRIPTION, "basin slice");
+        }
+        
+        public void actionPerformed(final ActionEvent e) {
+            stateMachine.parseInput(NewPlotInput.basinslice);
+        }
+    }
+    
     protected class AbsorbingAreaAction extends AbstractAction {
         public AbsorbingAreaAction() {
             super();
@@ -868,6 +886,9 @@ public class MainFrame extends JFrame {
     }
     Action getBasinACtion() {
         return basinACtion;
+    }
+    Action getBasinSliceAction() {
+        return basinsliceAction;
     }
     Action getBifurAction() {
         return bifurAction;
