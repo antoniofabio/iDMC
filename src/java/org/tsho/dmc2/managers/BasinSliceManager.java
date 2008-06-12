@@ -29,18 +29,15 @@ package org.tsho.dmc2.managers;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import javax.swing.JComponent;
-
 import org.tsho.dmc2.core.CoreStatusEvent;
 import org.tsho.dmc2.core.CoreStatusListener;
-import org.tsho.dmc2.core.VariableDoubles;
-import org.tsho.dmc2.core.chart.BasinRenderer;
+import org.tsho.dmc2.core.chart.BasinSliceRenderer;
 import org.tsho.dmc2.core.chart.DmcPlotRenderer;
 import org.tsho.dmc2.core.model.SimpleMap;
 import org.tsho.dmc2.ui.InvalidData;
-import org.tsho.dmc2.ui.basin.BasinControlForm2;
+import org.tsho.dmc2.ui.basinslice.*;
 import org.tsho.dmc2.core.util.*;
-import org.tsho.dmc2.ui.basin.*;
+import org.tsho.dmc2.ui.basinslice.*;
 
 /**
  *
@@ -52,10 +49,10 @@ public class BasinSliceManager extends AbstractManager
                                      AbstractManager.BigDots{
 
     private final SimpleMap model;
-    private final BasinControlForm2 form;
+    private final BasinSliceControlForm form;
 
-    private BasinComponent component;
-    private BasinRenderer plotRenderer;
+    private BasinSliceComponent component;
+    private BasinSliceRenderer plotRenderer;
 
     private boolean crosshair;
 
@@ -63,12 +60,12 @@ public class BasinSliceManager extends AbstractManager
     
     private final int refreshSleepTime = 500;
 
-    public BasinSliceManager(BasinComponent component) {
+    public BasinSliceManager(BasinSliceComponent component) {
 
         super((ManagerListener2) component);
         this.component = component;
         this.model = (SimpleMap) component.getModel();
-//        this.form = (BasinSliceControlForm) component.getControlForm();
+        this.form = (BasinSliceControlForm) component.getControlForm();
 
         crosshair = false;
 
@@ -102,8 +99,8 @@ public class BasinSliceManager extends AbstractManager
     }
 
     public boolean doRendering() {
+        /*TODO
         try {
-        //TODO
             plot.setNoData(false);
             
             //set axes labels:
@@ -117,6 +114,7 @@ public class BasinSliceManager extends AbstractManager
             errorMessage = e.getMessage();
             return false;
         }
+        */
 
         if (plot.getPlotRenderer() != plotRenderer) {
             plot.setPlotRenderer(plotRenderer);
@@ -141,7 +139,7 @@ public class BasinSliceManager extends AbstractManager
 
     class RefreshThread extends Thread {
 
-        int state = BasinRenderer.STATE_NONE;
+        int state = BasinSliceRenderer.STATE_NONE;
         int ratio;
 
         RefreshThread() {
@@ -158,15 +156,15 @@ public class BasinSliceManager extends AbstractManager
                     state = newState;
 
                     switch (newState) {
-                        case BasinRenderer.STATE_NONE:
+                        case BasinSliceRenderer.STATE_NONE:
                             ratio = 0;
                             break;
             
-                        case BasinRenderer.STATE_RUNNING:
+                        case BasinSliceRenderer.STATE_RUNNING:
 //                            frame.progressString("plotting...");
                             break;
                     
-                        case BasinRenderer.STATE_FINISHED:
+                        case BasinSliceRenderer.STATE_FINISHED:
 //                            frame.progressString("ok. ");
                             return;
                    
@@ -175,7 +173,7 @@ public class BasinSliceManager extends AbstractManager
                     }
                 }
 
-                if ((state & BasinRenderer.STATE_RUNNING) != 0 ) {
+                if ((state & BasinSliceRenderer.STATE_RUNNING) != 0 ) {
                     chartPanel.repaint();
                 }
 
@@ -211,7 +209,7 @@ public class BasinSliceManager extends AbstractManager
         launchThread();
     }
     
-    public BasinRenderer getPlotRenderer(){
+    public BasinSliceRenderer getPlotRenderer(){
         return plotRenderer;
     }
     
