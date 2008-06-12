@@ -48,11 +48,10 @@ import com.jgoodies.forms.layout.RowSpec;
 public final class BasinSliceControlForm extends AbstractControlForm {
 
     private VariableItems parFields;
-    private GetFloat infinityField;
-    private GetFloat epsilonField;
     private GetInt limitField;
     private GetInt iterationsField;
     private GetInt trialsField;
+    private GetFloat epsilonField;
     private GetFloat lowerHRangeField;
     private GetFloat upperHRangeField;
     private GetFloat lowerVRangeField;
@@ -62,7 +61,38 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         super(frame);
         setOpaque(true);
         //TODO: look at BasinControlForm2 implementation
-        createPanel();
+        parFields = FormHelper.createFields(model.getParNames(), "parameter");
+
+        limitField = new GetInt(
+                "limit", FormHelper.FIELD_LENGTH,
+                new Range(1, Integer.MAX_VALUE));
+
+        iterationsField = new GetInt(
+                "limits", FormHelper.FIELD_LENGTH,
+                new Range(1, Integer.MAX_VALUE));
+        
+        trialsField = new GetInt(
+                "trials",FormHelper.FIELD_LENGTH, 
+                new Range(1,Integer.MAX_VALUE));
+
+        epsilonField = new GetFloat(
+                "epsilon", FormHelper.FIELD_LENGTH,
+                new Range(0, Double.MAX_VALUE));
+
+        lowerHRangeField = new GetFloat(
+                "lower horizontal range", FormHelper.FIELD_LENGTH);
+        upperHRangeField = new GetFloat(
+                "upper horizontal range", FormHelper.FIELD_LENGTH);
+        lowerVRangeField = new GetFloat(
+                "lower vertical range", FormHelper.FIELD_LENGTH);
+        upperVRangeField = new GetFloat(
+                "upper vertical range", FormHelper.FIELD_LENGTH);
+
+        FormLayout layout = new FormLayout("f:p:n", "");
+        
+        setLayout(layout);
+        layout.appendRow(new RowSpec("f:p:n"));
+        add(createPanel(), new CellConstraints(1, 1));
     }
 
     private JPanel createPanel() {
@@ -107,7 +137,6 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         while (i.hasNext()) {
             ((GetFloat) i.nextValue()).setEditable(flag);
         }
-        infinityField.setEditable(flag);
         limitField.setEditable(flag);
         iterationsField.setEditable(flag);
         trialsField.setEditable(flag);
@@ -125,15 +154,6 @@ public final class BasinSliceControlForm extends AbstractControlForm {
 
     public void setParameterValues(final VariableDoubles init) {
         FormHelper.setFieldValues(parFields, init);
-    }
-
-    // Power
-    public double getInfinity() throws InvalidData {
-        return infinityField.getValue();
-    }
-
-    public void setInfinity(double value) {
-        infinityField.setValue(value);
     }
 
     // Limit

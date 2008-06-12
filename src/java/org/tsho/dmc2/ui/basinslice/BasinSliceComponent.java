@@ -39,7 +39,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import org.jfree.data.Range;
-//import org.tsho.dmc2.core.chart.BasinSliceRenderer;
+import org.tsho.dmc2.core.chart.BasinSliceRenderer;
 import org.tsho.dmc2.core.model.SimpleMap;
 import org.tsho.dmc2.managers.BasinSliceManager;
 import org.tsho.dmc2.sm.Input;
@@ -89,7 +89,7 @@ public class BasinSliceComponent extends AbstractPlotComponent
         manager = new BasinSliceManager(this);
         init(manager,
              new BasinSliceFrameSM(this),
-             controlForm, "Basin of attraction");
+             controlForm, "Basin of attraction slice");
 
         stateMachine.addSensibleItem(controlForm);
         stateMachine.parseInput(Input.go);
@@ -99,45 +99,7 @@ public class BasinSliceComponent extends AbstractPlotComponent
     protected JMenu createPlotMenu() {
         JMenu menu;
         menu = new JMenu("Plot");
-        
-        ButtonGroup group;
-
-        group = new ButtonGroup();
-        JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem("Fast algorithm");
-        menuItem.setMnemonic(KeyEvent.VK_F);
-        group.add(menuItem);
-        menu.add(menuItem);
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                /* TODO
-                //change flag in basin control form and in basin renderer
-                BasinRenderer plotRenderer=manager.getPlotRenderer();
-                plotRenderer.setType(BasinRenderer.FAST_ALGORITHM);
-                privateControlForm.setType(BasinRenderer.FAST_ALGORITHM);
-                controlForm.updateSamplesMenu();
-                 */
-            }
-        });
-        menuItem.setSelected(true);
-
-        menuItem = new JRadioButtonMenuItem("Slow algorithm");
-        menuItem.setMnemonic(KeyEvent.VK_S);
-        group.add(menuItem);
-        menu.add(menuItem);
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                /* TODO
-                //change flag in basin control form and in basin renderer
-                BasinRenderer plotRenderer=manager.getPlotRenderer();
-                plotRenderer.setType(BasinRenderer.SLOW_ALGORITHM);
-                privateControlForm.setType(BasinRenderer.SLOW_ALGORITHM);
-                privateControlForm.updateSamplesMenu();
-                 */
-            }
-        });
-        
-        menu.addSeparator();
-        
+                
         menu.add(colorSettingsAction);
                 
         return menu;
