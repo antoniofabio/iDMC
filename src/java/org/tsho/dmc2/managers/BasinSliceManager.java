@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2008 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -73,8 +73,8 @@ public class BasinSliceManager extends AbstractManager
         chartPanel.setPopupMenu(null);
         setCrosshair(crosshair);
 
-//        plotRenderer = new BasinSliceRenderer(model, plot, component);
-//        plot.setPlotRenderer(plotRenderer);
+        plotRenderer = new BasinSliceRenderer(model, plot, component);
+        plot.setPlotRenderer(plotRenderer);
 
         plot.setDrawGridLines(false);
         chart.setTitle(model.getName());
@@ -99,22 +99,18 @@ public class BasinSliceManager extends AbstractManager
     }
 
     public boolean doRendering() {
-        /*TODO
         try {
             plot.setNoData(false);
             
-            //set axes labels:
+            //TODO: set axes labels:
             // xAxis.setLabel(string); yAxis.setLabel(string)
 
-            //plotRenderer.initialize(whateverarguments from 'form' object)
-
-            //plot.setDataRanges(form.getXRange(), form.getYRange());
+            plot.setDataRanges(form.getXRange(), form.getYRange());
         }
         catch (InvalidData e) {
             errorMessage = e.getMessage();
             return false;
         }
-        */
 
         if (plot.getPlotRenderer() != plotRenderer) {
             plot.setPlotRenderer(plotRenderer);
