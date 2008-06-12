@@ -5,6 +5,7 @@
 
 package org.tsho.dmc2.core.dlua;
 
+import java.util.Vector;
 import org.tsho.jidmclib.*;
 
 /**
@@ -13,6 +14,8 @@ import org.tsho.jidmclib.*;
  */
 public class LuaBasinMulti {
     private BasinMulti bs;
+    attr_lst cattr;
+    int dim;
     
     public LuaBasinMulti(LuaModel m, double[] par,
             double xmin, double xmax, int xres,
@@ -24,6 +27,7 @@ public class LuaBasinMulti {
 			as_C_array(par), xmin, xmax, xres, ymin, ymax, yres,
 			eps, limit, iter, ntries, xvar, yvar,
 			as_C_array(var));
+        dim = var.length;
     }
     
     public int step() {
@@ -35,7 +39,7 @@ public class LuaBasinMulti {
     }
     
     public int findNextAttractor() {
-        return bs.find_next_attractor();
+         return bs.find_next_attractor();
     }
     
     public void findAttractors() {
@@ -46,6 +50,25 @@ public class LuaBasinMulti {
     
     public int getNAttractors() {
         return bs.getNAttractors();
+    }
+    
+    public Vector getAttractors() {
+        Vector ans = new Vector();
+        cattr = bs.getAttr_head();
+        attractor_pt tmp_apt;
+        SWIGTYPE_p_double tmp_dpt;
+        Vector tmp_vec;
+        for(int i=0; i<idmc.idmc_attractor_list_length(cattr); i++) {
+            tmp_vec = new Vector();
+            tmp_apt = cattr.getHd();
+            for(int j=0; j<idmc.idmc_attractor_length(cattr); j++) {
+                tmp_dpt = tmp_apt.getX();
+                tmp_vec.add(as_Java_array(tmp_dpt, dim));
+                tmp_apt = tmp_apt.getNext();
+            }
+            ans.add(tmp_vec);
+        }
+        return ans;
     }
 
     static SWIGTYPE_p_double as_C_array(double[] x) {
