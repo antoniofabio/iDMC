@@ -128,7 +128,7 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         yRange[0] = ry.getLowerBound();
         yRange[1] = ry.getUpperBound();
         xEps = (xRange[1] - xRange[0]) / (double) gridWidth;
-        xEps = (yRange[1] - yRange[0]) / (double) gridHeight;
+        yEps = (yRange[1] - yRange[0]) / (double) gridHeight;
         
         imageData = ((DataBufferInt) raster.getDataBuffer()).getData();
         rate = Math.max(1, gridHeight * gridWidth / 100);
