@@ -60,23 +60,32 @@ public class LuaBasinMulti {
         return as_Java_array(bs.getRaster().getData(), bs.getDataLength());
     }
     
+    /**
+     * Get list of attractors found as a vector.
+     * Each attractor is represented again as a vector of
+     *  fixed-size double arrays.
+     * 
+     * The resulting vector object is allocated and returned on method call.
+     */
     public Vector getAttractors() {
-        Vector ans = new Vector();
+        Vector attractors = new Vector();
         cattr = bs.getAttr_head();
         attractor_pt tmp_apt;
         SWIGTYPE_p_double tmp_dpt;
-        Vector tmp_vec;
-        for(int i=0; i<idmc.idmc_attractor_list_length(cattr); i++) {
-            tmp_vec = new Vector();
+        Vector attractor;
+        int na = idmc.idmc_attractor_list_length(cattr);
+        for(int i=0; i<na; i++) {
+            attractor = new Vector();
             tmp_apt = cattr.getHd();
             for(int j=0; j<idmc.idmc_attractor_length(cattr); j++) {
                 tmp_dpt = tmp_apt.getX();
-                tmp_vec.add(as_Java_array(tmp_dpt, dim));
+                attractor.add(as_Java_array(tmp_dpt, dim));
                 tmp_apt = tmp_apt.getNext();
             }
-            ans.add(tmp_vec);
+            attractors.add(attractor);
+            cattr = cattr.getNext();
         }
-        return ans;
+        return attractors;
     }
 
     static SWIGTYPE_p_double as_C_array(double[] x) {
