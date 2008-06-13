@@ -63,6 +63,10 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     private int state;
     private int gridWidth;
     private int gridHeight;
+    private int xvar, yvar;
+    private double xEps, yEps;
+    private double[] xRange = new double[2];
+    private double[] yRange = new double[2];
     
     private Graphics2D g2;
     private BufferedImage image;
@@ -97,6 +101,8 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     final PlotRenderingInfo info) {
         gridWidth = (int) dataArea.getWidth();
         gridHeight = (int) dataArea.getHeight();
+        xvar = controlForm.getXVar();
+        yvar = controlForm.getYVar();
         
     	gridData = new int[gridWidth * gridHeight];
 
@@ -117,12 +123,19 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         ValueAxis rx = plot.getDomainAxis();
         ValueAxis ry = plot.getRangeAxis();
         
+        xRange[0] = rx.getLowerBound();
+        xRange[1] = rx.getUpperBound();
+        yRange[0] = ry.getLowerBound();
+        yRange[1] = ry.getUpperBound();
+        xEps = (xRange[1] - xRange[0]) / (double) gridWidth;
+        xEps = (yRange[1] - yRange[0]) / (double) gridHeight;
+        
         imageData = ((DataBufferInt) raster.getDataBuffer()).getData();
         rate = Math.max(1, gridHeight * gridWidth / 100);
 
         bs = new LuaBasinMulti((LuaModel) basinComponent.getModel(), par,
-            rx.getLowerBound(), rx.getUpperBound(), (int) gridWidth,
-            ry.getLowerBound(), ry.getUpperBound(), (int) gridHeight,
+            xRange[0], xRange[1], (int) gridWidth,
+            yRange[0], yRange[1], (int) gridHeight,
             controlForm.getEpsilon(), controlForm.getLimit(), controlForm.getIterations(),
             controlForm.getTrials(), controlForm.getXVar(), controlForm.getYVar(),
             var);
@@ -168,9 +181,26 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
                     imageData[i] = gridColors[gridColors.length-1];
     	}
         g2.drawImage(image, null, imageX, imageY);
-        if(bigDotsEnabled) {
-                // FIXME: step through basins attractors
+        
+        //add attractors
+        int[] pt;
+        Vector attrList = bs.getAttractors();
+        for(int i=0; i<attrList.size(); i++) {
+            g2.setColor(new Color(gridColors[Math.min(2+i*2, gridColors.length-1)]));
+            Vector attr = (Vector) attrList.get(i);
+            for(int j=0; j<attr.size(); j++) {
+                pt = point2XY((double[]) attr.get(j));
+                g2.fillRect(imageX + pt[0] - 1, imageY + gridHeight - pt[1],
+                        bigDotsEnabled ? 3 : 1, bigDotsEnabled ? 3 : 1);
+            }
         }
+    }
+    
+    private int[] point2XY(double[] p) {
+        int[] ans = new int[2];
+        ans[0] = (int) Math.floor((p[xvar] - xRange[0])/xEps);
+        ans[1] = (int) Math.floor((p[yvar] - yRange[0])/yEps);
+        return ans;
     }
     
     public void initialize(
