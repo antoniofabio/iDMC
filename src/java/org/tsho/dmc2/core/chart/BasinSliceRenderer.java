@@ -132,6 +132,9 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
         
         imageData = ((DataBufferInt) raster.getDataBuffer()).getData();
         rate = Math.max(1, gridHeight * gridWidth / 100);
+        
+        LuaModel m = (LuaModel) basinComponent.getModel();
+        m.setRngSeed(xvar);
 
         bs = new LuaBasinMulti((LuaModel) basinComponent.getModel(), par,
             xRange[0], xRange[1], (int) gridWidth,
