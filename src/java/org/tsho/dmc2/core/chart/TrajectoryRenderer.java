@@ -256,10 +256,8 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         stepper.initialize();
 
         point = stepper.getCurrentPoint2D();
-        xLower = point.getX();
-        xUpper = point.getX();
-        yLower = point.getY();
-        yUpper = point.getY();
+        xLower = xUpper = point.getX();
+        yLower = yUpper = point.getY();
 
         for (index = 0; index < rangeIterations; index++) {
             if (stopped) {
@@ -272,15 +270,13 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
 
             if (xLower > point.getX()) {
                 xLower = point.getX();
-            }
-            else if (xUpper < point.getX()) {
+            } else if (xUpper < point.getX()) {
                 xUpper = point.getX();
             }
 
             if (yLower > point.getY()) {
                 yLower = point.getY();
-            }
-            else if (yUpper < point.getY()) {
+            } else if (yUpper < point.getY()) {
                 yUpper = point.getY();
             }
         }
