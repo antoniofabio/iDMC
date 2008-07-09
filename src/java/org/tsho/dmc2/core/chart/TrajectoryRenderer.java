@@ -114,7 +114,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         Color color = Color.BLACK;
 
         this.startPoint = new double[dataset.getNcol()];
-        stepper.setInitialValue(startPoint);
 
         /* transients */
         if (!continua) {
