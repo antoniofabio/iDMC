@@ -131,7 +131,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
                     }
                 }
             } catch(RuntimeException re) {
-                //plotComponent.showRuntimeErrorDialog(re.getMessage());
                 throw new RuntimeException(re);
             }
 
@@ -175,7 +174,11 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
 
             y = (int) rangeAxis.valueToJava2D(
                         point.getY(), dataArea, RectangleEdge.LEFT);
-
+            
+            if(Double.isNaN(point.getX()) || Double.isNaN(point.getY())) {
+                throw new RuntimeException("NaN values at iteration " + index);
+            }
+            
             if (delay > 0) {
                 boolean flag = false;
 
@@ -212,7 +215,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
             try{
                 stepper.step();
             } catch(RuntimeException re) {
-                //plotComponent.showRuntimeErrorDialog(re.getMessage());
                 throw new RuntimeException(re);
             }
 

@@ -121,4 +121,5 @@
 
 * 2.0.10
 - fixed legend in Lyap.exp. map plot: 'NA' instead of 'divergent'
+- an informative err.msg. is shown when 'NaN' values on trajectory rendering
 
