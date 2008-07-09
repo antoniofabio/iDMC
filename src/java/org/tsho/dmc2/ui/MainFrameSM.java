@@ -125,6 +125,7 @@ final class MainFrameSM extends ComponentStateMachine {
             if (i == InternalInput.contiModel) {
                 discreteActions = false;
                 frame.getBasinACtion().setEnabled(false);
+                frame.getBasinSliceAction().setEnabled(false);
             }
             else if (i == InternalInput.discrModel) {
                 frame.getManifoldsAction().setEnabled(false);
@@ -143,6 +144,7 @@ final class MainFrameSM extends ComponentStateMachine {
             else if (i == InternalInput.discr2DDiffModel) {
                 frame.getManifoldsAction().setEnabled(true);
                 frame.getBasinACtion().setEnabled(true);
+                frame.getBasinSliceAction().setEnabled(true);
                 frame.getAbsorbingAreaAction().setEnabled(true);
                 discreteActions = true;
             }
