@@ -124,8 +124,7 @@ public final class Lua {
 
     public static MapStepper newIterator(Model model, 
     		double pars[], double vars[]) {
-        return new LuaIterator((LuaSimpleMap) model, 
-        		pars, vars);
+        return new LuaIterator((LuaSimpleMap) model, pars, vars);
     }
 
     public static ODEStepper newODEStepper(Model model, double[] parValues, 
