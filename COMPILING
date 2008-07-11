@@ -83,8 +83,8 @@ tar xjf iDMC_building_toolset.tar.bz2
 cd iDMC_building_toolset
 wget http://idmclib.googlecode.com/files/idmclib-0.9.0-Source.tar.gz
 tar xzf idmclib-0.9.0-Source.tar.gz
-wget http://idmc.googlecode.com/files/iDmc-2.0.10-src.tar.bz2
-tar xjf iDmc-2.0.10-src.tar.bz2
+wget http://idmc.googlecode.com/files/iDmc-2.0.11-src.tar.bz2
+tar xjf iDmc-2.0.11-src.tar.bz2
 ##TO HERE.
 
 (replace 2.0.10 with your version of iDMC)
@@ -134,4 +134,4 @@ Building the installer
 -----------------------
 In the installer directory you will find support files for generating the win/linux IzPack installer. You can generate it under linux, taking care of placing the windows native DLL in the iDmc root directory.
 
-Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 27/04/2008
+Antonio, Fabio Di Narzo <antonio.fabio@gmail.com> on 11/07/2008
