@@ -25,9 +25,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 ============================
-2. What's new in this 2.x.x
+2. What's new in this 2.0.x
 ============================
 In this version there are some new features w.r.t. version 1.9.3.
+
+* Software distribution
+- now iDMC is distributed as a cross-platform (win and linux) self installer
 
 * Data exporting
 - ability to export trajectory, Lyapunov exponents and basins of attraction data
@@ -43,6 +46,9 @@ to external files, ready to be opened with the software of your choice
 - added a whole new random number generator with good statistical properties
 - added possibility of setting RNG seed for reproducibility of results
 
+* Lyapunov exponents
+- more precise labelling in Lyapunov Exponents plots
+
 * Periodic cycles
 - added cycles classification based on stability
 - improved input mask
@@ -52,12 +58,14 @@ to external files, ready to be opened with the software of your choice
 
 * Bug fixes
 - misc problems in Lyapunov exponent plots with diverging exponents
+- misc problems with trajectory plots
 
 * Invisible to user
 - removed C code from the software. Now iDMC (i.e., GUI and plotting)
   is written entirely in Java, while using a separate specialized library, 
   idmclib, for actual numerical analysis
 - upgraded external libraries to more recent versions
+- misc code cleaning
 
 Read the NEWS file for a detailed history of changes for subsequent iDMC versions.
 
