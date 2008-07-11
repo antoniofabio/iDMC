@@ -32,14 +32,12 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
-import java.util.logging.Level;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.data.Range;
 import org.jfree.ui.RectangleEdge;
 import org.tsho.dmc2.ui.trajectory.TrajectoryComponent;
-import org.tsho.dmc2.DmcDue;
 import org.tsho.dmc2.core.Stepper;
 import org.tsho.dmc2.core.model.ModelException;
 import org.tsho.dmc2.core.util.*;
@@ -56,7 +54,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
     private int transients;
     private int iterations;
     private int rangeIterations;
-    private double[] startPoint;
 
     // options
 
@@ -83,7 +80,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
 
     public TrajectoryRenderer(final DmcRenderablePlot plot,
             final Stepper stepper, TrajectoryComponent component) {
-
         this.plot = plot;
         this.stepper = stepper;
         computeRanges = true;
@@ -112,8 +108,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
         Stroke stroke = new BasicStroke(7f);
         Stroke origStroke = g2.getStroke();
         Color color = Color.BLACK;
-
-        this.startPoint = new double[dataset.getNcol()];
 
         /* transients */
         if (!continua) {
@@ -175,14 +169,16 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
                         point.getY(), dataArea, RectangleEdge.LEFT);
             
             if(Double.isNaN(point.getX()) || Double.isNaN(point.getY())) {
-                throw new RuntimeException("NaN values at iteration " + index);
+                System.err.println("NaN values at iteration " + index);
+                //FIXME
+                //Don't simply throw exception: that would mess up the state machine!
+                //throw new RuntimeException("NaN values at iteration " + index);
             }
             
             if (delay > 0) {
                 boolean flag = false;
 
                 try {
-
                     Thread.sleep(delay * 5);
 
                     drawItem(g2, index, x, y);
@@ -202,12 +198,10 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
                     g2.drawRect(x - 1, y - 1, 3, 3);
                     g2.setPaintMode();
                     g2.setStroke(origStroke);
-                }
-                else {
+                } else {
                     drawItem(g2, index, x, y);
                 }
-            }
-            else {
+            } else {
                 drawItem(g2, index, x, y);
             }
 
@@ -216,7 +210,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
             } catch(RuntimeException re) {
                 throw new RuntimeException(re);
             }
-
 
             if (stopped) {
                 state = STATE_STOPPED;
@@ -247,7 +240,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
     }
 
     private void computeRanges() {
-
         Stepper.Point2D point;
         double xLower, xUpper;
         double yLower, yUpper;
@@ -284,7 +276,6 @@ public class TrajectoryRenderer implements DmcPlotRenderer {
             || Double.isInfinite(yLower) || Double.isInfinite(yUpper)
             || Double.isNaN(xLower) || Double.isNaN(xUpper)
             || Double.isNaN(yLower) || Double.isNaN(yUpper)) {
-
             throw new ModelException(
                 "Exception during range calculations: (infinite or not-a-number value found)");
         }
