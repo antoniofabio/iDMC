@@ -27,6 +27,8 @@
 package org.tsho.dmc2.ui.basinslice;
 
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -61,10 +63,12 @@ public final class BasinSliceControlForm extends AbstractControlForm {
     private JComboBox yBox;
 
     private VariableItems varFields;
+    private Model model;
     
     public BasinSliceControlForm(final Model model, AbstractPlotComponent frame) {
         super(frame);
         setOpaque(true);
+        this.model = model;
 
         parFields = FormHelper.createFields(model.getParNames(), "parameter");
         
@@ -93,15 +97,19 @@ public final class BasinSliceControlForm extends AbstractControlForm {
                 "trials",FormHelper.FIELD_LENGTH, 
                 new Range(1,Integer.MAX_VALUE));
 
+        varFields = FormHelper.createFields(model.getVarNames(), "variables");
+        
         xBox = new JComboBox(model.getVarNames());
         yBox = new JComboBox(model.getVarNames());
+        /*listen for variables selection changes*/
+        MyListener myListener = new MyListener();
+        xBox.addItemListener(myListener);
+        yBox.addItemListener(myListener);
 
         xBox.setSelectedIndex(0);
         if (model.getNVar() > 1) {
             yBox.setSelectedIndex(1);
         }
-
-        varFields = FormHelper.createFields(model.getVarNames(), "variables");
 
         FormLayout layout = new FormLayout("f:p:n", "");
         
@@ -113,7 +121,7 @@ public final class BasinSliceControlForm extends AbstractControlForm {
     private JPanel createPanel() {
 
         FormHelper.FormBuilder builder;
-        builder = FormHelper.controlFormBuilder(this,false);
+        builder = FormHelper.controlFormBuilder(this, false);
 
         VariableItems.Iterator i;
         builder.addTitle("Parameters");
@@ -130,8 +138,8 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         builder.addRow("trials",trialsField);
         builder.addRow("epsilon",epsilonField);
         builder.addSubtitle("axes");
-        builder.addRow("x", xBox);
-        builder.addRow("y", yBox);
+        builder.addRow("horizontal", xBox);
+        builder.addRow("vertical", yBox);
         builder.addGap();
         
         builder.addTitle("Ranges");
@@ -144,10 +152,21 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         builder.addRow("max", upperVRangeField);
         builder.addGap();
         
-        builder.addTitle("Variables");
-        i = varFields.iterator();
-        while (i.hasNext()) {
-            builder.addRow(i.nextLabel(), (Component) i.value());
+        if (model.getVarNames().length > 2) {
+            builder.addTitle("Variables");
+            i = varFields.iterator();
+            int idx = -1;
+            String label;
+            while (i.hasNext()) {
+                idx++;
+                label = i.nextLabel();
+                if ((idx == xBox.getSelectedIndex()) || (idx == yBox.getSelectedIndex())) {
+                    ((GetFloat) varFields.get(label)).setIgnoreValid(true);
+                    continue;
+                }
+                ((GetFloat) varFields.get(label)).setIgnoreValid(false);
+                builder.addRow(label, (Component) i.value());
+            }
         }
 
         return builder.getPanel();
@@ -249,11 +268,6 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         upperHRangeField.setValue(range.getUpperBound());
     }
     
-    
-    protected String getFormType() {
-        return "BASINSLICE"+"_B";
-    }
-    
     public int getXVar() {
         return xBox.getSelectedIndex();
     }
@@ -262,5 +276,22 @@ public final class BasinSliceControlForm extends AbstractControlForm {
         return yBox.getSelectedIndex();
     }
     
+    public int getNVar() {
+        return model.getNVar();
+    }
+    
+    protected String getFormType() {
+        return "BASINSLICE_B";
+    }
+    
+    private class MyListener implements ItemListener {
+        public void itemStateChanged(ItemEvent e) {
+            removeAll();
+            add(createPanel(), new CellConstraints(1, 1));
+            revalidate();
+            repaint();
+        }
+    }
+
 }
 

@@ -86,9 +86,14 @@ public class BasinSliceRenderer implements DmcPlotRenderer {
     
     public void initialize() {
         this.stopped = false;
-        try{
+        try {
             par = controlForm.getParameterValues().toArray(controlForm.getParameterValues());
-            var = controlForm.getVariableValues().toArray(controlForm.getVariableValues());
+            if (controlForm.getNVar() > 2)
+                var = controlForm.getVariableValues().toArray(controlForm.getVariableValues());
+            else {
+                var = new double[2];
+                var[0] = var[1] = 0.0; //these values are actually ignored by the idmclib
+            }
         } catch(Exception e) {
             //FIXME: show pertinent error message box
             System.out.println("error getting parameters and variables settings");
