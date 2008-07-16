@@ -1,1 +1,3 @@
+- define a detailed test procedure against regressions
+- add installer target to ant build.xml file
 

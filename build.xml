@@ -36,6 +36,10 @@
     <property name="idmclib.lib.unix" value="${idmclib.src}/jidmclib.so"/>
     <property name="idmclib.lib.win" value="${idmclib.src}/jidmclib.dll"/>
     <property name="jar_file"      value="${basedir}/${name}.jar"/>
+    
+    <taskdef name="izpack"
+        classpath="${basedir}/lib/standalone-compiler.jar"
+        classname="com.izforge.izpack.ant.IzPackTask"/>
 
 <!--              -->
 <!-- work targets -->
@@ -500,6 +504,15 @@
       	</zip>
 
     </target>  
+    
+    <target name="installer"
+        description = "create the izpack installer"
+        depends="dist">
+        <izpack
+            input="installer/install.xml"
+            output="iDmc-${version}-install.jar"
+            basedir="installer"/>
+    </target>
 
 
     <!--                     -->
