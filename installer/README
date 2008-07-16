@@ -3,5 +3,6 @@ $ ant dist-linux
 
 - copy win32 jidmclib.dll in root project folder
 
-- make installer by running:
-$ sh makeInstaller.sh
+- make installer by running from top folder:
+$ ant installer
+

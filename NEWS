@@ -125,3 +125,6 @@
 - misc code cleaning
 - silent error message is reported when 'NaN' values on trajectory rendering
 
+* 2.0.11
+- added 'installer' target to ant build file (non user-visible)
+
