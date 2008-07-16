@@ -447,8 +447,7 @@ public final class TrajectoryControlForm2 extends AbstractControlForm {
         frame2.getContentPane().add(panel);
         frame2.setTitle(panel.getClass().getName());
         frame2.pack();
-		frame2.setVisible(true);
-
+        frame2.setVisible(true);
     }
     
     protected String getFormType() {
@@ -473,4 +472,3 @@ public final class TrajectoryControlForm2 extends AbstractControlForm {
     }
     
 }
-

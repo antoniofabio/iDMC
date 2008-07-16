@@ -29,23 +29,16 @@ package org.tsho.dmc2.ui.bifurcation;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.data.Range;
 import org.tsho.dmc2.core.VariableDoubles;
 import org.tsho.dmc2.core.VariableItems;
-import org.tsho.dmc2.core.dlua.Lua;
 import org.tsho.dmc2.core.model.Model;
-import org.tsho.dmc2.core.model.ModelException;
 import org.tsho.dmc2.core.model.ODE;
 import org.tsho.dmc2.ui.AbstractControlForm;
 import org.tsho.dmc2.ui.AbstractPlotComponent;

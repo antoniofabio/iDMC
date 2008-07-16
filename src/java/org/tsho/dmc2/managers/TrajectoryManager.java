@@ -33,7 +33,6 @@ import org.jfree.chart.StandardLegend;
 import org.jfree.data.Range;
 import org.tsho.dmc2.core.CoreStatusEvent;
 import org.tsho.dmc2.core.CoreStatusListener;
-import org.tsho.dmc2.core.ODEStepper;
 import org.tsho.dmc2.core.Stepper;
 import org.tsho.dmc2.core.VariableDoubles;
 import org.tsho.dmc2.core.chart.DmcPlotRenderer;
