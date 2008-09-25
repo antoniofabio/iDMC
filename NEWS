@@ -125,6 +125,8 @@
 - misc code cleaning
 - silent error message is reported when 'NaN' values on trajectory rendering
 
-* 2.0.11
+* 2.1.0
 - added 'installer' target to ant build file (non user-visible)
+- upgraded dependency on idmclib 0.11.0
+- added new BasinSlice plot type
 

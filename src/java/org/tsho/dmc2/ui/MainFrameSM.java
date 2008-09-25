@@ -3,7 +3,7 @@
  * graphical and numerical analysis of systems of differential and
  * difference equations.
  *
- * Copyright (C) 2004 Marji Lines and Alfredo Medio.
+ * Copyright (C) 2004-2008 Marji Lines and Alfredo Medio.
  *
  * Written by Daniele Pizzoni <auouo@tin.it>.
  * Extended by Alexei Grigoriev <alexei_grigoriev@libero.it>.
@@ -40,6 +40,7 @@ import org.tsho.dmc2.sm.UserActionInput;
 import org.tsho.dmc2.ui.MainFrame.SaveDataAction;
 import org.tsho.dmc2.ui.absorbingArea.AbsorbingAreaComponent;
 import org.tsho.dmc2.ui.basin.BasinComponent;
+import org.tsho.dmc2.ui.basinslice.BasinSliceComponent;
 import org.tsho.dmc2.ui.bifurcation.BifurcationComponent;
 import org.tsho.dmc2.ui.coweb.CowebComponent;
 import org.tsho.dmc2.ui.cycles.CyclesComponent;
@@ -104,6 +105,7 @@ final class MainFrameSM extends ComponentStateMachine {
             frame.getCyclesACtion().setEnabled(false);
             frame.getBifurAction().setEnabled(false);
             frame.getBasinACtion().setEnabled(false);
+            frame.getBasinSliceAction().setEnabled(false);
             frame.getLyapunovAction().setEnabled(false);
             frame.getManifoldsAction().setEnabled(false);
             frame.getAbsorbingAreaAction().setEnabled(false);
@@ -123,18 +125,26 @@ final class MainFrameSM extends ComponentStateMachine {
             if (i == InternalInput.contiModel) {
                 discreteActions = false;
                 frame.getBasinACtion().setEnabled(false);
+                frame.getBasinSliceAction().setEnabled(false);
             }
             else if (i == InternalInput.discrModel) {
                 frame.getManifoldsAction().setEnabled(false);
-                if (frame.getModel().getNVar()<=2)
+                if (frame.getModel().getNVar()==2) {
                     frame.getBasinACtion().setEnabled(true);
-                else
+                    frame.getBasinSliceAction().setEnabled(true);
+                } else if (frame.getModel().getNVar()>2) {
+                    frame.getBasinSliceAction().setEnabled(true);
                     frame.getBasinACtion().setEnabled(false);
+                } else {
+                    frame.getBasinSliceAction().setEnabled(false);
+                    frame.getBasinACtion().setEnabled(false);
+                }
                 discreteActions = true;
             }
             else if (i == InternalInput.discr2DDiffModel) {
                 frame.getManifoldsAction().setEnabled(true);
                 frame.getBasinACtion().setEnabled(true);
+                frame.getBasinSliceAction().setEnabled(true);
                 frame.getAbsorbingAreaAction().setEnabled(true);
                 discreteActions = true;
             }
@@ -191,6 +201,9 @@ final class MainFrameSM extends ComponentStateMachine {
 
             if (i == NewPlotInput.basin) {
                 frame.newPlotComponent(new BasinComponent((SimpleMap) model,frame));
+            }
+            else if (i == NewPlotInput.basinslice) {
+                frame.newPlotComponent(new BasinSliceComponent((SimpleMap) model,frame));
             }
             else if (i == NewPlotInput.cycles) {
                 frame.newPlotComponent(new CyclesComponent((SimpleMap) model,frame));
@@ -330,6 +343,7 @@ final class NewPlotInput extends Input {
     static final NewPlotInput coweb = new NewPlotInput("coweb");
     static final NewPlotInput bifurcat = new NewPlotInput("bifurcat");
     static final NewPlotInput basin = new NewPlotInput("basin");
+    static final NewPlotInput basinslice = new NewPlotInput("basinslice");
     static final NewPlotInput lyapunov = new NewPlotInput("lyapunov");
     static final NewPlotInput manifolds = new NewPlotInput("manifolds");
 }
