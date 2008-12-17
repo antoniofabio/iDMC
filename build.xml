@@ -26,7 +26,7 @@
     <property name="models"    value="models"/>
 
     <!-- external sources -->
-    <property name="idmclib.src"    location="../idmclib-${libVersion}-Source/build/java"/>
+    <property name="idmclib.src"    location="../idmclib-${libVersion}-Source/java"/>
     <property name="jcommon.src"    location="../jcommon-0.9.3/src"/>
     <property name="jfreechart.src" location="../jfreechart-0.9.18/src"/>
     <property name="forms.src"      location="../forms-1.0.3/src/jforms"/>
