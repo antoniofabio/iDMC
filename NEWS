@@ -127,4 +127,6 @@
 
 * 2.0.11
 - added 'installer' target to ant build file (non user-visible)
+- fixed unix shortcut spec
+	now app. launcher is shown in gnome, under "Applications/Office"
 
