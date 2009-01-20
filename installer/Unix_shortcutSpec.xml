@@ -3,59 +3,26 @@
 <shortcuts>
   <programGroup defaultName="iDMC" location="applications"/>
 
-   <shortcut
-	    name="iDMC $APP_VER"
-     programGroup="yes"
+  <shortcut
+     name="iDMC ${APP_VER}"
+     programGroup="no"
      desktop="yes"
      applications="no"
      startMenu="yes"
      startup="no"
      target="/usr/bin/java"
-     commandLine="-jar &quot;$INSTALL_PATH/iDmc-$APP_VER.jar&quot;"
+     commandLine="-jar iDmc-${APP_VER}.jar"
      workingDirectory="$INSTALL_PATH"
-     initialState="noShow"
-     iconFile="$INSTALL_PATH/logo_32x32.png"
+     description="iDMC"
+     iconFile="${INSTALL_PATH}/logo_32x32.png"
      iconIndex="0"
-     type="Application"
-     description="Start iDMC $APP_VER">
-	   <createForPack name="Core program" />
-   </shortcut>
-
-   <shortcut
-	    name="Uninstall iDMC $APP_VER"
-     programGroup="yes"
-     desktop="yes"
-     applications="no"
-     startMenu="no"
-     startup="no"
-     target="/usr/bin/java"
-     commandLine="-jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
-     initialState="noShow"
-     iconFile="trashcan_full"
-     iconIndex="0"
-     workingDirectory=""
      type="Application"
      encoding="UTF-8"
-     description="Uninstall iDMC $APP_VER">
-	   <createForPack name="Core program" />
-   </shortcut>
-   <shortcut
-	    name="iDMC homepage"
-	    programGroup="yes"
-	    desktop="yes"
-	    applications="no"
-	    startMenu="no"
-	    startup="no"
-	    target=""
-	    commandLine=""
-	    initialState="noShow"
-	    iconFile=""
-	    iconIndex="0"
-	    workingDirectory=""
-	    url="http://www.dss.uniud.it/nonlinear/"
-	    type="Link"
-	    encoding="UTF-8"
-	    description="iDMC homepage">
-	   <createForPack name="Core program" />
-   </shortcut>
+     terminal="false"
+     KdeSubstUID="false"
+     categories="Office"
+     initialState="normal">
+    <createForPack name="Core program"/>
+  </shortcut>
+
 </shortcuts>
