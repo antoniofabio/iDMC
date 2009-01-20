@@ -1,0 +1,9 @@
+lib
+dist
+dist-win
+build
+Version.java
+iDmc.jar
+*.dll
+*.so
+

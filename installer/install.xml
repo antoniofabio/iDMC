@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
-    <native type="izpack" name="ShellLink.dll"/>
+  <native type="izpack" name="ShellLink.dll"/>
 
-    <info>
-        <appname>iDMC</appname>
-	<appversion>2.1.0</appversion>
-        <authors>
-		<author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
-		<author name="Alexei Grigoriev" email="alexei_grigoriev@libero.it"/>
-		<author name="Daniele Pizzoni" email="auouo@tin.it"/>
-        </authors>
-        <url>http://idmc.googlecode.com</url>
-	<javaversion>1.5</javaversion>
-    </info>
-    
-    <guiprefs height="400" resizable="yes" width="550">
-	    <laf name="metouia">
-		    <os family="unix" />
-	    </laf>
-	    <laf name="looks">
-		    <os family="windows" />
-		    <param name="variant" value="extwin" />
-	    </laf>
-    </guiprefs>
-    
-    <locale>
-	    <langpack iso3="eng"/>
-    </locale>
-    
-    <resources>
-        <res id="LicencePanel.licence" src="../COPYING"/>
-	<res id="HTMLInfoPanel.info" src="Info.html"/>
-        <res id="InfoPanel.info" src="../README"/>
-	<res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
-	<res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
-    </resources>
-    
-    <panels>
-	<panel classname="HTMLInfoPanel"/>
-	<!--<panel classname="HelloPanel"/>-->
-        <panel classname="InfoPanel"/>
-        <panel classname="LicencePanel"/>
-        <panel classname="TargetPanel"/> 
-        <panel classname="PacksPanel"/>
-	<panel classname="SummaryPanel"/>
-        <panel classname="InstallPanel"/>
-	<panel classname="ShortcutPanel"/>
-        <panel classname="FinishPanel"/>
-    </panels>
-    
-    <packs>
-        <pack name="Core program" required="yes">
-            <description>The base program files</description>
-            <file src="../README" targetdir="$INSTALL_PATH"/>
-            <file src="../COPYING" targetdir="$INSTALL_PATH"/>
-	    <file src="../NEWS" targetdir="$INSTALL_PATH"/>
-	    <file src="../logo_new.jpg" targetdir="$INSTALL_PATH"/>
-	    <singlefile src="../iDmc.jar" target="${INSTALL_PATH}/iDmc-${APP_VER}.jar"/>
-	    <singlefile src="../dist/jidmclib.so" target="$INSTALL_PATH/jidmclib.so" os="unix"/>
-	    <singlefile src="../jidmclib.dll" target="$INSTALL_PATH/jidmclib.dll" os="windows"/>
-	    <singlefile src="logo_32x32.png" target="$INSTALL_PATH/logo_32x32.png" os="unix"/>
-	    <singlefile src="logo_32x32.ico" target="$INSTALL_PATH/logo_32x32.ico" os="windows"/>
-        </pack>
-	<pack name="Sample models" required="no">
-		<description>Sample model files</description>
-		<fileset dir="../models" targetdir="$INSTALL_PATH/models" include="**/*.lua"/>
-	</pack>	
-<!--        <pack name="Docs" required="no">
-            <description>The Documentation</description>
-            <file src="../doc" targetdir="$INSTALL_PATH"/> 
-    </pack> -->
-    </packs>
+ <info>
+    <appname>iDMC</appname>
+    <appversion>2.1.0</appversion>
+    <authors>
+      <author name="Antonio, Fabio Di Narzo" email="antonio.fabio@gmail.com"/>
+      <author name="Alexei Grigoriev" email="alexei_grigoriev@libero.it"/>
+      <author name="Daniele Pizzoni" email="auouo@tin.it"/>
+    </authors>
+    <url>http://idmc.googlecode.com</url>
+    <javaversion>1.5</javaversion>
+  </info>
+
+  <guiprefs height="400" resizable="yes" width="550">
+    <laf name="metouia">
+      <os family="unix" />
+    </laf>
+    <laf name="looks">
+      <os family="windows" />
+      <param name="variant" value="extwin" />
+    </laf>
+  </guiprefs>
+ 
+	<locale>
+    <langpack iso3="eng"/>
+  </locale>
+
+  <resources>
+    <res id="LicencePanel.licence" src="../COPYING"/>
+    <res id="HTMLInfoPanel.info" src="Info.html"/>
+    <res id="InfoPanel.info" src="../README"/>
+    <res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+    <res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
+  </resources>
+
+  <panels>
+    <panel classname="HTMLInfoPanel"/>
+    <!--<panel classname="HelloPanel"/>-->
+    <panel classname="InfoPanel"/>
+    <panel classname="LicencePanel"/>
+    <panel classname="TargetPanel"/>
+    <panel classname="PacksPanel"/>
+    <panel classname="SummaryPanel"/>
+    <panel classname="InstallPanel"/>
+    <panel classname="ShortcutPanel"/>
+    <panel classname="FinishPanel"/>
+  </panels>
+
+  <packs>
+    <pack name="Core program" required="yes">
+      <description>The base program files</description>
+      <file src="../README" targetdir="${INSTALL_PATH}/${APP_VER}"/>
+      <file src="../COPYING" targetdir="${INSTALL_PATH}/${APP_VER}"/>
+      <file src="../NEWS" targetdir="${INSTALL_PATH}/${APP_VER}"/>
+      <file src="../logo_new.jpg" targetdir="${INSTALL_PATH}/${APP_VER}"/>
+      <singlefile src="../iDmc.jar" target="${INSTALL_PATH}/${APP_VER}/iDmc-${APP_VER}.jar"/>
+      <singlefile src="../dist/jidmclib.so" target="${INSTALL_PATH}/${APP_VER}/jidmclib.so" os="unix"/>
+      <singlefile src="../jidmclib.dll" target="${INSTALL_PATH}/${APP_VER}/jidmclib.dll" os="windows"/>
+      <singlefile src="logo_32x32.png" target="${INSTALL_PATH}/${APP_VER}/logo_32x32.png" os="unix"/>
+      <singlefile src="logo_32x32.ico" target="${INSTALL_PATH}/${APP_VER}/logo_32x32.ico" os="windows"/>
+    </pack>
+    <pack name="Sample models" required="no">
+      <description>Sample model files</description>
+      <fileset dir="../models" targetdir="${INSTALL_PATH}/${APP_VER}/models" include="**/*.lua"/>
+    </pack>
+    <!--        <pack name="Docs" required="no">
+		<description>The Documentation</description>
+		<file src="../doc" targetdir="$INSTALL_PATH"/>
+      </pack> -->
+  </packs>
 
 </installation>
