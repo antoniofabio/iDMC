@@ -111,12 +111,6 @@ class LuaIterator implements MapStepper {
             currentValues, 0, value, 0, currentValues.length);
     }
 
-    public VariableDoubles getLastValue() {
-        VariableDoubles v = (VariableDoubles) lastValues.clone();
-        VariableDoubles.fill(v, lastValues);
-        return v;
-    }
-
     public void setXVariable(final double value) {
         currentValues[xIdx] = value;
     }

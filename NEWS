@@ -1,4 +1,5 @@
 * 2.0.11
+- changed default colors settings for the basins of attraction dialog
 - fixed unix shortcut spec
   	now app. launcher is shown in gnome, under "Applications/Office"
 - added 'installer' target to ant build file (non user-visible)

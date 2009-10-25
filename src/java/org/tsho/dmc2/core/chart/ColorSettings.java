@@ -30,30 +30,19 @@ public class ColorSettings implements Cloneable {
 	 * Encapsulates the full colors sequence
 	 * */
 	private Vector data;
-	/** Default pairs colors. Obtained with the following R code:
+	/** Default pairs colors. Can be obtained with the following R code:
  	npairs <- 16
 	colors <- gsub("#","0x",rainbow(npairs*2))
 	for(i in 1:npairs)
 		cat("\t{ ",colors[i*2-1], " , ", colors[i*2], " },\n")
 	 * */
 	public static final int[][] defaultPairs = new int[][] {
-			{  0xFF0000  ,  0xFF3000  },
-	        {  0xFF6000  ,  0xFF8F00  },
-	        {  0xFFBF00  ,  0xFFEF00  },
-	        {  0xDFFF00  ,  0xAFFF00  },
-	        {  0x80FF00  ,  0x50FF00  },
-	        {  0x20FF00  ,  0x00FF10  },
-	        {  0x00FF40  ,  0x00FF70  },
-	        {  0x00FF9F  ,  0x00FFCF  },
-	        {  0x00FFFF  ,  0x00CFFF  },
-	        {  0x009FFF  ,  0x0070FF  },
-	        {  0x0040FF  ,  0x0010FF  },
-	        {  0x2000FF  ,  0x5000FF  },
-	        {  0x8000FF  ,  0xAF00FF  },
-	        {  0xDF00FF  ,  0xFF00EF  },
-	        {  0xFF00BF  ,  0xFF008F  },
-	        {  0xFF0060  ,  0xFF0030  }
-	};
+        {-43776, -16640},
+        {-27392, -256},
+        {-16711935, -5308672},
+        {-16772097, -16729857},
+        {-16730113, 65535},
+        {-8584961, -65282}};
 	
 	public ColorSettings(Class dCl) {
 		this.dCl = dCl;
