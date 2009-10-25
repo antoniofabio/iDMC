@@ -26,7 +26,6 @@
  */
 package org.tsho.dmc2.core.chart;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
